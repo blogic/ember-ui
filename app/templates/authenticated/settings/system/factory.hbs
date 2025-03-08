@@ -1,0 +1,16 @@
+<Header />
+<SettingsHeader
+  @icon="house-down"
+  @title="Factory reset"
+  @description="The device will be reset to factor defaults. You will loose all of your configuration."
+/>
+<ActionSplash
+  @icon="house-down"
+  @onClick={{this.onSubmit}}
+  class="text-danger"
+/>
+<ModalConfirm
+  @header="Factory reset"
+  @body="You are about to factory reset the device."
+  @onSubmit={{this.onFactory}}
+/>

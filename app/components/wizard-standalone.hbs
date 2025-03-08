@@ -1,0 +1,24 @@
+<SettingsHeader
+    @icon="router"
+    @title="Standalone"
+    @description="Please choose the configuration type"
+/>
+<ButtonSelect
+    @value={{@model.standalone}}
+    @value1="router"
+    @option1="Router"
+    @value2="ap"
+    @option2="Access Point"
+/>
+{{#if (eq @model.standalone "router")}}
+    <SettingsDescription>
+        The device will will be able to route your local traffic to the internet.
+    </SettingsDescription>
+{{else}}
+    <SettingsDescription>
+        The device will act as a simple Access Point.
+    </SettingsDescription>
+{{/if}}
+<ButtonFooter>
+        <BsButton @onClick={{@onSubmit}} @type="primary">Continue</BsButton>
+</ButtonFooter>

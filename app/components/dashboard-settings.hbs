@@ -1,0 +1,49 @@
+<div>
+  <DashboardHeader
+    @title="Settings"
+    @description="Make changes to the behaviour of the device."
+    class="mb-4"
+  />
+  <BsListGroup as |ListGroup|>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.hostname"
+      @icon="house"
+    >Hostname</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.timezone"
+      @icon="clock"
+    >Timezone</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.leds"
+      @icon="lightbulb"
+    >LED behaviour</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.password"
+      @icon="key"
+    >Password</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.ssh"
+      @icon="house-lock"
+    >SSH</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.reboot"
+      @icon="arrow-counterclockwise"
+    >Reboot</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.factory"
+      @icon="house-down"
+    >Factory</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.upgrade"
+      @icon="house-add"
+    >Firmware</ListGroupNav>
+  </BsListGroup>
+</div>

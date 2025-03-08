@@ -1,0 +1,25 @@
+<SettingsHeader
+  @icon="router"
+  @title="Mode"
+  @description="Please choose the mode of the device."
+/>
+<ButtonSelect
+  @value={{@model.mode}}
+  @value1="configurable"
+  @option1="Configurable"
+  @value2="managed"
+  @option2="Managed"
+/>
+{{#if (eq @model.mode "configurable")}}
+  <SettingsDescription>
+    You will be able to configure the device via the webui. Configuration can
+    optionally be distributed to managed devices.
+  </SettingsDescription>
+{{else}}
+  <SettingsDescription>
+    The device will be managed by another configurable device.
+  </SettingsDescription>
+{{/if}}
+<ButtonFooter>
+  <BsButton @onClick={{@onSubmit}} @type="primary">Continue</BsButton>
+</ButtonFooter>

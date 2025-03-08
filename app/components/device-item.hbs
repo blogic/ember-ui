@@ -1,0 +1,18 @@
+{{#if (or @detail (has-block))}}
+  <@parent.item>
+    <div class="container" onclick={{@onClick}}>
+      <div class="row align-items-start d-flex align-items-center">
+        <div class="col-4 text-end mw-50">
+          {{@title}}
+        </div>
+        <div class="col">
+          {{#if (has-block)}}
+            {{yield}}
+          {{else}}
+            {{@detail}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </@parent.item>
+{{/if}}

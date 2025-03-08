@@ -1,0 +1,22 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{this.unit.model}}
+  @onSubmit={{this.onSubmit}}
+  {{on "change" this.unit.onChange}}
+  as |form|
+>
+  <Header
+    @onSubmit={{form.submit}}
+    @model={{this.unit}}
+  />
+  <SettingsHeader @icon="clock" @title="Timezone" />
+  <form.element
+    @controlType="power-select"
+    @property="timezone"
+    @options={{this.timezone.names}}
+  />
+  <SettingsDescription>
+    Choose your timezone. This will make sure that the device complies with
+    local regulatory requirements.
+  </SettingsDescription>
+</BsForm>

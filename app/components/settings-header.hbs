@@ -1,0 +1,23 @@
+<div class="mw-100 align-items-center d-flex justify-content-center user-select-none">
+  <div class="container p-3 my-3 text-center ">
+    <div class="row mb-1">
+      <div class="col">
+{{#if (has-block)}}
+        {{yield}}
+{{else}}
+        <BsIconRound @name={{@icon}}/>
+{{/if}}
+        <div>
+          <h4 class="text-primary mt-4">{{@title}}</h4>
+        </div>
+      </div>
+    </div>
+{{#if @description}}
+    <div class="row fs-6 d-flex mx-4">
+      <div class="text-center">
+        {{@description}}
+      </div>
+    </div>
+{{/if}}
+    </div>
+</div>

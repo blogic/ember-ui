@@ -1,0 +1,18 @@
+<SettingsHeader
+  @icon="clock"
+  @title="Timezone"
+  @description="Please pick the timezone you are in."
+/>
+<BsForm @formLayout="vertical" @model={{@model}} as |form|>
+  <form.element
+    @controlType="power-select"
+    @property="timezone"
+    @options={{@timezone}}
+  />
+  <SettingsDescription>
+    The default value was automatically detected from your browser settings.
+  </SettingsDescription>
+  <ButtonFooter>
+    <BsButton @onClick={{@onSubmit}} @type="primary">Continue</BsButton>
+  </ButtonFooter>
+</BsForm>

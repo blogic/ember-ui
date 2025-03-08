@@ -1,0 +1,101 @@
+{{#if this.pending}}
+  <ActionSplash
+    @icon="gear"
+    @description="Applying changes ..."
+    class="text-success rotating"
+  />
+{{else}}
+  <HeaderLogo />
+  {{#if (eq this.uconfig.wizard "welcome")}}
+    <WizardWelcome @onSubmit={{fn this.onChangeSlide "mode"}} />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "mode")}}
+    <WizardMode @model={{this.model}} @onSubmit={{this.onSubmitMode}} />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "managed")}}
+    <WizardManaged @model={{this.model}} @onSubmit={{this.onManaged}} />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "onboarding")}}
+    <ActionSplash
+      @icon="gear"
+      @description="Joining network"
+      class="text-primary rotating"
+    />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "onboarding-done")}}
+    <ActionSplash
+      @icon="check-circle"
+      @description="Success"
+      class="text-success"
+    />
+    <SettingsDescription>
+      The device was succesfully onboarded. It will now disable the webui and
+      wait to receive its configuration from the network.
+    </SettingsDescription>
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "onboarding-timeout")}}
+    <ActionSplash @icon="x-circle" @description="Timeout" class="text-danger" />
+    <SettingsDescription>
+      The device did not manage to join the network.
+    </SettingsDescription>
+    <ButtonFooter>
+      <BsButton @onClick={{this.onRetry}} @type="primary">Retry</BsButton>
+    </ButtonFooter>
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "standalone")}}
+    <WizardStandalone
+      @model={{this.model}}
+      @onSubmit={{fn this.onChangeSlide "password"}}
+    />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "password")}}
+    <WizardPassword
+      @model={{this.model}}
+      @onSubmit={{this.onSubmitPassword}}
+      @onChange={{this.onChangePassword}}
+      @bad_password={{this.bad_password}}
+    />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "timezone")}}
+    <WizardTimezone
+      @model={{this.model}}
+      @timezone={{this.timezone.names}}
+      @onSubmit={{fn this.onChangeSlide "wifi"}}
+    />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "wifi")}}
+    <WizardWifi
+      @model={{this.model}}
+      @onSubmit={{fn this.onChangeSlide "guest"}}
+    />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "guest")}}
+    <WizardGuest
+      @model={{this.model}}
+      @onSubmit={{fn this.onChangeSlide "done"}}
+    />
+  {{/if}}
+
+  {{#if (eq this.uconfig.wizard "done")}}
+    <SettingsHeader
+      @icon="check-circle"
+      @title="Done"
+      @description="The wizard will guide you through the initial setup of your device."
+    />
+    <ButtonFooter>
+      <BsButton @onClick={{this.submit}} @type="primary">Commit and Apply
+        Changes</BsButton>
+    </ButtonFooter>
+  {{/if}}
+
+{{/if}}

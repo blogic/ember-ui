@@ -1,0 +1,16 @@
+<Header />
+<SettingsHeader
+  @icon="arrow-counterclockwise"
+  @title="Reboot"
+  @description="The device will reboot. During this time you will loose internet connectivity."
+/>
+<ActionSplash
+  @icon="arrow-counterclockwise"
+  @onClick={{this.onSubmit}}
+  class="text-danger"
+/>
+<ModalConfirm
+  @header="Reboot device"
+  @body="You are about to reboot the device."
+  @onSubmit={{this.onReboot}}
+/>

@@ -1,0 +1,230 @@
+{{#if (eq this.devices.model undefined)}}
+  <Header />
+  <SettingsHeader @icon="pc-display-horizontal" @title="Connected Devices" />
+  <SettingsDescription>
+    Loading ...
+  </SettingsDescription>
+
+{{else if (eq this.model.key "list")}}
+  <Header />
+  <SettingsHeader @icon="pc-display-horizontal" @title="Connected Devices" />
+  <BsListGroup as |ListGroup|>
+    {{#if (eq this.noDevices true)}}
+      <ListGroup.item>No devices detected</ListGroup.item>
+    {{else}}
+      {{#each-in this.devices.model as |network devices|}}
+        {{#if (eq this.model.network network)}}
+          {{#each-in devices as |mac device|}}
+            <ListGroup.item
+              actionable="true"
+              onclick={{fn this.onDevice this.model.network mac}}
+            >
+              <div class="container">
+                <div class="row align-items-start">
+                  <div class="col-2">
+                    <BsIcon
+                      @name={{fingerprint
+                        device.fingerprint.class
+                        "pc-display-horizontal"
+                      }}
+                    />
+                    <BsIcon @name={{fingerprint device.fingerprint.vendor}} />
+                  </div>
+                  <div class="col">
+                    {{#if device.hostname}}
+                      {{device.hostname}}
+                    {{else}}
+                      {{mac}}
+                    {{/if}}
+                    {{#if device.wifi}}
+                      <BsIcon @name="wifi" />
+                    {{else}}
+                      <BsIcon @name="ethernet" />
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+            </ListGroup.item>
+          {{/each-in}}
+        {{/if}}
+      {{/each-in}}
+    {{/if}}
+  </BsListGroup>
+{{else}}
+
+  <BsForm
+    @formLayout="vertical"
+    @model={{this.model.form}}
+    @onSubmit={{this.onSubmit}}
+    {{on "change" this.onChange}}
+    as |form|
+  >
+    <Header
+      @onSubmit={{form.submit}}
+      @onReset={{this.onReset}}
+      @model={{this.datamodel}}
+    />
+    <SettingsHeader
+      @icon={{fingerprint
+        this.model.device.fingerprint.class
+        "pc-display-horizontal"
+      }}
+      @title="Device overview"
+    />
+
+    {{#if this.model.device.wifi}}
+      <BsListGroup class="mb-3" as |ListGroup|>
+        <ListGroup.item>
+          <div class="container">
+            <div class="row align-items-start align-items-center d-flex">
+              <div class="col-4 text-end mw-50">
+                <BsIcon
+                  @name={{wifiicon this.model.device.wifi.signal}}
+                  class="text-primary font-4em"
+                />
+              </div>
+              <div class="col capitalize-first-letter">
+                <div class="container">
+                  <div class="row align-items-start d-flex">
+                    <div class="col-4 text-end mw-50">
+                      SSID
+                    </div>
+                    <div class="col-4 text-start mw-50">
+                      {{this.model.device.wifi.ssid}}
+                    </div>
+                  </div>
+                  <div class="row align-items-start d-flex">
+                    <div class="col-4 text-end mw-50">
+                      Band
+                    </div>
+                    <div class="col-4 text-start mw-50">
+                      {{this.model.device.wifi.band}}
+                    </div>
+                  </div>
+                  <div class="row align-items-start d-flex">
+                    <div class="col-4 text-end mw-50">
+                      Signal
+                    </div>
+                    <div class="col-4 text-start mw-50">
+                      {{this.model.device.wifi.signal}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ListGroup.item>
+        {{#if this.model.owner}}
+          <DeviceItem
+            @parent={{ListGroup}}
+            @title="Owner"
+            @detail="{{this.model.owner}}"
+            @onClick={{fn this.onClickUser this.model.network this.model.owner}}
+          />
+        {{else}}
+          <DeviceItem @parent={{ListGroup}} @title="Owner">
+            {{#unless this.model.owner}}
+              {{#if (eq this.model.network "main")}}
+                <form.element
+                  @controlType="power-select"
+                  @property="user"
+                  @options={{this.users.mainUsers}}
+                />
+              {{else}}
+                <form.element
+                  @controlType="power-select"
+                  @property="user"
+                  @options={{this.users.guestUsers}}
+                />
+              {{/if}}
+            {{/unless}}
+          </DeviceItem>
+        {{/if}}
+      </BsListGroup>
+    {{/if}}
+
+    <BsListGroup class="mb-3" as |ListGroup|>
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title="Name"
+        @detail="{{this.model.device.hostname}}"
+      />
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title="Device"
+        @detail="{{this.model.device.fingerprint.device}}"
+      />
+      {{#if this.model.device.fingerprint.vendor}}
+        <DeviceItem
+          @parent={{ListGroup}}
+          @title="Vendor"
+          @detail="{{this.model.device.fingerprint.vendor}}"
+        >
+          <BsIcon @name={{fingerprint this.model.device.fingerprintvendor}} />
+          {{this.model.device.fingerprint.vendor}}
+        </DeviceItem>
+      {{/if}}
+      {{#if this.model.device.fingerprint.class}}
+        <DeviceItem
+          @parent={{ListGroup}}
+          @title="Class"
+          @detail="{{this.model.device.fingerprint.class}}"
+        />
+      {{/if}}
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title="MAC"
+        @detail="{{this.model.key}}"
+      />
+
+    </BsListGroup>
+    {{#if (and (eq this.model.network "main") this.model.form.dhcp)}}
+      <BsListGroup class="mb-3" as |ListGroup|>
+        <DeviceItem
+          @parent={{ListGroup}}
+          @title="IPv4"
+          @detail="{{this.model.device.ipv4}}"
+        />
+        {{#each this.model.device.ipv6 as |ipv6|}}
+          <DeviceItem @parent={{ListGroup}} @title="IPv6" @detail="{{ipv6}}" />
+        {{/each}}
+        <DeviceItem @parent={{ListGroup}} @title="DHCP">
+          <ButtonSelect
+            @value={{this.model.form.dhcp}}
+            @value1="dynamic"
+            @option1="Dynamic"
+            @value2="static"
+            @option2="Static"
+          />
+        </DeviceItem>
+      </BsListGroup>
+
+    {{/if}}
+  </BsForm>
+  {{#if this.model.device.bytes}}
+    <BsListGroup as |ListGroup|>
+      <ListGroup.item>
+
+        <div class="w-100 justify-content-center">
+          <ChartJs
+            @type="pie"
+            @data={{this.model.chart}}
+            @width="5em"
+            @height="5em"
+          />
+        </div>
+        {{#each-in this.model.device.traffic as |type traffic|}}
+          {{type}}
+          ({{bandwidth traffic.bytes}})
+          <BsProgress as |pg|>
+            <pg.bar
+              @value={{traffic.bytes}}
+              @maxValue={{this.model.device.bytes}}
+              @showLabel={{true}}
+            />
+          </BsProgress>
+        {{/each-in}}
+      </ListGroup.item>
+    </BsListGroup>
+  {{/if}}
+{{/if}}

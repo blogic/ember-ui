@@ -1,0 +1,38 @@
+diff --git a/node_modules/ember-bootstrap/addon/components/bs-carousel.hbs b/node_modules/ember-bootstrap/addon/components/bs-carousel.hbs
+index 156e61e..d4cf196 100644
+--- a/node_modules/ember-bootstrap/addon/components/bs-carousel.hbs
++++ b/node_modules/ember-bootstrap/addon/components/bs-carousel.hbs
+@@ -49,7 +49,11 @@
+           registerChild=this.registerChild
+           unregisterChild=this.unregisterChild
+         )
+-      )
++	toNextSlide=this.toNextSlide
++	toPrevSlide=this.toPrevSlide
++	toSlide=this.toSlide
++	index=this.index
++    )
+     }}
+   </div>
+ 
+diff --git a/node_modules/ember-bootstrap/addon/components/bs-form.js b/node_modules/ember-bootstrap/addon/components/bs-form.js
+index 79b4a92..4a9f817 100644
+--- a/node_modules/ember-bootstrap/addon/components/bs-form.js
++++ b/node_modules/ember-bootstrap/addon/components/bs-form.js
+@@ -526,11 +526,16 @@ export default class Form extends Component {
+       "You cannot use the form element's default onChange action for form elements if not using a model or setting the value directly on a form element. You must add your own onChange action to the form element in this case!",
+       isPresent(model) && isPresent(property),
+     );
++
+     if (typeof model.set === 'function') {
+       model.set(property, value);
+     } else {
+       set(model, property, value);
+     }
++
++    let event = document.createEvent('Events');
++    event.initEvent('change', true, true);
++    this._element.dispatchEvent(event);
+   }
+ 
+   @action

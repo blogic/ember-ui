@@ -1,0 +1,27 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{@model}}
+  @onSubmit={{@onSubmit}}
+  as |form|
+>
+  <SettingsHeader
+    @icon="router"
+    @title="Onboarding"
+    @description="Add this devices in managed mode to your network"
+  />
+<form.element @controlType="text" @property="access-key" as |el|>
+      <el.control
+        placeholder="Access Key"
+        required
+        minlength="6"
+        maxlength="6"
+        pattern="[0-9]{6}"
+      />
+    </form.element>
+  <SettingsDescription>
+    The device will be managed by another configurable device.
+  </SettingsDescription>
+  <ButtonFooter>
+    <BsButton @onClick={{form.submit}} @type="primary">Continue</BsButton>
+  </ButtonFooter>
+</BsForm>

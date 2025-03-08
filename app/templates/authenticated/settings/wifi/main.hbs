@@ -1,0 +1,43 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{this.wifimain.model}}
+  @onSubmit={{this.onSubmit}}
+  {{on "change" this.wifimain.onChange}}
+  as |form|
+>
+  <Header @onSubmit={{form.submit}} @model={{this.wifimain}} />
+  <SettingsHeader
+    @icon="wifi"
+    @title="Wi-Fi"
+    @description="The main Wi-Fi networks provided by your device."
+  />
+  <form.element @controlType="text" @property="ssid" as |el|>
+    <el.control placeholder="SSID" required maxlength="32" />
+  </form.element>
+  <SettingsDescription>
+    The name of the Wi-Fi that you can connect to.
+  </SettingsDescription>
+  <form.element @controlType="password-eye" @property="key" as |el|>
+    <el.control placeholder="Password" required minlength="8" maxlength="64" />
+  </form.element>
+  <SettingsDescription>
+    The password that you need to enter to authenticate.
+  </SettingsDescription>
+  <ButtonSelect
+    @value={{this.wifimain.model.security}}
+    @value1="compatibility"
+    @option1="Compatibility"
+    @value2="maximum"
+    @option2="Maximum"
+  />
+  {{#if (eq this.wifimain.model.security "maximum")}}
+    <SettingsDescription>
+      The latest encryption standard will be used. Older devices might not be
+      able to connect
+    </SettingsDescription>
+  {{else}}
+    <SettingsDescription>
+      The encryption standard used will allow older devices to connect.
+    </SettingsDescription>
+  {{/if}}
+</BsForm>

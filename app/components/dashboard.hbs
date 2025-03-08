@@ -1,0 +1,59 @@
+<div>
+  <DashboardHeader @title="Internet" />
+  {{#if @internet.connected}}
+    <SettingsDescription>
+      You are currently connected to the internet
+    </SettingsDescription>
+  {{else}}
+    <SettingsDescription>
+      You are currently disconnected from the internet
+    </SettingsDescription>
+  {{/if}}
+  <div
+    class="mw-100 align-items-center d-flex justify-content-center user-select-none container text-center"
+  >
+    <div class="d-grid">
+      <tbody>
+        <tr>
+          <td>
+            <BsIcon @name="globe2" class="font-4em {{@internet.globe_color}}" />
+          </td>
+          <td>
+            <div
+              class="rounded-2 {{@internet.line_color}} m-1"
+              style="height: 0.25em; width: 3em"
+            />
+          </td>
+          <td>
+            <BsIcon @name="router" class="font-4em text-primary" />
+          </td>
+          <td>
+            <div
+              class="rounded-2 bg-success m-1"
+              style="height: 0.25em; width: 3em"
+            />
+          </td>
+          <td>
+            <BsIcon @name="house" class="font-4em text-primary" />
+          </td>
+        </tr>
+      </tbody>
+    </div>
+  </div>
+  {{#if @internet.connected}}
+    <BsListGroup @flush={{true}} class="my-5" as |ListGroup|>
+      <ListGroupItem
+        @parent={{ListGroup}}
+        @key="Online since"
+        @value={{uptime @internet.uptime}}
+      />
+      <ListGroupItem
+        @parent={{ListGroup}}
+        @key="IPv4 address"
+        @value={{@internet.ipv4}}
+      />
+    </BsListGroup>
+  {{/if}}
+</div>
+
+<EthernetPorts @ethernet={{@ethernet}} />

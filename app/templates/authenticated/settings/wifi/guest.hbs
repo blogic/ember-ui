@@ -1,0 +1,72 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{this.wifiguest.model}}
+  @onSubmit={{this.onSubmit}}
+  {{on "change" this.wifiguest.onChange}}
+  as |form|
+>
+  <Header
+    @onSubmit={{form.submit}}
+    @model={{this.wifiguest}}
+  />
+  <SettingsHeader
+    @icon="wifi"
+    @title="Guest Wi-Fi"
+    @description="The Wi-Fi networks that guests can connect to."
+  >
+    {{#if (eq this.wifiguest.model.iface.disable "false")}}
+      <BsIconRound @name="wifi" />
+    {{else}}
+      <BsIconRound @name="wifi-off" />
+    {{/if}}
+  </SettingsHeader>
+  <ButtonSelect
+    @value={{this.wifiguest.model.iface.disable}}
+    @value1="false"
+    @option1="Enable"
+    @value2="true"
+    @option2="Disable"
+  />
+  {{#if (eq this.wifiguest.model.iface.disable "false")}}
+    <form.element @controlType="text" @property="ssid.ssid" as |el|>
+      <el.control placeholder="SSID" required maxlength="32" />
+    </form.element>
+    <SettingsDescription>
+      The name of the Wi-Fi that guests can connect to.
+    </SettingsDescription>
+    <form.element
+      @controlType="password-eye"
+      @label="Password"
+      @property="ssid.key"
+      as |el|
+    >
+      <el.control
+        placeholder="Password"
+        required
+        minlength="8"
+        maxlength="64"
+      />
+    </form.element>
+    <ButtonSelect
+      @value={{this.wifiguest.model.ssid.security}}
+      @value1="maximum"
+      @option1="Maximum"
+      @value2="compatibility"
+      @option2="Compatibility"
+    />
+    {{#if (eq this.wifiguest.model.ssid.security "maximum")}}
+      <SettingsDescription>
+        The latest encryption standard will be used. Older devices might not be
+        able to connect
+      </SettingsDescription>
+    {{else}}
+      <SettingsDescription>
+        The encryption standard used will allow older devices to connect.
+      </SettingsDescription>
+    {{/if}}
+  {{else}}
+    <SettingsDescription>
+      The guest WiFi is currently disabled.
+    </SettingsDescription>
+  {{/if}}
+</BsForm>

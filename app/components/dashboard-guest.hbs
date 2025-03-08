@@ -1,0 +1,29 @@
+<div>
+  <DashboardHeader @title="Guest Network" @car={{@car}} />
+  <BsListGroup @flush={{true}} class="mb-5" as |ListGroup|>
+    <ListGroupItem @parent={{ListGroup}} @key="SSID" @value="MyHome" />
+    <ListGroupItem @parent={{ListGroup}} @key="Channel" @value="36" />
+  </BsListGroup>
+  <BsListGroup as |ListGroup|>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @onClick={{@onDevices}}
+      @icon="pc-display-horizontal"
+    >Connected Devices</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.qrcode.guest"
+      @icon="qr-code"
+    >QR Code</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.wifi.guest"
+      @icon="gear"
+    >Configure</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @onClick={{@onUsers}}
+      @icon="people"
+    >Users</ListGroupNav>
+  </BsListGroup>
+</div>

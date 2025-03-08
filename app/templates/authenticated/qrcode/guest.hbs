@@ -1,0 +1,8 @@
+<Header />
+<SettingsHeader @icon="qr-code" @title="Guest Network" />
+
+<WifiQrCode
+  @ssid={{this.wifiguest.model.ssid.ssid}}
+  @psk={{this.wifiguest.model.ssid.key}}
+  @description="Ask your guest to scan the QR code to gain access to the guest network."
+/>

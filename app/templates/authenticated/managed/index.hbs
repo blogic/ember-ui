@@ -1,0 +1,120 @@
+{{#if (eq this.model.device "list")}}
+  <Header />
+  <SettingsHeader @icon="router" @title="Managed Devices" />
+  <BsListGroup as |ListGroup|>
+    {{#each-in this.managed.model as |device info|}}
+      <ListGroupNav @parent={{ListGroup}} @onClick={{fn this.onManaged device}}>
+        {{#if info.connected}}
+          <BsIcon @name="check-circle" />
+        {{else}}
+          <BsIcon @name="x-circle" />
+        {{/if}}
+        {{device}}
+      </ListGroupNav>
+    {{/each-in}}
+    <ListGroupNav
+      @icon="person-add"
+      @onClick={{fn this.onManaged "add"}}
+      @parent={{ListGroup}}
+    >
+      Add device
+    </ListGroupNav>
+  </BsListGroup>
+
+{{else if (eq this.model.device "add")}}
+  <BsForm
+    @formLayout="vertical"
+    @model={{this.new}}
+    @onSubmit={{this.onOnboarding}}
+    as |form|
+  >
+    <Header />
+    <SettingsHeader
+      @icon="router"
+      @title="Managed Devices"
+      @description="Device onboarding"
+    />
+    <form.element @controlType="text" @property="name" as |el|>
+      <el.control placeholder="Managed Device" required maxlength="16" />
+    </form.element>
+    <SettingsDescription>
+      The name of the new device
+    </SettingsDescription>
+    <ButtonFooter>
+      <BsButton @onClick={{form.submit}} @type="primary">Start onboarding</BsButton>
+    </ButtonFooter>
+  </BsForm>
+
+{{else if (eq this.model.device "onboarding")}}
+  <ActionSplash @icon="router" @description="Onboarding" class="text-success" />
+  <BsListGroup @flush={{true}} class="mb-5" as |ListGroup|>
+    <ListGroupItem
+      @parent={{ListGroup}}
+      @key="Name"
+      @value="{{this.managed.onboarding.name}}"
+    />
+    <ListGroupItem
+      @parent={{ListGroup}}
+      @key="PIN"
+      @value="{{this.managed.onboarding.pin}}"
+    />
+  </BsListGroup>
+
+{{else}}
+  <Header />
+  <ModalConfirm />
+  <SettingsHeader @icon="router" @title="Managed Devices" />
+  <BsListGroup class="mb-3" as |ListGroup|>
+    <DeviceItem
+      @parent={{ListGroup}}
+      @title="Name"
+      @detail="{{this.model.device}}"
+    />
+    <DeviceItem
+      @parent={{ListGroup}}
+      @title="Status"
+      @detail="{{this.model.info.connected}}"
+    />
+    {{#if (eq this.model.info.connected "Connected")}}
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title="Traffic"
+        @detail="{{bandwidth this.model.info.tx_bytes}} / {{bandwidth
+          this.model.info.rx_bytes
+        }}"
+      >
+        <Traffic
+          @tx={{this.model.info.tx_bytes}}
+          @rx={{this.model.info.rx_bytes}}
+        />
+      </DeviceItem>
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title="Model"
+        @detail="{{this.model.info.model}}"
+      />
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title="Firmware"
+        @detail="{{this.model.info.revision}}"
+      />
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title="Endpoint"
+        @detail="{{this.model.info.endpoint}}"
+      />
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title="Uptime"
+        @detail="{{uptime this.model.info.uptime}}"
+      />
+    {{/if}}
+  </BsListGroup>
+  <EthernetPorts @ethernet={{this.model.info.ports}} />
+  <ButtonFooter>
+    <BsButton @onClick={{this.onDeviceDel}} @type="primary">Delete Device</BsButton>
+    {{#if (eq this.model.info.connected "Connected")}}
+      <BsButton @onClick={{this.onDeviceReboot}} @type="primary">Reboot Device</BsButton>
+    {{/if}}
+  </ButtonFooter>
+{{/if}}

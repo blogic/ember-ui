@@ -1,0 +1,20 @@
+<div
+  class="mw-100 align-items-center d-flex justify-content-center user-select-none"
+>
+  <div class="container p-3 mx-5 my-1 w-100 text-center">
+    <div class="row mb-4">
+      <BsIcon
+        @name={{@icon}}
+        @route={{@route}}
+        @onClick={{@onClick}}
+        class="font-15em"
+        ...attributes
+      />
+    </div>
+    <div class="row fs-6 d-flex">
+      <div class="text-center font-2em">
+        {{@description}}
+      </div>
+    </div>
+  </div>
+</div>

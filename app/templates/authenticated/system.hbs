@@ -1,0 +1,128 @@
+<BsTab as |tab|>
+  <tab.pane @title="Status">
+    <BsListGroup as |ListGroup|>
+      <ListGroup.item>
+        <h5>Device</h5>
+        <p>{{this.state.board.model}}</p>
+      </ListGroup.item>
+      <ListGroup.item>
+        <h5>Hostname</h5>
+        <p>{{this.state.board.hostname}}</p>
+      </ListGroup.item>
+      <ListGroup.item>
+        <h5>Kernel</h5>
+        <p>{{this.state.board.kernel}}</p>
+      </ListGroup.item>
+      <ListGroup.item>
+        <h5>Release</h5>
+        <p>{{this.state.board.release.revision}}</p>
+      </ListGroup.item>
+      <ListGroup.item>
+        <h5>Memory Usage</h5>
+        <BsProgress as |pg|>
+          <pg.bar
+            @value={{this.state.info.memory.used_mb}}
+            @minValue={{0}}
+            @maxValue={{this.state.info.memory.total_mb}}
+            @showLabel={{true}}
+            @roundDigits={{0}}
+            @type="default"
+            @striped={{false}}
+            @animate={{false}}
+          />
+        </BsProgress>
+        <small>{{this.state.info.memory.used_mb}}
+          MB /
+          {{this.state.info.memory.total_mb}}
+          MB</small>
+      </ListGroup.item>
+      <ListGroup.item>
+        <h5>Storage Usage</h5>
+        <BsProgress as |pg|>
+          <pg.bar
+            @value={{this.state.info.root.used_mb}}
+            @minValue={{0}}
+            @maxValue={{this.state.info.root.total_mb}}
+            @showLabel={{true}}
+            @roundDigits={{0}}
+            @type="default"
+            @striped={{false}}
+            @animate={{false}}
+          />
+        </BsProgress>
+        <small>{{this.state.info.root.used_mb}}
+          MB /
+          {{this.state.info.root.total_mb}}
+          MB</small>
+      </ListGroup.item>
+    </BsListGroup>
+  </tab.pane>
+  <tab.pane @title="Settings">
+    <BsAccordion as |acc|>
+      <acc.item @value="1" @title="Hostname">
+        <BsForm
+          @formLayout="vertical"
+          @model={{this.unit}}
+          @onSubmit={{this.submitUnit}}
+          as |form|
+        >
+          <form.element
+            @controlType="text"
+            @label="Hostname"
+            @property="hostname"
+            as |el|
+          >
+            <el.control placeholder="Hostname" required />
+          </form.element>
+          <form.element
+            @controlType="power-select"
+            @property="timezone"
+            @label="Timezone"
+            @options={{this.timezone.names}}
+          />
+          <form.submitButton>Submit</form.submitButton>
+          <BsButton @onClick={{this.reset}}>Reset</BsButton>
+        </BsForm>
+      </acc.item>
+      <acc.item @value="2" @title="Set Password">
+        <BsForm
+          @formLayout="vertical"
+          @model={{this}}
+          @onSubmit={{this.set_password}}
+          as |form|
+        >
+          <form.element
+            @controlType="text"
+            @label="New Password"
+            @property="password"
+            as |el|
+          >
+            <el.control placeholder="Hostname" required />
+          </form.element>
+          <form.element
+            @controlType="text"
+            @label="Retype Password"
+            @property="password2"
+            as |el|
+          >
+            <el.control placeholder="Hostname" required />
+          </form.element>
+          <form.submitButton>Submit</form.submitButton>
+          <BsButton @onClick={{this.reset}}>Reset</BsButton>
+        </BsForm>
+      </acc.item>
+      <acc.item @value="3" @title="Reboot Device">
+        <p><BsButton
+            @type="warning"
+            @onClick={{this.reboot}}
+          >Confirm</BsButton></p>
+      </acc.item>
+      <acc.item @value="4" @title="Factory Reset">
+        <p><BsButton
+            @type="warning"
+            @onClick={{this.factory}}
+          >Confirm</BsButton></p>
+      </acc.item>
+    </BsAccordion>
+  </tab.pane>
+</BsTab>

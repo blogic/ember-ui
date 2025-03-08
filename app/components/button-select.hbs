@@ -1,0 +1,11 @@
+  <BsButtonGroup
+    @value={{@value}}
+    @type="radio"
+    @onChange={{fn (mut @value)}}
+    class="w-100"
+    ...attributes
+    as |bg|
+  >
+    <bg.button @type="select" @value={{@value1}}>{{@option1}}</bg.button>
+    <bg.button @type="select" @value={{@value2}}>{{@option2}}</bg.button>
+  </BsButtonGroup>

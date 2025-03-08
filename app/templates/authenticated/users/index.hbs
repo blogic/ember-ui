@@ -1,0 +1,123 @@
+{{#if (eq this.users.model undefined)}}
+  <SettingsHeader @icon="people" @title="Users" />
+  <SettingsDescription>
+    Loading ...
+  </SettingsDescription>
+
+{{else if (eq this.model.key "list")}}
+  <Header />
+  <SettingsHeader
+    @icon="people"
+    @title="Users"
+    @description="Manage the users on your network."
+  />
+  <BsListGroup as |ListGroup|>
+    {{#each-in this.users.model as |name network|}}
+      {{#if (eq this.model.network name)}}
+        {{#each-in network as |user data|}}
+          <ListGroupNav
+            @icon="person"
+            @onClick={{fn this.onUser this.model.network user}}
+            @parent={{ListGroup}}
+          >
+            {{user}}
+          </ListGroupNav>
+        {{/each-in}}
+      {{/if}}
+    {{/each-in}}
+    <ListGroupNav
+      @icon="person-add"
+      @onClick={{fn this.onUser this.model.network "add"}}
+      @parent={{ListGroup}}
+    >
+      Add User
+    </ListGroupNav>
+  </BsListGroup>
+{{else if (eq this.model.key "add")}}
+  <BsForm
+    @formLayout="vertical"
+    @model={{this.add}}
+    @onSubmit={{this.onSubmitAdd}}
+    {{on "change" this.onChangeAdd}}
+    as |form|
+  >
+    <Header
+      @onSubmit={{form.submit}}
+      @model={{this}}
+    />
+    <SettingsHeader
+      @icon="person-add"
+      @title="Users"
+      @description="Add a new user."
+    />
+    <form.element @controlType="text" @property="name" as |el|>
+      <el.control placeholder="Username" required maxlength="16" />
+    </form.element>
+    <SettingsDescription>
+      The name of the user
+    </SettingsDescription>
+    <form.element @controlType="password" @property="key" as |el|>
+      <el.control
+        placeholder="Password"
+        required
+        minlength="8"
+        maxlength="64"
+      />
+    </form.element>
+    <SettingsDescription>
+      The user specific PSK.
+    </SettingsDescription>
+    {{#if (eq this.duplicate false)}}
+      <SettingsDescription class="text-danger">
+        There is already an user with that name.
+      </SettingsDescription>
+    {{/if}}
+  </BsForm>
+
+{{else}}
+  <ModalConfirm />
+  <BsForm
+    @formLayout="vertical"
+    @model={{this.model.user}}
+    @onSubmit={{this.onSubmitPassword}}
+    {{on "change" this.onChangePassword}}
+    as |form|
+  >
+    <Header
+      @onSubmit={{form.submit}}
+      @model={{this.users}}
+    />
+    <SettingsHeader
+      @icon="person"
+      @title={{this.model.key}}
+      @description="Manage the settings for user {{this.model.key}}."
+    />
+    <form.element @controlType="password-eye" @property="key" as |el|>
+      <el.control
+        placeholder="Password"
+        required
+        minlength="8"
+        maxlength="64"
+      />
+    </form.element>
+    <SettingsDescription>
+      The user specific PSK.
+    </SettingsDescription>
+    <BsListGroup class="mb-5" as |ListGroup|>
+      {{#each-in this.model.macs as |mac name|}}
+        <ListGroupNav
+          @icon="node-minus"
+          @onClick={{fn this.onMacDel mac}}
+          @parent={{ListGroup}}
+        >
+          {{name}}
+        </ListGroupNav>
+      {{else}}
+        <ListGroup.item>No devices assigned</ListGroup.item>
+      {{/each-in}}
+    </BsListGroup>
+  </BsForm>
+  <ButtonFooter>
+    <BsButton @onClick={{this.onUserDel}} @type="primary">Delete User</BsButton>
+  </ButtonFooter>
+{{/if}}

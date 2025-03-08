@@ -1,0 +1,27 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{@model}}
+  @onSubmit={{@onSubmit}}
+  as |form|
+>
+  <SettingsHeader
+    @icon="wifi"
+    @title="Create WiFi Network"
+    @description="Personalize your WiFi network name and password"
+  />
+  <form.element @controlType="text" @property="name" as |el|>
+    <el.control placeholder="Network Name" required maxlength="16" />
+  </form.element>
+  <SettingsDescription>
+    WiFi Network name (SSID).
+  </SettingsDescription>
+  <form.element @controlType="password-eye" @property="wifipsk" as |el|>
+    <el.control placeholder="Password" required minlength="8" maxlength="32" />
+  </form.element>
+  <SettingsDescription>
+    WiFi Network Password (PSK).
+  </SettingsDescription>
+  <ButtonFooter>
+    <BsButton @onClick={{form.submit}} @type="primary">Continue</BsButton>
+  </ButtonFooter>
+</BsForm>

@@ -1,0 +1,8 @@
+<Header />
+<SettingsHeader @icon="qr-code" @title="Main Network" />
+
+<WifiQrCode
+  @ssid={{this.wifimain.model.ssid}}
+  @psk={{this.wifimain.model.key}}
+  @description="Scan the QR code on your mobile device to gain access to your network."
+/>

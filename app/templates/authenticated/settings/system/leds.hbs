@@ -1,0 +1,34 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{this.unit.model}}
+  @onSubmit={{this.onSubmit}}
+  {{on "change" this.unit.onChange}}
+  as |form|
+>
+  <Header
+    @onSubmit={{form.submit}}
+    @model={{this.unit}}
+  />
+  <SettingsHeader @icon="lightbulb" @title="LED behaviour">
+    {{#if (eq this.unit.model.leds-active "true")}}
+      <BsIconRound @name="lightbulb" />
+    {{else}}
+      <BsIconRound @name="lightbulb-off" />
+    {{/if}}
+  </SettingsHeader>
+  <ButtonSelect
+    @value={{this.unit.model.leds-active}}
+    @value1="true"
+    @option1="Enable"
+    @value2="false"
+    @option2="Disable"
+  />
+
+  <SettingsDescription>
+    {{#if (eq this.unit.model.leds-active "true")}}
+      The device LEDs are active.
+    {{else}}
+      All LEDs on the device will be turned off.
+    {{/if}}
+  </SettingsDescription>
+</BsForm>

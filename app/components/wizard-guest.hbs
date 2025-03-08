@@ -1,0 +1,45 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{@model}}
+  @onSubmit={{@onSubmit}}
+  as |form|
+>
+  <SettingsHeader
+    @icon="wifi"
+    @title="Create Guest WiFi"
+    @description="This will allow guests to use a dedicated WiFi network."
+  >
+    {{#if (eq @model.guest_wifi "enable")}}
+      <BsIconRound @name="wifi" />
+    {{else}}
+      <BsIconRound @name="wifi-off" />
+    {{/if}}
+  </SettingsHeader>
+  <ButtonSelect
+    @value={{@model.guest_wifi}}
+    @value1="enable"
+    @option1="Enable"
+    @value2="disable"
+    @option2="Disable"
+  />
+  {{#if (eq @model.guest_wifi "enable")}}
+    <form.element @controlType="password-eye" @property="guestpsk" as |el|>
+      <el.control
+        placeholder="Password"
+        required
+        minlength="8"
+        maxlength="32"
+      />
+    </form.element>
+    <SettingsDescription>
+      Guest WiFi Network Password (PSK).
+    </SettingsDescription>
+  {{else}}
+    <SettingsDescription>
+      The Guest WiFi Network will be disabled.
+    </SettingsDescription>
+  {{/if}}
+  <ButtonFooter>
+    <BsButton @onClick={{form.submit}} @type="primary">Continue</BsButton>
+  </ButtonFooter>
+</BsForm>

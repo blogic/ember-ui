@@ -1,7 +1,7 @@
-{{page-title "Webui"}}
-
-{{outlet}}
-
-{{! The following component displays Ember's default welcome message. }}
-<WelcomePage />
-{{! Feel free to remove this! }}
+{{page-title "OpenWrt Webui"}}
+<BasicDropdownWormhole />
+<main class="container bd-main h-100 px-3" style="max-width: 800px;">
+    <div class="content justify-content-center overflow-auto">
+        {{outlet}}
+    </div>
+</main>

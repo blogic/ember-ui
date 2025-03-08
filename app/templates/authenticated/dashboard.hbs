@@ -1,0 +1,41 @@
+<HeaderLogo />
+{{#if (eq this.uconfig.dashboard "home")}}
+  <Dashboard @internet={{this.internet}} @ethernet={{this.ethernet}} />
+{{/if}}
+
+{{#if (eq this.uconfig.dashboard "main")}}
+  <DashboardMain
+    @onDevices={{this.onLanDevices}}
+    @onUsers={{this.onLanUsers}}
+    @onManaged={{this.onManaged}}
+  />
+{{/if}}
+
+{{#if (eq this.uconfig.dashboard "guest")}}
+  <DashboardGuest
+    @onClick={{this.onGuestDevices}}
+    @onUsers={{this.onGuestUsers}}
+  />
+{{/if}}
+
+{{#if (eq this.uconfig.dashboard "settings")}}
+  <DashboardSettings @model={{this.model}} />
+{{/if}}
+
+<div class="container position-absolute bottom-0 align-items-center pb-2" style="max-width: 90%;">
+  <FooterApply />
+  <div class="row text-center">
+    <div class="col text-center">
+      <DashboardIcon @name="globe" @index="home" />
+    </div>
+    <div class="col">
+      <DashboardIcon @name="wifi" @index="main" />
+    </div>
+    <div class="col">
+      <DashboardIcon @name="person" @index="guest" />
+    </div>
+    <div class="col">
+      <DashboardIcon @name="gear" @index="settings" />
+    </div>
+  </div>
+</div>

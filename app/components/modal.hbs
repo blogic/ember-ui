@@ -1,0 +1,18 @@
+<BsModal
+  @open={{this.modal.visible}}
+  @onSubmit={{this.onSubmit}}
+  @onHidden={{fn (mut this.modal.visible) false}}
+  class="modal-dialog-centered"
+  as |modal|
+>
+  <modal.header>
+    {{this.modal.model.header}}
+  </modal.header>
+  <modal.body>
+    {{this.modal.model.body}}
+  </modal.body>
+  <modal.footer>
+    <BsButton @onClick={{modal.close}} @type="primary">Cancel</BsButton>
+    <BsButton @onClick={{modal.submit}} @type="danger">Confirm</BsButton>
+  </modal.footer>
+</BsModal>
