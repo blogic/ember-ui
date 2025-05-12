@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys, prettier/prettier */
 import Datamodel from './datamodel';
 
 export default class UnitService extends Datamodel {
