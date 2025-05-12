@@ -45,9 +45,4 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   onClickUser(network, user) {
     this.router.transitionTo('authenticated.users', network, user);
   }
-
-  @action
-  noDevices() {
-    return !Object.keys(this.devices.model[this.model.network]).length;
-  }
 }

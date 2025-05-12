@@ -17,6 +17,8 @@ export default class DevicesService extends Service {
   load() {
     this.uconfig.state(['devices']).then(
       function (msg) {
+        msg.data.main ??= {};
+        msg.data.guest ??= {};
         this.model = msg.data;
       }.bind(this),
     );

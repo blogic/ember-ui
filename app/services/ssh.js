@@ -2,7 +2,7 @@ import Datamodel from './datamodel';
 
 export default class UnitService extends Datamodel {
   keys = {
-    ssh: ['authorized-keys'],
+    ssh: ['key'],
     iface: ['enable'],
   };
 
@@ -19,22 +19,38 @@ export default class UnitService extends Datamodel {
       })
       .then(
         function (msg) {
-          this.model = { iface: {} };
-          this.model.ssh = msg.ssh;
-          this.model.iface.enable = 'ssh' in msg.iface.service;
+          this.model = {};
+          this.model.ssh = { key: msg.ssh['authorized-keys']?.[0] || '' };
+          this.model.iface = {
+            enable: msg.iface.service.includes('ssh'),
+          };
           this.bool_to_string(this.model.iface, 'enable');
           this.doUpdate();
-          console.log(this.model);
         }.bind(this),
       );
   }
 
-  onSubmit(values) {
-    this.uconfig.setModel(
+  onSubmit() {
+    this.uconfig.sendModel(
       {
-        ssh: [['edit', 'services', 'ssh'], values, this.model],
-        ssh: [['edit', 'services', 'ssh'], values, this.model],
-
+        iface: [
+          'edit',
+          'interface',
+          'main',
+          this.model.iface.enable == 'true' ? 'add' : 'remove',
+          'service',
+          'ssh',
+        ],
+        ssh: [
+          'edit',
+          'services',
+          'ssh',
+          'set',
+          'authorized-keys',
+          this.model.ssh.key,
+          'password-authentication',
+          false,
+        ],
       },
       this,
     );

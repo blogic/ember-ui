@@ -14,7 +14,7 @@
   <BsListGroup as |ListGroup|>
     {{#each-in this.users.model as |name network|}}
       {{#if (eq this.model.network name)}}
-        {{#each-in network as |user data|}}
+        {{#each-in network as |user|}}
           <ListGroupNav
             @icon="person"
             @onClick={{fn this.onUser this.model.network user}}

@@ -188,13 +188,8 @@ export default class UconfigService extends Service {
     return path;
   }
 
-  setModel(request, model) {
+  sendModel(path, model) {
     let id = this.id;
-    let path = {};
-
-    for (const [k, v] of Object.entries(request))
-      path[k] = this.generate_path(v[0], v[1], v[2]);
-
     let msg = ['set', this.id++, path];
 
     this.send(msg);
@@ -209,16 +204,21 @@ export default class UconfigService extends Service {
           });
           if (model) model.onReset();
         } else {
-          /*t.notifications.success('Applied', {
-            autoClear: true,
-            clearDuration: 2000,
-          });*/
           if (model) model.doUpdate();
           t.status = 'pending';
         }
       },
       ctx: model,
     };
+  }
+
+  setModel(request, model) {
+    let path = {};
+
+    for (const [k, v] of Object.entries(request))
+      path[k] = this.generate_path(v[0], v[1], v[2]);
+
+    this.sendModel(path, model);
   }
 
   setPending() {

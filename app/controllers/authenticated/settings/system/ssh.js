@@ -6,6 +6,6 @@ export default class AuthenticatedSettingsSystemSshController extends Controller
   @service ssh;
 
   @action onSubmit() {
-    this.ssh.onSubmit(['disable']);
+    this.ssh.onSubmit();
   }
 }

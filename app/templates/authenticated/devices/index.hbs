@@ -9,46 +9,45 @@
   <Header />
   <SettingsHeader @icon="pc-display-horizontal" @title="Connected Devices" />
   <BsListGroup as |ListGroup|>
-    {{#if (eq this.noDevices true)}}
-      <ListGroup.item>No devices detected</ListGroup.item>
-    {{else}}
-      {{#each-in this.devices.model as |network devices|}}
-        {{#if (eq this.model.network network)}}
-          {{#each-in devices as |mac device|}}
-            <ListGroup.item
-              actionable="true"
-              onclick={{fn this.onDevice this.model.network mac}}
-            >
-              <div class="container">
-                <div class="row align-items-start">
-                  <div class="col-2">
-                    <BsIcon
-                      @name={{fingerprint
-                        device.fingerprint.class
-                        "pc-display-horizontal"
-                      }}
-                    />
-                    <BsIcon @name={{fingerprint device.fingerprint.vendor}} />
-                  </div>
-                  <div class="col">
-                    {{#if device.hostname}}
-                      {{device.hostname}}
-                    {{else}}
-                      {{mac}}
-                    {{/if}}
-                    {{#if device.wifi}}
-                      <BsIcon @name="wifi" />
-                    {{else}}
-                      <BsIcon @name="ethernet" />
-                    {{/if}}
-                  </div>
+    {{#each-in this.devices.model as |network devices|}}
+      {{#if (eq this.model.network network)}}
+        {{#each-in devices as |mac device|}}
+          <ListGroup.item
+            actionable="true"
+            onclick={{fn this.onDevice this.model.network mac}}
+          >
+            <div class="container">
+              <div class="row align-items-start">
+                <div class="col-2">
+                  <BsIcon
+                    @name={{fingerprint
+                      device.fingerprint.class
+                      "pc-display-horizontal"
+                    }}
+                  />
+                  <BsIcon @name={{fingerprint device.fingerprint.vendor}} />
+                </div>
+                <div class="col">
+                  {{#if device.hostname}}
+                    {{device.hostname}}
+                  {{else}}
+                    {{mac}}
+                  {{/if}}
+                  {{#if device.wifi}}
+                    <BsIcon @name="wifi" />
+                  {{else}}
+                    <BsIcon @name="ethernet" />
+                  {{/if}}
                 </div>
               </div>
-            </ListGroup.item>
-          {{/each-in}}
-        {{/if}}
-      {{/each-in}}
-    {{/if}}
+            </div>
+          </ListGroup.item>
+        {{else}}
+          <ListGroup.item>No devices detected</ListGroup.item>
+        {{/each-in}}
+      {{/if}}
+    {{/each-in}}
+
   </BsListGroup>
 {{else}}
 
@@ -114,6 +113,11 @@
             </div>
           </div>
         </ListGroup.item>
+        <DeviceItem
+          @parent={{ListGroup}}
+          @title="AP"
+          @detail="{{this.model.device.wifi.host}}"
+        />
         {{#if this.model.owner}}
           <DeviceItem
             @parent={{ListGroup}}

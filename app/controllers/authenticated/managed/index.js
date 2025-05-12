@@ -44,8 +44,8 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   @action
   onDeviceReboot() {
     this.modal.show({
-      header: 'Remove MAC',
-      body: 'You are about to remove this MAC from the user.',
+      header: 'Reboot Device',
+      body: 'You are about to reboot the managed device.',
       onSubmit: this.onConfirmReboot,
       device: this.model.device,
     });

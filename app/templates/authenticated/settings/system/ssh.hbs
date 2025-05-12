@@ -17,13 +17,12 @@
     @option2="Disable"
     class="mb-4"
   />
-{{this.ssh.model.iface.enable}}
   {{#if (eq this.ssh.model.iface.enable "false")}}
     <SettingsDescription>
       The SSH server is disabled
     </SettingsDescription>
   {{else}}
-    <form.element @controlType="textarea" @property="authorized-key" as |el|>
+    <form.element @controlType="textarea" @property="ssh.key" as |el|>
       <el.control placeholder="SSH public key" required />
     </form.element>
     <SettingsDescription>
