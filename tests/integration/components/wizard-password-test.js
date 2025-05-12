@@ -10,17 +10,11 @@ module('Integration | Component | wizard-password', function (hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<WizardPassword />`);
+    this.set('onChange', () => {});
+    this.set('onSubmit', () => {});
 
-    assert.dom().hasText('');
+    await render(hbs`<WizardPassword @onChange={{this.onChange}} @onSubmit={{this.onSubmit}}/>`);
 
-    // Template block usage:
-    await render(hbs`
-      <WizardPassword>
-        template block text
-      </WizardPassword>
-    `);
-
-    assert.dom().hasText('template block text');
+    assert.dom().hasText('Password Setup your login credentials Your new password. Please confirm the password. Continue');
   });
 });

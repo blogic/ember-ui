@@ -12,15 +12,6 @@ module('Integration | Component | wizard-wifi', function (hooks) {
 
     await render(hbs`<WizardWifi />`);
 
-    assert.dom().hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      <WizardWifi>
-        template block text
-      </WizardWifi>
-    `);
-
-    assert.dom().hasText('template block text');
+    assert.dom().hasText('Create WiFi Network Personalize your WiFi network name and password WiFi Network name (SSID). WiFi Network Password (PSK). Continue');
   });
 });

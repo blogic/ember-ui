@@ -10,17 +10,12 @@ module('Integration | Component | wizard-guest', function (hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<WizardGuest />`);
+    this.set('model', {
+      guest_wifi: 'something',
+    });
 
-    assert.dom().hasText('');
+    await render(hbs`<WizardGuest @model={{this.model}}/>`);
 
-    // Template block usage:
-    await render(hbs`
-      <WizardGuest>
-        template block text
-      </WizardGuest>
-    `);
-
-    assert.dom().hasText('template block text');
+    assert.dom().hasText('Create Guest WiFi This will allow guests to use a dedicated WiFi network. Enable Disable The Guest WiFi Network will be disabled. Continue');
   });
 });

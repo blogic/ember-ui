@@ -12,15 +12,6 @@ module('Integration | Component | wizard-timezone', function (hooks) {
 
     await render(hbs`<WizardTimezone />`);
 
-    assert.dom().hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      <WizardTimezone>
-        template block text
-      </WizardTimezone>
-    `);
-
-    assert.dom().hasText('template block text');
+    assert.dom().hasText('Timezone Please pick the timezone you are in. The default value was automatically detected from your browser settings. Continue');
   });
 });

@@ -1,12 +1,12 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'webui/tests/helpers';
 
-module('Unit | Service | model', function (hooks) {
+module('Unit | Service | mainwifi', function (hooks) {
   setupTest(hooks);
 
   // TODO: Replace this with your real tests.
   test('it exists', function (assert) {
-    let service = this.owner.lookup('service:model');
+    let service = this.owner.lookup('service:wifimain');
     assert.ok(service);
   });
 });
