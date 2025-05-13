@@ -2,6 +2,8 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { runTask } from 'ember-lifeline';
 import Service from '@ember/service';
+import { action } from '@ember/object';
+import { isDevelopingApp, macroCondition } from '@embroider/macros';
 
 let callbacks = {};
 
@@ -16,6 +18,8 @@ export default class UconfigService extends Service {
   @tracked status = 'clean';
   @tracked dashboard = 'home';
   @tracked wizard = 'welcome';
+  @tracked websocket = false;
+  @tracked onboarding;
 
   mode;
 
@@ -28,6 +32,7 @@ export default class UconfigService extends Service {
 
     'setup-required': function (msg, t) {
       t.authenticated = 'setup';
+      t.wizard = 'welcome';
       t.router.transitionTo('setup.wizard');
     },
 
@@ -40,6 +45,7 @@ export default class UconfigService extends Service {
 
     authenticated: function (msg, t) {
       t.authenticated = 'logged-in';
+      t.dashboard = 'home';
       t.status = msg[1].pending_changes ? 'pending' : 'clean';
       t.router.transitionTo('authenticated.dashboard');
       t.mode = msg[1].mode;
@@ -63,26 +69,50 @@ export default class UconfigService extends Service {
         case 'join_timeout':
           t.wizard = 'onboarding-timeout';
           break;
+        case 'invite_timeout':
+          t.onboarding = 'timeout';
+          break;
+        case 'invite_done':
+          t.onboarding = 'done';
+          break;
       }
     },
   };
 
   get_socket(connect) {
-    let path = 'ws://192.168.42.86/config';
+    let path;
+    if (macroCondition(isDevelopingApp())) {
+      path = 'ws://192.168.42.81/config';
+    } else {
+      let ws = 'ws://';
+      if (window.location.protocol == 'https:') ws = 'wss://';
+      path = ws + window.location.hostname + '/config';
+    }
+
     if (connect) return this.socketService.socketFor(path, 'config');
     this.socketService.closeSocketFor(path);
   }
 
   constructor(...args) {
     super(...args);
+    this.load();
+  }
 
+  @action
+  load() {
     let socket = this.get_socket(true);
-
-    socket.on('open', () => {}, this);
+    socket.on(
+      'open',
+      () => {
+        this.websocket = true;
+      },
+      this,
+    );
 
     socket.on(
       'close',
       () => {
+        this.websocket = false;
         if (this.wizard == 'onboarding-done') return;
         runTask(
           this,
@@ -92,7 +122,7 @@ export default class UconfigService extends Service {
           5000,
         );
         this.authenticated = false;
-        this.router.transitionTo('splash');
+        this.router.transitionTo('login');
       },
       this,
     );

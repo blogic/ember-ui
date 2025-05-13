@@ -1,8 +1,8 @@
 {{! template-lint-disable no-bare-strings }}
 <SettingsHeader
   @icon="clock"
-  @title="Timezone"
-  @description="Please pick the timezone you are in."
+  @title={{format-message "Timezone"}}
+  @description={{format-message "Please pick the timezone you are in"}}
 />
 <BsForm @formLayout="vertical" @model={{@model}} as |form|>
   <form.element
@@ -11,9 +11,13 @@
     @options={{@timezone}}
   />
   <SettingsDescription>
-    The default value was automatically detected from your browser settings.
+    {{format-message
+      "The default value was automatically detected from your browser settings"
+    }}
   </SettingsDescription>
   <ButtonFooter>
-    <BsButton @onClick={{@onSubmit}} @type="primary">Continue</BsButton>
+    <BsButton @onClick={{@onSubmit}} @type="primary">{{format-message
+        "Continue"
+      }}</BsButton>
   </ButtonFooter>
 </BsForm>

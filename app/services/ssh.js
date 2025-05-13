@@ -32,28 +32,28 @@ export default class UnitService extends Datamodel {
   }
 
   onSubmit() {
-    this.uconfig.sendModel(
-      {
-        iface: [
-          'edit',
-          'interface',
-          'main',
-          this.model.iface.enable == 'true' ? 'add' : 'remove',
-          'service',
-          'ssh',
-        ],
-        ssh: [
-          'edit',
-          'services',
-          'ssh',
-          'set',
-          'authorized-keys',
-          this.model.ssh.key,
-          'password-authentication',
-          false,
-        ],
-      },
-      this,
-    );
+    let msg = {
+      ssh: [
+        'edit',
+        'services',
+        'ssh',
+        'set',
+        'authorized-keys',
+        this.model.iface.enable == 'true' ? this.model.ssh.key : '',
+        'password-authentication',
+        false,
+      ],
+    };
+    if (this.model.iface.enable != this.shadow.iface.enable)
+      msg.iface = [
+        'edit',
+        'interface',
+        'main',
+        this.model.iface.enable == 'true' ? 'add' : 'remove',
+        'service',
+        'ssh',
+      ];
+
+    this.uconfig.sendModel(msg, this);
   }
 }

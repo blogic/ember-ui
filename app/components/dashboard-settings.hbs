@@ -5,46 +5,55 @@
     @description="Make changes to the behaviour of the device."
     class="mb-4"
   />
-  <BsListGroup as |ListGroup|>
+  <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.system.hostname"
       @icon="house"
-    >Hostname</ListGroupNav>
+    >{{format-message "Hostname"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.system.timezone"
       @icon="clock"
-    >Timezone</ListGroupNav>
+    >{{format-message "Timezone"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.system.leds"
       @icon="lightbulb"
-    >LED behaviour</ListGroupNav>
+    >{{format-message "LED behaviour"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.system.password"
       @icon="key"
-    >Password</ListGroupNav>
+    >{{format-message "Password"}}</ListGroupNav>
+  </BsListGroup>
+  <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.system.ssh"
       @icon="house-lock"
-    >SSH</ListGroupNav>
+    >{{format-message "SSH"}}</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.settings.system.adguard"
+      @icon="badge-ad"
+    >{{format-message "AdGuardHome"}}</ListGroupNav>
+  </BsListGroup>
+  <BsListGroup as |ListGroup|>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.system.reboot"
       @icon="arrow-counterclockwise"
-    >Reboot</ListGroupNav>
+    >{{format-message "Reboot"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.system.factory"
       @icon="house-down"
-    >Factory</ListGroupNav>
+    >{{format-message "Factory"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.system.upgrade"
       @icon="house-add"
-    >Firmware</ListGroupNav>
+    >{{format-message "Firmware"}}</ListGroupNav>
   </BsListGroup>
 </div>

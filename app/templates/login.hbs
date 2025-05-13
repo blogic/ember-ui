@@ -1,20 +1,27 @@
 {{! template-lint-disable no-bare-strings no-curly-component-invocation }}
-{{notification-container position="top-right" zindex="9999"}}
-<SettingsHeader @icon="person-circle" @title="Login" />
-<BsForm
-  @formLayout="vertical"
-  @model={{this}}
-  @onSubmit={{this.submit}}
-  as |form|
->
-
-  <form.element @controlType="password" @property="password" as |el|>
-    <el.control placeholder="Password" required />
-  </form.element>
-  <SettingsDescription>
-    Please enter your password.
-  </SettingsDescription>
-  <ButtonFooter>
-    <form.submitButton>Submit</form.submitButton>
-  </ButtonFooter>
-</BsForm>
+{{#if this.uconfig.websocket}}
+  {{notification-container position="top-right" zindex="9999"}}
+  <SettingsHeader @icon="person-circle" @title="Login" />
+  <BsForm
+    @formLayout="vertical"
+    @model={{this}}
+    @onSubmit={{this.submit}}
+    as |form|
+  >
+    <form.element @controlType="password" @property="password" as |el|>
+      <el.control placeholder={{format-message "Password"}} required />
+    </form.element>
+    <SettingsDescription>
+      {{format-message "Please enter your password"}}
+    </SettingsDescription>
+    <ButtonFooter>
+      <form.submitButton>{{format-message "Submit"}}</form.submitButton>
+    </ButtonFooter>
+  </BsForm>
+{{else}}
+  <ActionSplash
+    @icon="router"
+    @description={{format-message "Connecting ..."}}
+    class="text-primary"
+  />
+{{/if}}

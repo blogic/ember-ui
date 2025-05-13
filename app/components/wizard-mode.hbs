@@ -7,20 +7,27 @@
 <ButtonSelect
   @value={{@model.mode}}
   @value1="configurable"
-  @option1="Configurable"
+  @option1={{format-message "Configurable"}}
   @value2="managed"
-  @option2="Managed"
+  @option2={{format-message "Managed"}}
+  class="mb-3"
 />
 {{#if (eq @model.mode "configurable")}}
   <SettingsDescription>
-    You will be able to configure the device via the webui. Configuration can
-    optionally be distributed to managed devices.
+    {{format-message
+      "You will be able to configure the device via the webui. Configuration can
+    optionally be distributed to managed devices."
+    }}
   </SettingsDescription>
 {{else}}
   <SettingsDescription>
-    The device will be managed by another configurable device.
+    {{format-message
+      "The device will be managed by another configurable device"
+    }}
   </SettingsDescription>
 {{/if}}
 <ButtonFooter>
-  <BsButton @onClick={{@onSubmit}} @type="primary">Continue</BsButton>
+  <BsButton @onClick={{@onSubmit}} @type="primary">{{format-message
+      "Continue"
+    }}</BsButton>
 </ButtonFooter>

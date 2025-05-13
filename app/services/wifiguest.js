@@ -23,6 +23,8 @@ export default class GuestwifiService extends Datamodel {
       );
   }
 
+  load() {}
+
   onSubmit(values) {
     this.uconfig.setModel(
       {

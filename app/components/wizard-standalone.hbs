@@ -1,25 +1,30 @@
 {{! template-lint-disable no-bare-strings }}
 <SettingsHeader
-    @icon="router"
-    @title="Standalone"
-    @description="Please choose the configuration type"
+  @icon="router"
+  @title={{format-message "Standalone"}}
+  @description={{format-message "Please choose the configuration type"}}
 />
 <ButtonSelect
-    @value={{@model.standalone}}
-    @value1="router"
-    @option1="Router"
-    @value2="ap"
-    @option2="Access Point"
+  @value={{@model.standalone}}
+  @value1="router"
+  @option1={{format-message "Router"}}
+  @value2="ap"
+  @option2={{format-message "Access Point"}}
+  class="mb-3"
 />
 {{#if (eq @model.standalone "router")}}
-    <SettingsDescription>
-        The device will will be able to route your local traffic to the internet.
-    </SettingsDescription>
+  <SettingsDescription>
+    {{format-message
+      "The device will will be able to route your local traffic to the internet"
+    }}
+  </SettingsDescription>
 {{else}}
-    <SettingsDescription>
-        The device will act as a simple Access Point.
-    </SettingsDescription>
+  <SettingsDescription>
+    {{format-message "The device will act as a simple Access Point"}}
+  </SettingsDescription>
 {{/if}}
 <ButtonFooter>
-        <BsButton @onClick={{@onSubmit}} @type="primary">Continue</BsButton>
+  <BsButton @onClick={{@onSubmit}} @type="primary">{{format-message
+      "Continue"
+    }}</BsButton>
 </ButtonFooter>

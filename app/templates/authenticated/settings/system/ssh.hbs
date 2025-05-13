@@ -7,27 +7,27 @@
   as |form|
 >
   <Header @onSubmit={{form.submit}} @model={{this.ssh}} />
-  <SettingsHeader @icon="house-lock" @title="SSH">
+  <SettingsHeader @icon="house-lock" @title={{format-message "SSH"}}>
     <BsIconRound @name="house-lock" />
   </SettingsHeader>
   <ButtonSelect
     @value={{this.ssh.model.iface.enable}}
     @value1="true"
-    @option1="Enable"
+    @option1={{format-message "Enable"}}
     @value2="false"
-    @option2="Disable"
+    @option2={{format-message "Disable"}}
     class="mb-4"
   />
   {{#if (eq this.ssh.model.iface.enable "false")}}
     <SettingsDescription>
-      The SSH server is disabled
+      {{format-message "The SSH server is disabled"}}
     </SettingsDescription>
   {{else}}
     <form.element @controlType="textarea" @property="ssh.key" as |el|>
-      <el.control placeholder="SSH public key" required />
+      <el.control placeholder={{format-message "SSH public key"}} required />
     </form.element>
     <SettingsDescription>
-      The SSH key used to login.
+      {{format-message "The SSH key used to login"}}
     </SettingsDescription>
   {{/if}}
 </BsForm>

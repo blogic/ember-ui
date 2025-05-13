@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class AuthenticatedDevicesIndexController extends Controller {
   @service datamodel;
@@ -8,6 +9,8 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   @service uconfig;
   @service router;
   @service users;
+
+  @tracked network = 'main';
 
   @action
   onSubmit() {
@@ -44,5 +47,11 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   @action
   onClickUser(network, user) {
     this.router.transitionTo('authenticated.users', network, user);
+  }
+
+  @action
+  onChangeNetwork() {
+    console.log('foo');
+    this.router.replaceWith('authenticated.devices', this.network, 'list');
   }
 }

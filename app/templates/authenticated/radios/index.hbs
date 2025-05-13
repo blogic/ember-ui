@@ -1,0 +1,91 @@
+{{#if (eq this.model "list")}}
+  <Header />
+  <SettingsHeader
+    @icon="broadcast-pin"
+    @title={{format-message "Radio Settings"}}
+    @description={{format-message "Manage the settings of your WiFi radios"}}
+  />
+  <WifiRadios @radio={{this.radio.model}} @onRadio={{this.radio.onRadio}} />
+{{else}}
+  <BsForm
+    @formLayout="vertical"
+    @model={{this.model}}
+    @onSubmit={{this.onSubmit}}
+    {{on "change" this.onChange}}
+    as |form|
+  >
+    <Header @onSubmit={{form.submit}} @model={{this}} />
+    <SettingsHeader
+      @icon="broadcast-pin"
+      @title={{format-message "Radio Settings"}}
+      @description={{format-message "Manage the settings of your 5G radio"}}
+    />
+    <BsListGroup class="mb-3" as |ListGroup|>
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title={{format-message "Mode"}}
+        @detail={{htmode this.model.mode}}
+      />
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title={{format-message "Channel"}}
+        @detail={{this.model.active_channel}}
+      />
+    </BsListGroup>
+    <ButtonSelect
+      @value={{this.model.acs}}
+      @value1="true"
+      @option1={{format-message "Automatic"}}
+      @value2="false"
+      @option2={{format-message "Manual"}}
+      class="mb-3"
+    />
+    {{#if (eq this.model.acs "true")}}
+      <SettingsDescription>
+        {{format-message
+          "The radio will automatically select the best channel"
+        }}
+      </SettingsDescription>
+    {{else}}
+      <SettingsDescription>
+        {{format-message "Manually configure the radio"}}
+      </SettingsDescription>
+      {{#if (eq this.model.bandwidth "20")}}
+        <form.element
+          @controlType="power-select"
+          @property="b20channel"
+          @options={{this.model.channels.b20}}
+        />
+      {{else if (eq this.model.bandwidth "40")}}
+        <form.element
+          @controlType="power-select"
+          @property="b40channel"
+          @options={{this.model.channels.b40}}
+        />
+      {{else if (eq this.model.bandwidth "80")}}
+        <form.element
+          @controlType="power-select"
+          @property="b80channel"
+          @options={{this.model.channels.b80}}
+        />
+      {{else if (eq this.model.bandwidth "160")}}
+        <form.element
+          @controlType="power-select"
+          @property="b160channel"
+          @options={{this.model.channels.b160}}
+        />
+      {{/if}}
+      <SettingsDescription>
+        {{format-message "The channel that the radio will broadcast on"}}
+      </SettingsDescription>
+      <form.element
+        @controlType="power-select"
+        @property="bandwidth"
+        @options={{this.model.bandwidths}}
+      />
+      <SettingsDescription>
+        {{format-message "The bandwidth in MHz that the radio will use"}}
+      </SettingsDescription>
+    {{/if}}
+  </BsForm>
+{{/if}}

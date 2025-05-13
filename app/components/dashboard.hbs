@@ -42,19 +42,42 @@
     </div>
   </div>
   {{#if @internet.connected}}
-    <BsListGroup @flush={{true}} class="my-5" as |ListGroup|>
-      <ListGroupItem
+    <BsListGroup class="my-3" as |ListGroup|>
+      <DeviceItem
         @parent={{ListGroup}}
-        @key="Online since"
-        @value={{uptime @internet.uptime}}
+        @title={{format-message "IPv4 address"}}
+        @detail={{@internet.ipv4}}
       />
-      <ListGroupItem
+      <DeviceItem
         @parent={{ListGroup}}
-        @key="IPv4 address"
-        @value={{@internet.ipv4}}
+        @title={{format-message "Online since"}}
+        @detail={{uptime @internet.uptime}}
       />
     </BsListGroup>
   {{/if}}
 </div>
+
+<BsListGroup class="mb-3" as |ListGroup|>
+  <DeviceItem
+    @parent={{ListGroup}}
+    @title={{format-message "Model"}}
+    @detail={{@system.board.model}}
+  />
+  <DeviceItem
+    @parent={{ListGroup}}
+    @title={{format-message "Firmware"}}
+    @detail={{@system.board.release.revision}}
+  />
+  <DeviceItem
+    @parent={{ListGroup}}
+    @title={{format-message "Uptime"}}
+    @detail={{uptime @system.info.uptime}}
+  />
+  <DeviceItem
+    @parent={{ListGroup}}
+    @title={{format-message "Temperature"}}
+    @detail={{temperature @system.thermal}}
+  />
+</BsListGroup>
 
 <EthernetPorts @ethernet={{@ethernet}} />

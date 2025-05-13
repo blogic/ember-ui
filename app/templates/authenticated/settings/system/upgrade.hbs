@@ -1,20 +1,20 @@
 {{! template-lint-disable no-bare-strings require-valid-alt-text }}
 <Header />
-<SettingsHeader @icon="house-add" @title="Firmware" />
+<SettingsHeader @icon="house-add" @title={{format-message "Firmware"}} />
 <BsListGroup @flush={{true}} class="mb-3" as |ListGroup|>
-  <ListGroup.item>Current Revision</ListGroup.item>
+  <ListGroup.item>{{format-message "Current Revision"}}</ListGroup.item>
   <ListGroup.item
   >{{this.firmware.model.board.release.revision}}</ListGroup.item>
 </BsListGroup>
 
 {{#if this.firmware.upgrade.revision}}
   <BsListGroup @flush={{true}} class="" as |ListGroup|>
-    <ListGroup.item>New firmware available</ListGroup.item>
+    <ListGroup.item>{{format-message "New firmware available"}}</ListGroup.item>
     <ListGroup.item>{{this.firmware.upgrade.revision}}</ListGroup.item>
   </BsListGroup>
   {{#if (and this.firmware.upgrade.image this.firmware.upgrade.link)}}
     <BsListGroup @flush={{true}} as |ListGroup|>
-      <ListGroup.item>Provided by</ListGroup.item>
+      <ListGroup.item>{{format-message "Provided by"}}</ListGroup.item>
       <ListGroup.item>
         <div class="mw-100 text-center">
           <a
@@ -28,7 +28,6 @@
       </ListGroup.item>
     </BsListGroup>
   {{/if}}
-
   <ActionSplash
     @icon="house-up"
     class="text-success font-6em"

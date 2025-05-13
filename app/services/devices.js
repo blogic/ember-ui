@@ -10,11 +10,6 @@ export default class DevicesService extends Service {
 
   constructor(...args) {
     super(...args);
-    this.load();
-  }
-
-  @action
-  load() {
     this.uconfig.state(['devices']).then(
       function (msg) {
         msg.data.main ??= {};
@@ -23,6 +18,8 @@ export default class DevicesService extends Service {
       }.bind(this),
     );
   }
+
+  load() {}
 
   @action
   doUpdate() {

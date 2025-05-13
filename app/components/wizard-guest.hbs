@@ -7,8 +7,10 @@
 >
   <SettingsHeader
     @icon="wifi"
-    @title="Create Guest WiFi"
-    @description="This will allow guests to use a dedicated WiFi network."
+    @title={{format-message "Create Guest WiFi"}}
+    @description={{format-message
+      "This will allow guests to use a dedicated WiFi network"
+    }}
   >
     {{#if (eq @model.guest_wifi "enable")}}
       <BsIconRound @name="wifi" />
@@ -22,25 +24,28 @@
     @option1="Enable"
     @value2="disable"
     @option2="Disable"
+    class="mb-3"
   />
   {{#if (eq @model.guest_wifi "enable")}}
     <form.element @controlType="password-eye" @property="guestpsk" as |el|>
       <el.control
-        placeholder="Password"
+        placeholder={{format-message "Password"}}
         required
         minlength="8"
         maxlength="32"
       />
     </form.element>
     <SettingsDescription>
-      Guest WiFi Network Password (PSK).
+      {{format-message "Guest WiFi Network Password (PSK)"}}
     </SettingsDescription>
   {{else}}
     <SettingsDescription>
-      The Guest WiFi Network will be disabled.
+      {{format-message "The Guest WiFi Network will be disabled"}}
     </SettingsDescription>
   {{/if}}
   <ButtonFooter>
-    <BsButton @onClick={{form.submit}} @type="primary">Continue</BsButton>
+    <BsButton @onClick={{form.submit}} @type="primary">{{format-message
+        "Continue"
+      }}</BsButton>
   </ButtonFooter>
 </BsForm>

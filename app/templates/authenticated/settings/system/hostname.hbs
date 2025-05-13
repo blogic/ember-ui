@@ -6,15 +6,12 @@
   {{on "change" this.unit.onChange}}
   as |form|
 >
-  <Header
-    @onSubmit={{form.submit}}
-    @model={{this.unit}}
-  />
-  <SettingsHeader @icon="house" @title="Device Name" />
+  <Header @onSubmit={{form.submit}} @model={{this.unit}} />
+  <SettingsHeader @icon="house" @title={{format-message "Device Name"}} />
   <form.element @controlType="text" @property="hostname" as |el|>
-    <el.control placeholder="Hostname" required />
+    <el.control placeholder={{format-message "Hostname"}} required />
   </form.element>
   <SettingsDescription>
-    The name of your device.
+    {{format-message "The name of your device"}}
   </SettingsDescription>
 </BsForm>

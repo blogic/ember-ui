@@ -6,13 +6,12 @@
   {{on "change" this.wifimesh.onChange}}
   as |form|
 >
-  <Header
-    @onSubmit={{form.submit}}
-    @model={{this.wifimesh}}
-  />
+  <Header @onSubmit={{form.submit}} @model={{this.wifimesh}} />
   <SettingsHeader
-    @title="Backhaul Mesh"
-    @description="The backhaul Mesh network that devices can use for connectivity."
+    @title={{format-message "Backhaul Mesh"}}
+    @description={{format-message
+      "The backhaul Mesh network that devices can use for connectivity"
+    }}
   >
     {{#if (eq this.wifimesh.model.disable "false")}}
       <BsIconRound @name="wifi" />
@@ -23,31 +22,36 @@
   <ButtonSelect
     @value={{this.wifimesh.model.disable}}
     @value1="false"
-    @option1="Enable"
+    @option1={{format-message "Enable"}}
     @value2="true"
-    @option2="Disable"
+    @option2={{format-message "Disable"}}
+    class="mb-3"
   />
   {{#if (eq this.wifimesh.model.disable "false")}}
     <form.element @controlType="text" @property="ssid" as |el|>
-      <el.control placeholder="SSID" required maxlength="32" />
+      <el.control
+        placeholder={{format-message "SSID"}}
+        required
+        maxlength="32"
+      />
     </form.element>
     <SettingsDescription>
-      The name of the Mesh backhaul.
+      {{format-message "The name of the Mesh backhaul"}}
     </SettingsDescription>
     <form.element @controlType="password-eye" @property="key" as |el|>
       <el.control
-        placeholder="Password"
+        placeholder={{format-message "Password"}}
         required
         minlength="8"
         maxlength="64"
       />
     </form.element>
     <SettingsDescription>
-      The password used to encrypt the Mesh network.
+      {{format-message "The password used to encrypt the Mesh network"}}
     </SettingsDescription>
   {{else}}
     <SettingsDescription>
-      The Mesh backhaul is currently disabled.
+      {{format-message "The Mesh backhaul is currently disabled"}}
     </SettingsDescription>
   {{/if}}
 </BsForm>

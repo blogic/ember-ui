@@ -13,10 +13,8 @@ Router.map(function () {
     this.route('devices', { path: '/devices/:network/:mac' }, function () {});
     this.route('logout');
     this.route('managed', { path: '/managed/:device' }, function () {});
-    this.route('qrcode', function () {
-      this.route('main');
-      this.route('guest');
-    });
+    this.route('qrcode');
+    this.route('radios', { path: '/radios/:band' }, function () {});
     this.route('settings', function () {
       this.route('system', function () {
         this.route('hostname');
@@ -27,6 +25,7 @@ Router.map(function () {
         this.route('password');
         this.route('upgrade');
         this.route('ssh');
+        this.route('adguard');
       });
       this.route('wifi', function () {
         this.route('guest');
@@ -42,5 +41,4 @@ Router.map(function () {
   this.route('setup', function () {
     this.route('wizard');
   });
-  this.route('splash');
 });

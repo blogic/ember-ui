@@ -7,6 +7,7 @@ export default class ManagedService extends Service {
   @service uconfig;
 
   @tracked pin;
+  @tracked name;
   @tracked onboarding = {};
   @tracked model;
 
@@ -20,11 +21,12 @@ export default class ManagedService extends Service {
 
   @action
   addDevice(name) {
-    this.onboarding.pin = Math.floor(Math.random() * 899999 + 100000);
-    this.onboarding.name = name;
+    this.pin = Math.floor(Math.random() * 899999 + 100000);
+    this.name = name;
+    this.uconfig.onboarding = 'pending';
 
     this.uconfig
-      .request('unet', ['onboard', this.onboarding.name, this.onboarding.pin])
+      .request('unet', ['onboard', this.name, this.pin])
       .then(function () {});
   }
 

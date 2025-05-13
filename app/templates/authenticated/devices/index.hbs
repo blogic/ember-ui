@@ -1,21 +1,32 @@
 {{! template-lint-disable no-bare-strings }}
 {{#if (eq this.devices.model undefined)}}
   <Header />
-  <SettingsHeader @icon="pc-display-horizontal" @title="Connected Devices" />
+  <SettingsHeader
+    @icon="pc-display-horizontal"
+    @title={{format-message "Connected Devices"}}
+  />
   <SettingsDescription>
-    Loading ...
+    {{format-message "Loading ..."}}"
   </SettingsDescription>
 
 {{else if (eq this.model.key "list")}}
   <Header />
   <SettingsHeader @icon="pc-display-horizontal" @title="Connected Devices" />
+  <ButtonSelect
+    @value={{this.network}}
+    @value1="main"
+    @option1={{format-message "Main"}}
+    @value2="guest"
+    @option2={{format-message "Guest"}}
+    class="mb-3"
+  />
   <BsListGroup as |ListGroup|>
     {{#each-in this.devices.model as |network devices|}}
-      {{#if (eq this.model.network network)}}
+      {{#if (eq this.network network)}}
         {{#each-in devices as |mac device|}}
           <ListGroup.item
             actionable="true"
-            onclick={{fn this.onDevice this.model.network mac}}
+            onclick={{fn this.onDevice this.network mac}}
           >
             <div class="container">
               <div class="row align-items-start">
@@ -44,14 +55,14 @@
             </div>
           </ListGroup.item>
         {{else}}
-          <ListGroup.item>No devices detected</ListGroup.item>
+          <ListGroup.item>{{format-message
+              "No devices detected"
+            }}</ListGroup.item>
         {{/each-in}}
       {{/if}}
     {{/each-in}}
-
   </BsListGroup>
 {{else}}
-
   <BsForm
     @formLayout="vertical"
     @model={{this.model.form}}
@@ -69,7 +80,7 @@
         this.model.device.fingerprint.class
         "pc-display-horizontal"
       }}
-      @title="Device overview"
+      @title={{format-message "Device overview"}}
     />
 
     {{#if this.model.device.wifi}}
@@ -87,7 +98,7 @@
                 <div class="container">
                   <div class="row align-items-start d-flex">
                     <div class="col-4 text-end mw-50">
-                      SSID
+                      {{format-message "SSID"}}
                     </div>
                     <div class="col-4 text-start mw-50">
                       {{this.model.device.wifi.ssid}}
@@ -95,7 +106,7 @@
                   </div>
                   <div class="row align-items-start d-flex">
                     <div class="col-4 text-end mw-50">
-                      Band
+                      {{format-message "Band"}}
                     </div>
                     <div class="col-4 text-start mw-50">
                       {{this.model.device.wifi.band}}
@@ -103,7 +114,7 @@
                   </div>
                   <div class="row align-items-start d-flex">
                     <div class="col-4 text-end mw-50">
-                      Signal
+                      {{format-message "Signal"}}
                     </div>
                     <div class="col-4 text-start mw-50">
                       {{this.model.device.wifi.signal}}
@@ -116,20 +127,20 @@
         </ListGroup.item>
         <DeviceItem
           @parent={{ListGroup}}
-          @title="AP"
+          @title={{format-message "AP"}}
           @detail="{{this.model.device.wifi.host}}"
         />
         {{#if this.model.owner}}
           <DeviceItem
             @parent={{ListGroup}}
-            @title="Owner"
+            @title={{format-message "Owner"}}
             @detail="{{this.model.owner}}"
-            @onClick={{fn this.onClickUser this.model.network this.model.owner}}
+            @onClick={{fn this.onClickUser this.network this.model.owner}}
           />
         {{else}}
           <DeviceItem @parent={{ListGroup}} @title="Owner">
             {{#unless this.model.owner}}
-              {{#if (eq this.model.network "main")}}
+              {{#if (eq this.network "main")}}
                 <form.element
                   @controlType="power-select"
                   @property="user"
@@ -151,18 +162,18 @@
     <BsListGroup class="mb-3" as |ListGroup|>
       <DeviceItem
         @parent={{ListGroup}}
-        @title="Name"
+        @title={{format-message "Name"}}
         @detail="{{this.model.device.hostname}}"
       />
       <DeviceItem
         @parent={{ListGroup}}
-        @title="Device"
+        @title={{format-message "Device"}}
         @detail="{{this.model.device.fingerprint.device}}"
       />
       {{#if this.model.device.fingerprint.vendor}}
         <DeviceItem
           @parent={{ListGroup}}
-          @title="Vendor"
+          @title={{format-message "Vendor"}}
           @detail="{{this.model.device.fingerprint.vendor}}"
         >
           <BsIcon @name={{fingerprint this.model.device.fingerprintvendor}} />
@@ -172,34 +183,38 @@
       {{#if this.model.device.fingerprint.class}}
         <DeviceItem
           @parent={{ListGroup}}
-          @title="Class"
+          @title={{format-message "Class"}}
           @detail="{{this.model.device.fingerprint.class}}"
         />
       {{/if}}
       <DeviceItem
         @parent={{ListGroup}}
-        @title="MAC"
+        @title={{format-message "MAC"}}
         @detail="{{this.model.key}}"
       />
 
     </BsListGroup>
-    {{#if (and (eq this.model.network "main") this.model.form.dhcp)}}
+    {{#if (and (eq this.network "main") this.model.form.dhcp)}}
       <BsListGroup class="mb-3" as |ListGroup|>
         <DeviceItem
           @parent={{ListGroup}}
-          @title="IPv4"
+          @title={{format-message "IPv4"}}
           @detail="{{this.model.device.ipv4}}"
         />
         {{#each this.model.device.ipv6 as |ipv6|}}
-          <DeviceItem @parent={{ListGroup}} @title="IPv6" @detail="{{ipv6}}" />
+          <DeviceItem
+            @parent={{ListGroup}}
+            @title={{format-message "IPv6"}}
+            @detail="{{ipv6}}"
+          />
         {{/each}}
         <DeviceItem @parent={{ListGroup}} @title="DHCP">
           <ButtonSelect
             @value={{this.model.form.dhcp}}
             @value1="dynamic"
-            @option1="Dynamic"
+            @option1={{format-message "Dynamic"}}
             @value2="static"
-            @option2="Static"
+            @option2={{format-message "Static"}}
           />
         </DeviceItem>
       </BsListGroup>
@@ -209,7 +224,6 @@
   {{#if this.model.device.bytes}}
     <BsListGroup as |ListGroup|>
       <ListGroup.item>
-
         <div class="w-100 justify-content-center">
           <ChartJs
             @type="pie"

@@ -1,1 +1,28 @@
-{{outlet}}
+<Header />
+{{#if (eq this.type "main")}}
+  <SettingsHeader @icon="qr-code" @title={{format-message "WiFi"}} />
+  <WifiQrCode
+    @ssid={{this.wifimain.model.ssid}}
+    @psk={{this.wifimain.model.key}}
+    @description={{format-message
+      "Scan the QR code on your mobile device to gain access to your network"
+    }}
+  />
+{{else}}
+  <SettingsHeader @icon="qr-code" @title={{format-message "Guest WiFi"}} />
+  <WifiQrCode
+    @ssid={{this.wifiguest.model.ssid.ssid}}
+    @psk={{this.wifiguest.model.ssid.key}}
+    @description={{format-message
+      "Ask your guest to scan the QR code to gain access to the guest network"
+    }}
+  />
+{{/if}}
+<ButtonSelect
+  @value={{this.type}}
+  @value1="main"
+  @option1={{format-message "Main"}}
+  @value2="guest"
+  @option2={{format-message "Guest"}}
+  class="mt-3"
+/>

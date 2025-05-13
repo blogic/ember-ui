@@ -101,6 +101,7 @@
     "edition": "octane"
   },
   "dependencies": {
+    "@embroider/macros": "^1.17.3",
     "chart.js": "^4.4.9"
   }
 }

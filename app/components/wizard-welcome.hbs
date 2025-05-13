@@ -1,9 +1,13 @@
 {{! template-lint-disable no-bare-strings }}
 <SettingsHeader
   @icon="router"
-  @title="Welcome"
-  @description="The wizard will guide you through the initial setup of your device."
+  @title={{format-message "Welcome"}}
+  @description={{format-message
+    "The wizard will guide you through the initial setup of your device"
+  }}
 />
 <ButtonFooter>
-  <BsButton @onClick={{@onSubmit}} @type="primary">Lets go</BsButton>
+  <BsButton @onClick={{@onSubmit}} @type="primary">{{format-message
+      "Lets go"
+    }}</BsButton>
 </ButtonFooter>

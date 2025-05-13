@@ -36,6 +36,7 @@ export default class ModelService extends Service {
         if (Array.isArray(from[k])) {
           return [...from[k]];
         }
+        if (!from[k]) continue;
         from[k] ??= {};
         ret[k] = this.clone_model(from[k], v);
       }
@@ -66,8 +67,10 @@ export default class ModelService extends Service {
     if (Array.isArray(keys)) {
       dirty = this.isObjectDirty(model, shadow, keys);
     } else {
-      for (const [k, v] of Object.entries(keys))
+      for (const [k, v] of Object.entries(keys)) {
+        if (!model[k]) continue;
         dirty |= this.isObjectDirty(model[k], shadow[k], v);
+      }
     }
     this.isDirty = dirty;
     return dirty;

@@ -1,16 +1,22 @@
 {{! template-lint-disable no-bare-strings }}
-<div class="mw-100 align-items-center d-flex justify-content-center user-select-none">
-    <div class="container text-center"> 
-         <div>
-            {{@description}}
-        </div>
-        <div class="border rounded-3 p-3 mt-3">
-            <div class="">
-                <h4>'{{@ssid}}'</h4>
-            </div>
-            <div class="mt-4">
-                <QrCode @text="WIFI:T:WPA;S:{{@ssid}};P:{{@psk}};;" class="h-50 w-50" @darkColor="#0d6efd" />
-            </div>
-        </div>
+<div
+  class="mw-100 align-items-center d-flex justify-content-center user-select-none"
+>
+  <div class="container text-center">
+    <div>
+      {{@description}}
     </div>
+    <div class="border rounded-3 p-3 mt-3">
+      <div class="">
+        <h4>'{{@ssid}}'</h4>
+      </div>
+      <div class="mt-4">
+        <QrCode
+          @text="WIFI:T:WPA;S:{{@ssid}};P:{{@psk}};;"
+          class="h-50 w-50"
+          @darkColor="#0d6efd"
+        />
+      </div>
+    </div>
+  </div>
 </div>

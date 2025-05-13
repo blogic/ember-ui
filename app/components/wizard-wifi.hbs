@@ -7,22 +7,35 @@
 >
   <SettingsHeader
     @icon="wifi"
-    @title="Create WiFi Network"
-    @description="Personalize your WiFi network name and password"
+    @title={{format-message "Create WiFi Network"}}
+    @description={{format-message
+      "Personalize your WiFi network name and password"
+    }}
   />
   <form.element @controlType="text" @property="name" as |el|>
-    <el.control placeholder="Network Name" required maxlength="16" />
+    <el.control
+      placeholder={{format-message "Network Name"}}
+      required
+      maxlength="16"
+    />
   </form.element>
   <SettingsDescription>
-    WiFi Network name (SSID).
+    {{format-message " WiFi Network name (SSID)"}}"
   </SettingsDescription>
   <form.element @controlType="password-eye" @property="wifipsk" as |el|>
-    <el.control placeholder="Password" required minlength="8" maxlength="32" />
+    <el.control
+      placeholder={{format-message "Password"}}
+      required
+      minlength="8"
+      maxlength="32"
+    />
   </form.element>
   <SettingsDescription>
-    WiFi Network Password (PSK).
+    {{format-message "WiFi Network Password (PSK)"}}
   </SettingsDescription>
   <ButtonFooter>
-    <BsButton @onClick={{form.submit}} @type="primary">Continue</BsButton>
+    <BsButton @onClick={{form.submit}} @type="primary">{{format-message
+        "Continue"
+      }}</BsButton>
   </ButtonFooter>
 </BsForm>

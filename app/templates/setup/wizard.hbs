@@ -2,7 +2,7 @@
 {{#if this.pending}}
   <ActionSplash
     @icon="gear"
-    @description="Applying changes ..."
+    @description={{format-message "Applying changes ..."}}
     class="text-success rotating"
   />
 {{else}}
@@ -22,7 +22,7 @@
   {{#if (eq this.uconfig.wizard "onboarding")}}
     <ActionSplash
       @icon="gear"
-      @description="Joining network"
+      @description={{format-message "Joining network"}}
       class="text-primary rotating"
     />
   {{/if}}
@@ -34,18 +34,22 @@
       class="text-success"
     />
     <SettingsDescription>
-      The device was succesfully onboarded. It will now disable the webui and
-      wait to receive its configuration from the network.
+      {{format-message
+        "The device was succesfully onboarded. It will now disable the webui and
+      wait to receive its configuration from the network."
+      }}
     </SettingsDescription>
   {{/if}}
 
   {{#if (eq this.uconfig.wizard "onboarding-timeout")}}
     <ActionSplash @icon="x-circle" @description="Timeout" class="text-danger" />
     <SettingsDescription>
-      The device did not manage to join the network.
+      {{format-message "The device did not manage to join the network"}}
     </SettingsDescription>
     <ButtonFooter>
-      <BsButton @onClick={{this.onRetry}} @type="primary">Retry</BsButton>
+      <BsButton @onClick={{this.onRetry}} @type="primary">{{format-message
+          "Retry"
+        }}</BsButton>
     </ButtonFooter>
   {{/if}}
 
@@ -91,11 +95,15 @@
     <SettingsHeader
       @icon="check-circle"
       @title="Done"
-      @description="The wizard will guide you through the initial setup of your device."
+      @description={{format-message
+        "The wizard will guide you through the initial setup of your device"
+      }}
     />
     <ButtonFooter>
-      <BsButton @onClick={{this.submit}} @type="primary">Commit and Apply
-        Changes</BsButton>
+      <BsButton @onClick={{this.submit}} @type="primary">{{format-message
+          "Commit and Apply
+        Changes"
+        }}</BsButton>
     </ButtonFooter>
   {{/if}}
 

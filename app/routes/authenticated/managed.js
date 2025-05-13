@@ -23,6 +23,7 @@ export default class AuthenticatedManagedRoute extends Route {
       info.total = device.total;
       info.revision = device.revision;
       info.ports = device.ports;
+      info.thermal = device.thermal;
     }
     return {
       device: params.device,

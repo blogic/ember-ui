@@ -1,0 +1,38 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{this.adguard.model}}
+  @onSubmit={{this.onSubmit}}
+  {{on "change" this.adguard.onChange}}
+  as |form|
+>
+  <Header @onSubmit={{form.submit}} @model={{this.adguard}} />
+  <SettingsHeader @icon="badge-ad" @title="AdGuardHome" />
+  <ButtonSelect
+    @value={{this.adguard.model.enable}}
+    @value1="true"
+    @option1={{format-message "Enable"}}
+    @value2="false"
+    @option2={{format-message "Disable"}}
+    class="mb-4"
+  />
+  {{#if (eq this.adguard.model.enable "false")}}
+    <SettingsDescription>
+      {{format-message "Ads and tracking will not be blocked"}}
+    </SettingsDescription>
+  {{else}}
+    <SettingsDescription>
+      {{format-message "Ads and tracking will be blocked"}}
+    </SettingsDescription>
+    {{#if this.adguard.running}}
+      <div class="mw-100 text-center">
+        <a
+          href={{this.adguard.webui}}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{format-message "AdGuardHome configuration"}}
+        </a>
+      </div>
+    {{/if}}
+  {{/if}}
+</BsForm>

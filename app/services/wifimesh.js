@@ -19,6 +19,8 @@ export default class MeshwifiService extends Datamodel {
       );
   }
 
+  load() {}
+
   onSubmit(values) {
     this.uconfig.setModel(
       {

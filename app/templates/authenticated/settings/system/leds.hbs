@@ -6,11 +6,8 @@
   {{on "change" this.unit.onChange}}
   as |form|
 >
-  <Header
-    @onSubmit={{form.submit}}
-    @model={{this.unit}}
-  />
-  <SettingsHeader @icon="lightbulb" @title="LED behaviour">
+  <Header @onSubmit={{form.submit}} @model={{this.unit}} />
+  <SettingsHeader @icon="lightbulb" @title={{format-message "LED behaviour"}}>
     {{#if (eq this.unit.model.leds-active "true")}}
       <BsIconRound @name="lightbulb" />
     {{else}}
@@ -20,16 +17,16 @@
   <ButtonSelect
     @value={{this.unit.model.leds-active}}
     @value1="true"
-    @option1="Enable"
+    @option1={{format-message "Enable"}}
     @value2="false"
-    @option2="Disable"
+    @option2={{format-message "Disable"}}
   />
 
   <SettingsDescription>
     {{#if (eq this.unit.model.leds-active "true")}}
-      The device LEDs are active.
+      {{format-message "The device LEDs are active"}}
     {{else}}
-      All LEDs on the device will be turned off.
+      {{format-message "All LEDs on the device will be turned off"}}
     {{/if}}
   </SettingsDescription>
 </BsForm>

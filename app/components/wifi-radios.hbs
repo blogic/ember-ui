@@ -1,0 +1,38 @@
+{{! template-lint-disable no-bare-strings }}
+{{#if @radio}}
+  <BsListGroup class="mb-3" as |ListGroup|>
+    {{#each-in @radio as |name info|}}
+      <ListGroup.item onclick={{fn @onRadio name}}>
+        <div class="container">
+          <div class="row align-items-start align-items-center d-flex">
+            <div class="col-4 text-end mw-50">
+              <BsIcon @name={{radioicon name}} class="h1 text-primary" />
+            </div>
+            <div class="col">
+              <div class="container">
+                <div class="row align-items-start d-flex">
+                  <div class="col-4 text-end mw-50">
+                    {{format-message "Name"}}
+                  </div>
+                  <div class="col-4 text-start mw-50">
+                    {{name}}
+                  </div>
+                </div>
+                {{#if info.carrier}}
+                  <div class="row align-items-start d-flex">
+                    <div class="col-4 text-end mw-50">
+                      {{format-message "Speed"}}
+                    </div>
+                    <div class="col-4 text-start mw-50">
+                      {{info.speed}}
+                    </div>
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ListGroup.item>
+    {{/each-in}}
+  </BsListGroup>
+{{/if}}

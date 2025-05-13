@@ -1,12 +1,12 @@
 {{! template-lint-disable no-bare-strings }}
+<Header />
 {{#if (eq this.model.device "list")}}
-  <Header />
   <SettingsHeader @icon="router" @title="Managed Devices" />
   <BsListGroup as |ListGroup|>
     {{#each-in this.managed.model as |device info|}}
       <ListGroupNav @parent={{ListGroup}} @onClick={{fn this.onManaged device}}>
         {{#if info.connected}}
-          <BsIcon @name="check-circle" class="text-success"/>
+          <BsIcon @name="check-circle" class="text-success" />
         {{else}}
           <BsIcon @name="x-circle text-danger" />
         {{/if}}
@@ -18,7 +18,7 @@
       @onClick={{fn this.onManaged "add"}}
       @parent={{ListGroup}}
     >
-      Add device
+      {{format-message "Add device"}}
     </ListGroupNav>
   </BsListGroup>
 
@@ -32,54 +32,69 @@
     <Header />
     <SettingsHeader
       @icon="router"
-      @title="Managed Devices"
-      @description="Device onboarding"
+      @title={{format-message "Managed Devices"}}
+      @description={{format-message "Device onboarding"}}
     />
     <form.element @controlType="text" @property="name" as |el|>
-      <el.control placeholder="Managed Device" required maxlength="16" />
+      <el.control
+        placeholder={{format-message "Managed Device"}}
+        required
+        maxlength="16"
+      />
     </form.element>
     <SettingsDescription>
-      The name of the new device
+      {{format-message "The name of the new device"}}
     </SettingsDescription>
     <ButtonFooter>
-      <BsButton @onClick={{form.submit}} @type="primary">Start onboarding</BsButton>
+      <BsButton @onClick={{form.submit}} @type="primary">{{format-message
+          "Start onboarding"
+        }}</BsButton>
     </ButtonFooter>
   </BsForm>
 
 {{else if (eq this.model.device "onboarding")}}
   <ActionSplash @icon="router" @description="Onboarding" class="text-success" />
-  <BsListGroup @flush={{true}} class="mb-5" as |ListGroup|>
-    <ListGroupItem
-      @parent={{ListGroup}}
-      @key="Name"
-      @value="{{this.managed.onboarding.name}}"
-    />
-    <ListGroupItem
-      @parent={{ListGroup}}
-      @key="PIN"
-      @value="{{this.managed.onboarding.pin}}"
-    />
-  </BsListGroup>
+  {{#if (eq this.managed.uconfig.onboarding "pending")}}
+    <BsListGroup @flush={{true}} class="mb-5" as |ListGroup|>
+      <ListGroupItem
+        @parent={{ListGroup}}
+        @key={{format-message "Name"}}
+        @value={{this.managed.name}}
+      />
+      <ListGroupItem
+        @parent={{ListGroup}}
+        @key={{format-message "PIN"}}
+        @value={{this.managed.pin}}
+      />
+    </BsListGroup>
+  {{else if (eq this.managed.uconfig.onboarding "timeout")}}
+    <SettingsDescription>
+      {{format-message "The device onboarding attempt has timed out"}}
+    </SettingsDescription>
+  {{else if (eq this.managed.uconfig.onboarding "done")}}
+    <SettingsDescription>
+      {{format-message "The device onboarding process was successfull"}}
+    </SettingsDescription>
+  {{/if}}
 
 {{else}}
-  <Header />
   <ModalConfirm />
   <SettingsHeader @icon="router" @title="Managed Devices" />
   <BsListGroup class="mb-3" as |ListGroup|>
     <DeviceItem
       @parent={{ListGroup}}
-      @title="Name"
+      @title={{format-message "Name"}}
       @detail="{{this.model.device}}"
     />
     <DeviceItem
       @parent={{ListGroup}}
-      @title="Status"
-      @detail="{{this.model.info.connected}}"
+      @title={{format-message "Status"}}
+      @detail={{this.model.info.connected}}
     />
     {{#if (eq this.model.info.connected "Connected")}}
       <DeviceItem
         @parent={{ListGroup}}
-        @title="Traffic"
+        @title={{format-message "Traffic"}}
         @detail="{{bandwidth this.model.info.tx_bytes}} / {{bandwidth
           this.model.info.rx_bytes
         }}"
@@ -89,33 +104,47 @@
           @rx={{this.model.info.rx_bytes}}
         />
       </DeviceItem>
+    {{/if}}
+  </BsListGroup>
+  <BsListGroup class="mb-3" as |ListGroup|>
+    {{#if (eq this.model.info.connected "Connected")}}
       <DeviceItem
         @parent={{ListGroup}}
-        @title="Model"
-        @detail="{{this.model.info.model}}"
+        @title={{format-message "Model"}}
+        @detail={{this.model.info.model}}
       />
       <DeviceItem
         @parent={{ListGroup}}
-        @title="Firmware"
-        @detail="{{this.model.info.revision}}"
+        @title={{format-message "Firmware"}}
+        @detail={{this.model.info.revision}}
       />
       <DeviceItem
         @parent={{ListGroup}}
-        @title="Endpoint"
-        @detail="{{this.model.info.endpoint}}"
+        @title={{format-message "Endpoint"}}
+        @detail={{this.model.info.endpoint}}
       />
       <DeviceItem
         @parent={{ListGroup}}
-        @title="Uptime"
-        @detail="{{uptime this.model.info.uptime}}"
+        @title={{format-message "Uptime"}}
+        @detail={{uptime this.model.info.uptime}}
+      />
+      <DeviceItem
+        @parent={{ListGroup}}
+        @title={{format-message "Temperature"}}
+        @detail={{temperature this.model.info.thermal}}
       />
     {{/if}}
   </BsListGroup>
   <EthernetPorts @ethernet={{this.model.info.ports}} />
   <ButtonFooter>
-    <BsButton @onClick={{this.onDeviceDel}} @type="primary">Delete Device</BsButton>
+    <BsButton @onClick={{this.onDeviceDel}} @type="primary">{{format-message
+        "Delete Device"
+      }}</BsButton>
     {{#if (eq this.model.info.connected "Connected")}}
-      <BsButton @onClick={{this.onDeviceReboot}} @type="primary">Reboot Device</BsButton>
+      <BsButton
+        @onClick={{this.onDeviceReboot}}
+        @type="primary"
+      >{{format-message "Reboot Device"}}</BsButton>
     {{/if}}
   </ButtonFooter>
 {{/if}}
