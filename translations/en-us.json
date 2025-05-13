@@ -1,6 +1,18 @@
 {
   "1dYmvv": "You are currently disconnected from the internet",
+  "6/zhQB": "Remove MAC",
+  "AlPhNV": "{mathFloorUptime} Minutes",
+  "FkaHkr": "{floorRate}Mb",
   "Gs8gGX": "You are currently connected to the internet",
   "QKFeMq": "Internet",
-  "oMaeEx": "Connecting ..."
+  "T80SLw": "{mathFloorUptime} Hours",
+  "Y6uRPa": "{mathFloorUptime} Days",
+  "aREI01": "You are about to delete this user.",
+  "caFqs3": "You are about to remove this managed device from your network.",
+  "g9a4ef": "Remove the device",
+  "lFZ6dF": "Delete this user",
+  "oMaeEx": "Connecting ...",
+  "pmIsP+": "You are about to remove this MAC from the user.",
+  "v9tBEF": "{floorRate}Kb",
+  "xGo3tL": "{floorRate}Gb"
 }

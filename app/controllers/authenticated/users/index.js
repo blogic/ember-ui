@@ -8,6 +8,7 @@ export default class AuthenticatedUsersIndexController extends Controller {
   @service router;
   @service modal;
   @service datamodel;
+  @service intl;
 
   @tracked add = {};
   @tracked duplicate;
@@ -21,8 +22,10 @@ export default class AuthenticatedUsersIndexController extends Controller {
   @action
   onMacDel(mac) {
     this.modal.show({
-      header: 'Remove MAC',
-      body: 'You are about to remove this MAC from the user.',
+      header: this.intl.formatMessage({ defaultMessage: 'Remove MAC' }),
+      body: this.intl.formatMessage({
+        defaultMessage: 'You are about to remove this MAC from the user.',
+      }),
       onSubmit: this.onConfirmDel,
       mac,
     });
@@ -36,8 +39,10 @@ export default class AuthenticatedUsersIndexController extends Controller {
   @action
   onUserDel() {
     this.modal.show({
-      header: 'Delete this user',
-      body: 'You are about to delete this user.',
+      header: this.intl.formatMessage({ defaultMessage: 'Delete this user' }),
+      body: this.intl.formatMessage({
+        defaultMessage: 'You are about to delete this user.',
+      }),
       onSubmit: this.onConfirmUser,
     });
   }

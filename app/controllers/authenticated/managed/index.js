@@ -7,6 +7,7 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   @service router;
   @service managed;
   @service modal;
+  @service intl;
 
   @tracked new = {};
 
@@ -29,8 +30,11 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   @action
   onDeviceDel() {
     this.modal.show({
-      header: 'Remove the device',
-      body: 'You are about to remove this managed device from your network.',
+      header: this.intl.formatMessage({ defaultMessage: 'Remove the device' }),
+      body: this.intl.formatMessage({
+        defaultMessage:
+          'You are about to remove this managed device from your network.',
+      }),
       onSubmit: this.onConfirmDel,
       device: this.model.device,
     });
