@@ -6,7 +6,7 @@ module('Unit | Service | meshwifi', function (hooks) {
 
   // TODO: Replace this with your real tests.
   test('it exists', function (assert) {
-    let service = this.owner.lookup('service:meshwifi');
+    let service = this.owner.lookup('service:wifimesh');
     assert.ok(service);
   });
 });

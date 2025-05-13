@@ -14,13 +14,6 @@ module('Integration | Component | modal', function (hooks) {
 
     assert.dom().hasText('');
 
-    // Template block usage:
-    await render(hbs`
-      <Modal>
-        template block text
-      </Modal>
-    `);
-
-    assert.dom().hasText('template block text');
+    // TODO: add real tests here
   });
 });

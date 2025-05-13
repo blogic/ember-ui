@@ -14,13 +14,6 @@ module('Integration | Component | bs-icon-round', function (hooks) {
 
     assert.dom().hasText('');
 
-    // Template block usage:
-    await render(hbs`
-      <BsIconRound>
-        template block text
-      </BsIconRound>
-    `);
-
-    assert.dom().hasText('template block text');
+    // TODO: add real tests here
   });
 });

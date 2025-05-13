@@ -10,17 +10,12 @@ module('Integration | Component | wizard-mode', function (hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<WizardMode />`);
+    this.set('model', {
+      guest_wifi: 'something',
+    });
 
-    assert.dom().hasText('');
+    await render(hbs`<WizardMode @model={{this.model}}/>`);
 
-    // Template block usage:
-    await render(hbs`
-      <WizardMode>
-        template block text
-      </WizardMode>
-    `);
-
-    assert.dom().hasText('template block text');
+    assert.dom().hasText('Mode Please choose the mode of the device. Configurable Managed The device will be managed by another configurable device. Continue');
   });
 });

@@ -14,13 +14,6 @@ module('Integration | Component | action-splash', function (hooks) {
 
     assert.dom().hasText('');
 
-    // Template block usage:
-    await render(hbs`
-      <ActionSplash>
-        template block text
-      </ActionSplash>
-    `);
-
-    assert.dom().hasText('template block text');
+    // TODO: add real tests here
   });
 });

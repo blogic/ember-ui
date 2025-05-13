@@ -7,7 +7,7 @@ module('Unit | Controller | authenticated/settings/mesh', function (hooks) {
   // TODO: Replace this with your real tests.
   test('it exists', function (assert) {
     let controller = this.owner.lookup(
-      'controller:authenticated/settings/mesh',
+      'controller:authenticated/settings/wifi/mesh',
     );
     assert.ok(controller);
   });
