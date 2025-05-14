@@ -13,8 +13,14 @@ module('Integration | Component | wizard-password', function (hooks) {
     this.set('onChange', () => {});
     this.set('onSubmit', () => {});
 
-    await render(hbs`<WizardPassword @onChange={{this.onChange}} @onSubmit={{this.onSubmit}}/>`);
+    await render(
+      hbs`<WizardPassword @onChange={{this.onChange}} @onSubmit={{this.onSubmit}}/>`,
+    );
 
-    assert.dom().hasText('Password Setup your login credentials Your new password. Please confirm the password. Continue');
+    assert
+      .dom()
+      .hasText(
+        'Password Setup your login credentials Your new password. Please confirm the password. Continue',
+      );
   });
 });

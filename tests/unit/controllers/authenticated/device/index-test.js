@@ -6,7 +6,9 @@ module('Unit | Controller | authenticated/device/index', function (hooks) {
 
   // TODO: Replace this with your real tests.
   test('it exists', function (assert) {
-    let controller = this.owner.lookup('controller:authenticated/devices/index');
+    let controller = this.owner.lookup(
+      'controller:authenticated/devices/index',
+    );
     assert.ok(controller);
   });
 });
