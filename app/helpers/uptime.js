@@ -13,7 +13,7 @@ export default class Uptime extends Helper {
         { mathFloorUptime: Math.floor(uptime) },
       );
     uptime /= 60;
-    if (uptime < 60)
+    if (uptime < 24)
       return this.intl.formatMessage(
         { defaultMessage: '{mathFloorUptime} Hours' },
         { mathFloorUptime: Math.floor(uptime) },
