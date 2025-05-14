@@ -4,7 +4,16 @@ module.exports = {
   extends: 'recommended',
   rules: {
     'no-bare-strings': {
-      globalAttributes: ['@title', '@description', 'placeholder'],
+      globalAttributes: [
+        '@title',
+        '@description',
+        '@header',
+        '@body',
+        '@key',
+        '@option1',
+        '@option2',
+        'placeholder',
+      ],
     },
   },
 };
