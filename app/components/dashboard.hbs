@@ -1,13 +1,13 @@
 {{! template-lint-disable no-bare-strings no-inline-styles }}
 <div>
-  <DashboardHeader @title="Internet" />
+  <DashboardHeader @title={{format-message "Internet"}} />
   {{#if @internet.connected}}
     <SettingsDescription>
-      You are currently connected to the internet
+      {{format-message "You are currently connected to the internet"}}
     </SettingsDescription>
   {{else}}
     <SettingsDescription>
-      You are currently disconnected from the internet
+      {{format-message "You are currently disconnected from the internet"}}
     </SettingsDescription>
   {{/if}}
   <div
