@@ -16,6 +16,10 @@ module('Integration | Component | wizard-guest', function (hooks) {
 
     await render(hbs`<WizardGuest @model={{this.model}}/>`);
 
-    assert.dom().hasText('Create Guest WiFi This will allow guests to use a dedicated WiFi network. Enable Disable The Guest WiFi Network will be disabled. Continue');
+    assert
+      .dom()
+      .hasText(
+        'Create Guest WiFi This will allow guests to use a dedicated WiFi network. Enable Disable The Guest WiFi Network will be disabled. Continue',
+      );
   });
 });

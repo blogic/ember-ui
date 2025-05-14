@@ -16,6 +16,10 @@ module('Integration | Component | wizard-mode', function (hooks) {
 
     await render(hbs`<WizardMode @model={{this.model}}/>`);
 
-    assert.dom().hasText('Mode Please choose the mode of the device. Configurable Managed The device will be managed by another configurable device. Continue');
+    assert
+      .dom()
+      .hasText(
+        'Mode Please choose the mode of the device. Configurable Managed The device will be managed by another configurable device. Continue',
+      );
   });
 });

@@ -12,6 +12,10 @@ module('Integration | Component | wizard-timezone', function (hooks) {
 
     await render(hbs`<WizardTimezone />`);
 
-    assert.dom().hasText('Timezone Please pick the timezone you are in. The default value was automatically detected from your browser settings. Continue');
+    assert
+      .dom()
+      .hasText(
+        'Timezone Please pick the timezone you are in. The default value was automatically detected from your browser settings. Continue',
+      );
   });
 });

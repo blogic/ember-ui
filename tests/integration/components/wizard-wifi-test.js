@@ -12,6 +12,10 @@ module('Integration | Component | wizard-wifi', function (hooks) {
 
     await render(hbs`<WizardWifi />`);
 
-    assert.dom().hasText('Create WiFi Network Personalize your WiFi network name and password WiFi Network name (SSID). WiFi Network Password (PSK). Continue');
+    assert
+      .dom()
+      .hasText(
+        'Create WiFi Network Personalize your WiFi network name and password WiFi Network name (SSID). WiFi Network Password (PSK). Continue',
+      );
   });
 });
