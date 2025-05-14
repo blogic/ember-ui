@@ -3,7 +3,7 @@ import { execa } from 'execa';
 
 import { writeFile } from 'node:fs/promises';
 
-const { stdout } = await execa`pnpm formatjs extract ./app/**/*.(hbs|js)`;
+const { stdout } = await execa`npx formatjs extract ./app/**/*.(hbs|js)`;
 
 const extractedJSON = JSON.parse(stdout);
 
