@@ -1,5 +1,5 @@
 {{! template-lint-disable no-invalid-interactive }}
-<span class="align-middle " onclick={{this.click}}>
-    <i class="bi-{{@name}}" ...attributes onclick={{this.click}}/>
+<span class="align-middle " ...attributes onclick={{this.click}}>
+    <i class="bi-{{@name}} d-inline-block lh-1" onclick={{this.click}}/>
     {{yield}}
 </span>
