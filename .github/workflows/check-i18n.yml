@@ -1,0 +1,33 @@
+name: Check i18n
+
+on:
+  pull_request: {}
+
+jobs:
+  check-i18n:
+    name: "Check i18n"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+      - run: npm run extract $RUNNER_TEMP
+      - name: Compare source files
+        shell: bash
+        run: |
+          set +e
+          git diff --no-index translations/en-us.json "$RUNNER_TEMP/en-us.json"
+          if [ $? -eq 1 ]; then
+            echo "This PR includes changes in the English messages in the app."
+            echo "Execute 'npm run extract' to update translations/en-us.json"
+            exit 1
+          else
+            echo "Compare ok"
+          fi
