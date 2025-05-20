@@ -1,8 +1,8 @@
 {{! template-lint-disable no-bare-strings }}
 <div>
   <DashboardHeader
-    @title="Settings"
-    @description="Make changes to the behaviour of the device."
+    @title={{format-message "Settings"}}
+    @description={{format-message "Make changes to the behaviour of the device"}}
     class="mb-4"
   />
   <BsListGroup class="mb-3" as |ListGroup|>

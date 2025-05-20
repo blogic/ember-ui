@@ -82,7 +82,7 @@ export default class UconfigService extends Service {
   get_socket(connect) {
     let path;
     if (macroCondition(isDevelopingApp())) {
-      path = 'ws://192.168.42.81/config';
+      path = 'ws://192.168.42.78/config';
     } else {
       let ws = 'ws://';
       if (window.location.protocol == 'https:') ws = 'wss://';

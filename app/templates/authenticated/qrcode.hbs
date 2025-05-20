@@ -18,11 +18,13 @@
     }}
   />
 {{/if}}
-<ButtonSelect
-  @value={{this.type}}
-  @value1="main"
-  @option1={{format-message "Main"}}
-  @value2="guest"
-  @option2={{format-message "Guest"}}
-  class="mt-3"
-/>
+{{#if (eq this.wifiguest.model.iface.disable "false")}}
+  <ButtonSelect
+    @value={{this.type}}
+    @value1="main"
+    @option1={{format-message "Main"}}
+    @value2="guest"
+    @option2={{format-message "Guest"}}
+    class="mt-3"
+  />
+{{/if}}

@@ -2,15 +2,14 @@
 {{#if (eq this.uconfig.status "pending")}}
   <ActionSplash @icon="gear" @onClick={{this.commit}} class="text-success" />
   <ButtonFooter>
-    <BsButton @onClick={{this.commit}} @type="primary">{{format-message
-        "Apply changes"
-      }}</BsButton>
-    <BsButton @onClick={{this.reset}} @type="primary">{{format-message
-        "Reset changes"
-      }}</BsButton>
-    <BsButton @onClick={{this.back}} @type="primary">{{format-message
-        "Cancel"
-      }}</BsButton>
+    <BsButton @onClick={{this.commit}} @type="primary">
+      {{format-message "Apply changes"}}
+    </BsButton>
+    <BsButton @onClick={{this.reset}} @type="primary">
+      {{format-message "Reset changes"}}
+    </BsButton>
+    <BsButton @onClick={{this.back}} @type="primary">
+      {{format-message "Cancel"}}</BsButton>
   </ButtonFooter>
 {{else if (eq this.uconfig.status "applying")}}
   <ActionSplash

@@ -1,4 +1,4 @@
 <div>
-  <DashboardHeader @title="Network Traffic" />
+  <DashboardHeader @title={{format-message "Network Traffic"}} />
   <ChartJs @type="line" @data={{@traffic}} @width="5em" @height="400" />
 </div>

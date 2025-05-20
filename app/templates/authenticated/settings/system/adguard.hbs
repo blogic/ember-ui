@@ -6,7 +6,7 @@
   as |form|
 >
   <Header @onSubmit={{form.submit}} @model={{this.adguard}} />
-  <SettingsHeader @icon="badge-ad" @title="AdGuardHome" />
+  <SettingsHeader @icon="badge-ad" @title={{format-message "AdGuardHome"}} />
   <ButtonSelect
     @value={{this.adguard.model.enable}}
     @value1="true"

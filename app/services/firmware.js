@@ -24,6 +24,6 @@ export default class FirmwareService extends Datamodel {
   onUpgrade() {
     this.uconfig
       .request('firmware-download', [])
-      .then(function (msg) {}.bind(this));
+      .then(function () {}.bind(this));
   }
 }
