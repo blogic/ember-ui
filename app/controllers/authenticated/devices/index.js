@@ -51,7 +51,6 @@ export default class AuthenticatedDevicesIndexController extends Controller {
 
   @action
   onChangeNetwork() {
-    console.log('foo');
     this.router.replaceWith('authenticated.devices', this.network, 'list');
   }
 }

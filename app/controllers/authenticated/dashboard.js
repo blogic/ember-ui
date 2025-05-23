@@ -15,24 +15,51 @@ export default class AuthenticatedDashboardController extends Controller {
   @tracked system;
   @tracked loading = true;
   @tracked traffic = {
-    labels: [1, 2, 3, 4, 5, 6, 7],
+    labels: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
     datasets: [
       {
         label: 'Upload',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: [],
         fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.3,
+        borderColor: 'rgb(1, 146, 250)',
+        tension: 0.4,
       },
       {
         label: 'Download',
-        data: [165, 259, 8, 50, 60, 90, 240],
+        data: [],
         fill: false,
-        borderColor: 'rgb(192, 0, 0)',
-        tension: 0.3,
+        borderColor: 'rgb(0, 70, 192)',
+        tension: 0.4,
       },
     ],
   };
+
+  scale = {
+    scales: {
+      y: {
+        ticks: {
+          callback: function (rate) {
+            if (rate > 1024 * 1024 * 1024)
+              return Math.floor(rate / (1024 * 1024 * 1024)) + 'GB';
+            if (rate > 1024 * 1024)
+              return Math.floor(rate / (1024 * 1024)) + 'MB';
+            if (rate > 1024) return Math.floor(rate / 1024) + 'KB';
+            return rate + 'B';
+          },
+        },
+      },
+    },
+  };
+
+  loadTraffic() {
+    this.uconfig.request('state', ['traffic']).then(
+      function (msg) {
+        this.traffic.datasets[0].data = msg.data.up;
+        this.traffic.datasets[1].data = msg.data.down;
+        this.traffic = { ...this.traffic };
+      }.bind(this),
+    );
+  }
 
   load() {
     this.uconfig.request('state', ['internet']).then(
@@ -60,6 +87,7 @@ export default class AuthenticatedDashboardController extends Controller {
     );
     this.wifiguest.load();
     this.wifimesh.load();
+    this.loadTraffic();
   }
 
   @action
@@ -80,6 +108,5 @@ export default class AuthenticatedDashboardController extends Controller {
   @action
   onSlideChanged(index) {
     this.uconfig.dashboard = index;
-    console.log(this.ethernet);
   }
 }

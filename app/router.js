@@ -41,4 +41,5 @@ Router.map(function () {
   this.route('setup', function () {
     this.route('wizard');
   });
+  this.route('logged-out');
 });

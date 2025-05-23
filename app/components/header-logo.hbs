@@ -1,6 +1,17 @@
 {{! template-lint-disable no-inline-styles require-valid-alt-text }}
-<nav class="navbar navbar-expand-md fixed-top v-100" style="max-width: 800px;">
-  <div class="position-absolute top-0 start-0 p-1" style="height:2em;">
-    <img src="/OpenWrt_Logo.png" class="h-100 mx-auto" />
+<nav class="navbar navbar-expand-lg">
+  <div class="container mw-100">
+    <div class="align-items-start" style="height:2em;">
+      <img src="/OpenWrt_Logo.png" class="h-100 mx-auto" />
+    </div>
+    {{#if (eq @logged-in true)}}
+      <div>
+        <BsIcon
+          @name="box-arrow-right"
+          class="h1 text-primary"
+          @route="authenticated.logout"
+        />
+      </div>
+    {{/if}}
   </div>
 </nav>

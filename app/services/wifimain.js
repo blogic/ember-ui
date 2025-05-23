@@ -21,7 +21,7 @@ export default class MainwifiService extends Datamodel {
   onSubmit(values) {
     this.uconfig.setModel(
       {
-        unit: [
+        wifimain: [
           ['edit', 'interface', 'main', 'ssid', 'main'],
           values,
           this.model,

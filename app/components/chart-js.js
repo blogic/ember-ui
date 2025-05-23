@@ -25,22 +25,8 @@ export default class EmberChart extends Component {
 
   @action
   updateChart() {
-    let { chart, animate } = this.chart;
-    let { data, options } = this.args;
-
-    if (chart) {
-      chart.data = data;
-      chart.options = options;
-      if (animate) {
-        chart.update();
-      } else {
-        chart.update(0);
-      }
-
-      if (this.customLegendElement) {
-        this.customLegendElement.innerHTML = chart.generateLegend();
-      }
-    }
+    this.chart.data.datasets = this.args.data.datasets;
+    this.chart.update('none');
   }
 
   willDestroy() {

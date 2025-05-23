@@ -1,5 +1,5 @@
 {{! template-lint-disable no-bare-strings no-curly-component-invocation }}
-{{#if this.uconfig.websocket}}
+{{#if (eq this.uconfig.authenticated "login-required")}}
   <NotificationContainer @position="top-right" @zindex="9999" />
   <SettingsHeader @icon="person-circle" @title="Login" />
   <BsForm

@@ -20,7 +20,7 @@
     @option2={{format-message "Guest"}}
     class="mb-3"
   />
-  <BsListGroup as |ListGroup|>
+  <BsListGroup class="mb-3" as |ListGroup|>
     {{#each-in this.devices.model as |network devices|}}
       {{#if (eq this.network network)}}
         {{#each-in devices as |mac device|}}
@@ -37,7 +37,6 @@
                       "pc-display-horizontal"
                     }}
                   />
-                  <BsIcon @name={{fingerprint device.fingerprint.vendor}} />
                 </div>
                 <div class="col">
                   {{#if device.hostname}}
@@ -45,6 +44,8 @@
                   {{else}}
                     {{mac}}
                   {{/if}}
+                </div>
+                <div class="col-2">
                   {{#if device.wifi}}
                     <BsIcon @name="wifi" />
                   {{else}}
@@ -75,7 +76,7 @@
       @onReset={{this.onReset}}
       @model={{this.datamodel}}
     />
-    
+
     <SettingsHeader
       @icon={{fingerprint
         this.model.device.fingerprint.class
@@ -177,7 +178,7 @@
           @title={{format-message "Vendor"}}
           @detail="{{this.model.device.fingerprint.vendor}}"
         >
-          <BsIcon @name={{fingerprint this.model.device.fingerprintvendor}} />
+          <BsIcon @name={{fingerprint this.model.device.fingerprint.vendor}} />
           {{this.model.device.fingerprint.vendor}}
         </DeviceItem>
       {{/if}}
@@ -223,15 +224,10 @@
     {{/if}}
   </BsForm>
   {{#if this.model.device.bytes}}
-    <BsListGroup as |ListGroup|>
+    <BsListGroup class="mb-3" as |ListGroup|>
       <ListGroup.item>
-        <div class="w-100 justify-content-center">
-          <ChartJs
-            @type="pie"
-            @data={{this.model.chart}}
-            @width="5em"
-            @height="5em"
-          />
+        <div style="max-width: 400px;">
+          <ChartJs @type="pie" @data={{this.model.chart}} @height="200px" />
         </div>
         {{#each-in this.model.device.traffic as |type traffic|}}
           {{type}}

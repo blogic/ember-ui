@@ -5,10 +5,6 @@ import { action } from '@ember/object';
 export default class AuthenticatedSettingsSystemAdguardController extends Controller {
   @service adguard;
 
-  load() {
-    console.log('load');
-  }
-
   @action onSubmit() {
     this.adguard.onSubmit();
   }

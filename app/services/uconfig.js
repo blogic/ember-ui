@@ -15,6 +15,7 @@ export default class UconfigService extends Service {
   @service users;
 
   @tracked authenticated = 'logged-out';
+  @tracked logout_state;
   @tracked status = 'clean';
   @tracked dashboard = 'home';
   @tracked wizard = 'welcome';
@@ -25,8 +26,28 @@ export default class UconfigService extends Service {
 
   id = 1;
 
+  inactivityTimeout() {
+    let timer;
+    const IDLE_TIMEOUT = 60000; // In milliseconds (1 minute)
+
+    const resetTimer = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        // User is inactive, do something like displaying a warning or logging out
+        alert('You have been inactive for too long. Please refresh the page.');
+      }, IDLE_TIMEOUT);
+    };
+
+    window.onload = resetTimer;
+    document.onmousemove = resetTimer;
+    document.onmousedown = resetTimer;
+    document.onscroll = resetTimer;
+  }
+
   handlers = {
     'login-required': function (msg, t) {
+      t.logout_state = null;
+      t.authenticated = 'login-required';
       t.router.transitionTo('login');
     },
 
@@ -50,7 +71,8 @@ export default class UconfigService extends Service {
       t.router.transitionTo('authenticated.dashboard');
       t.mode = msg[1].mode;
       t.users.load();
-      t.devices.load();
+      t.devices.onLoad();
+      //t.inactivityTimeout();
     },
 
     result: function (msg, t) {
@@ -82,7 +104,7 @@ export default class UconfigService extends Service {
   get_socket(connect) {
     let path;
     if (macroCondition(isDevelopingApp())) {
-      path = 'ws://192.168.42.78/config';
+      path = 'ws://192.168.42.1/config';
     } else {
       let ws = 'ws://';
       if (window.location.protocol == 'https:') ws = 'wss://';
@@ -96,6 +118,18 @@ export default class UconfigService extends Service {
   constructor(...args) {
     super(...args);
     this.load();
+  }
+
+  @action
+  reconnect() {
+    let socket = this.get_socket(true);
+    runTask(
+      this,
+      function () {
+        socket.reconnect();
+      },
+      5000,
+    );
   }
 
   @action
@@ -114,15 +148,13 @@ export default class UconfigService extends Service {
       () => {
         this.websocket = false;
         if (this.wizard == 'onboarding-done') return;
-        runTask(
-          this,
-          function () {
-            socket.reconnect();
-          },
-          5000,
-        );
-        this.authenticated = false;
-        this.router.transitionTo('login');
+        this.authenticated = 'logged-out';
+        if (this.logout_state) {
+          this.router.transitionTo('logged-out');
+        } else {
+          this.reconnect();
+          this.router.transitionTo('login');
+        }
       },
       this,
     );
@@ -256,8 +288,8 @@ export default class UconfigService extends Service {
   }
 
   logout() {
-    this.authenticated = 'logged-out';
-    this.get_socket(false);
+    this.logout_state = 'user';
+    this.request('log-out', []);
   }
 
   state(path) {
@@ -275,6 +307,7 @@ export default class UconfigService extends Service {
           this.router.transitionTo('setup.wizard');
           break;
         case 'logged-out':
+        case 'login-required':
           this.router.transitionTo('login');
           break;
         case 'logged-in':

@@ -1,4 +1,15 @@
-<div>
-  <DashboardHeader @title={{format-message "Network Traffic"}} />
-  <ChartJs @type="line" @data={{@traffic}} @width="5em" @height="400" />
+<div class="mb-3">
+  <DashboardHeader
+    @title={{format-message "Network Traffic"}}
+    @description={{format-message
+      "Monitor the current traffic of the device"
+    }}
+    class="mb-4"
+  />
+  <ChartJs
+    @type="line"
+    @data={{@traffic}}
+    @options={{@options}}
+    @height="200"
+  />
 </div>

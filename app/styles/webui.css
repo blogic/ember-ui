@@ -1,7 +1,3 @@
-body {
-  padding-top: 3em;
-}
-
 .font-15em {
   font-size: 15em;
 }
@@ -42,7 +38,7 @@ body {
 }
 
 .content {
-  height: 90%;
+  height: 99%;
 }
 
 .btn-select {

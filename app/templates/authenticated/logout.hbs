@@ -1,4 +1,12 @@
 {{! template-lint-disable no-bare-strings }}
-{{format-message "Do you want to logout ?"}}"
-<BsButton @type="warning" @onClick={{this.logout}}>{{format-message "Logout"}}</BsButton>
-{{outlet}}
+<Header />
+<SettingsHeader
+  @icon="door-open"
+  @title={{format-message "Logout"}}
+  @description={{format-message "Do you want to logout ?"}}
+/>
+<ButtonFooter>
+  <BsButton @onClick={{this.logout}} @type="primary">
+    {{format-message "Logout"}}
+  </BsButton>
+</ButtonFooter>

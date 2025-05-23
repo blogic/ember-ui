@@ -10,8 +10,15 @@ export default class AuthenticatedDashboardRoute extends Route {
     super.setupController(controller, ...args);
     controller.load();
     this.updateInterval = setInterval(() => {
-      controller.load();
-    }, 15000);
+      switch (this.uconfig.dashboard) {
+        case 'home':
+          controller.load();
+          break;
+        case 'traffic':
+          controller.loadTraffic();
+          break;
+      }
+    }, 10000);
   }
 
   resetController(_controller, isExiting) {
