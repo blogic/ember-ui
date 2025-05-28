@@ -9,18 +9,27 @@ export default class Uptime extends Helper {
     uptime /= 60;
     if (uptime < 60)
       return this.intl.formatMessage(
-        { defaultMessage: '{mathFloorUptime} Minutes' },
+        {
+          defaultMessage:
+            '{mathFloorUptime} {mathFloorUptime, plural, =1 {Minute} other {Minutes}}',
+        },
         { mathFloorUptime: Math.floor(uptime) },
       );
     uptime /= 60;
     if (uptime < 24)
       return this.intl.formatMessage(
-        { defaultMessage: '{mathFloorUptime} Hours' },
+        {
+          defaultMessage:
+            '{mathFloorUptime} {mathFloorUptime, plural, =1 {Hour} other {Hours}}',
+        },
         { mathFloorUptime: Math.floor(uptime) },
       );
     uptime /= 24;
     return this.intl.formatMessage(
-      { defaultMessage: '{mathFloorUptime} Days' },
+      {
+        defaultMessage:
+          '{mathFloorUptime} {mathFloorUptime, plural, =1 {Day} other {Days}}',
+      },
       { mathFloorUptime: Math.floor(uptime) },
     );
   }

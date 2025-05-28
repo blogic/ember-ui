@@ -34,18 +34,23 @@ export default class AuthenticatedDashboardController extends Controller {
     ],
   };
 
+  toFixed(rate, scale) {
+    if (rate / scale >= 100) return Math.floor(rate / scale);
+    return (rate / scale).toFixed(1);
+  }
+
   scale = {
     scales: {
       y: {
         ticks: {
           callback: function (rate) {
             if (rate > 1024 * 1024 * 1024)
-              return Math.floor(rate / (1024 * 1024 * 1024)) + 'GB';
+              return this.toFixed(rate, 1024 * 1024 * 1024) + 'GB';
             if (rate > 1024 * 1024)
-              return Math.floor(rate / (1024 * 1024)) + 'MB';
-            if (rate > 1024) return Math.floor(rate / 1024) + 'KB';
+              return this.toFixed(rate, 1024 * 1024) + 'MB';
+            if (rate > 1024) return this.toFixed(rate, 1024) + 'KB';
             return rate + 'B';
-          },
+          }.bind(this),
         },
       },
     },
