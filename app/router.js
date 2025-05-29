@@ -11,6 +11,7 @@ Router.map(function () {
     this.route('commit');
     this.route('dashboard');
     this.route('devices', { path: '/devices/:network/:mac' }, function () {});
+    this.route('events');
     this.route('logout');
     this.route('managed', { path: '/managed/:device' }, function () {});
     this.route('qrcode');

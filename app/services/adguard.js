@@ -2,7 +2,7 @@ import Datamodel from './datamodel';
 import { tracked } from '@glimmer/tracking';
 
 export default class AdguardService extends Datamodel {
-  keys = ['enable'];
+  keys = ['enable', 'server1', 'server2'];
   @tracked webui;
   @tracked running;
 
@@ -15,11 +15,14 @@ export default class AdguardService extends Datamodel {
     this.uconfig
       .getModel({
         iface: ['edit', 'interface', 'main', 'show'],
+        adguard: ['edit', 'services', 'adguardhome', 'show'],
       })
       .then(
         function (msg) {
           this.model = {
             enable: msg.iface.service.includes('adguardhome'),
+            server1: msg.adguard.servers?.[0],
+            server2: msg.adguard.servers?.[1],
           };
           this.bool_to_string(this.model, 'enable');
           this.doUpdate();
@@ -40,18 +43,30 @@ export default class AdguardService extends Datamodel {
   }
 
   onSubmit() {
-    this.uconfig.sendModel(
-      {
-        iface: [
-          'edit',
-          'interface',
-          'main',
-          this.model.enable == 'true' ? 'add' : 'remove',
-          'service',
-          'adguardhome',
-        ],
-      },
-      this,
-    );
+    let msg = {};
+
+    if (this.model.enable != this.shadow.enable)
+      msg.iface = [
+        'edit',
+        'interface',
+        'main',
+        this.model.enable == 'true' ? 'add' : 'remove',
+        'service',
+        'adguardhome',
+      ];
+    if (this.model.enable == 'true') {
+      let adguard = [
+        'edit',
+        'services',
+        'adguardhome',
+        'set',
+        'servers',
+        this.model.server1,
+      ];
+      if (this.model.server2)
+        adguard = [adguard, ...['servers', this.model.server2]];
+      msg.adguard = adguard;
+    }
+    this.uconfig.sendModel(msg, this);
   }
 }

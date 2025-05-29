@@ -1,0 +1,111 @@
+<Header />
+<SettingsHeader
+  @icon="card-list"
+  @title={{format-message "Event log"}}
+  @description={{format-message "View the system event log"}}
+/>
+{{#if (eq this.events undefined)}}
+  <SettingsDescription>
+    {{format-message "Loading ..."}}"
+  </SettingsDescription>
+{{else}}
+  <BsAccordion as |acc|>
+    {{#each this.events as |event index|}}
+      {{#if (eq event.object "dhcp")}}{{else}}
+        <acc.item @value={{index}} as |item|>
+          <item.title>
+            <div class="container">
+              <div class="row align-items-start">
+                <div class="col-2">
+                  <BsIcon @name={{eventicon event}} />
+                </div>
+                <div class="col-2 capitalize-first-letter">{{event.object}}</div>
+                <div class="col text-end">
+                  {{timestamp event.time}}
+                </div>
+              </div>
+            </div>
+          </item.title>
+          <item.body>
+            <div class="container">
+              {{#if (eq event.object "carrier")}}
+                <Row
+                  @title={{format-message "Port"}}
+                  @description={{event.name}}
+                />
+                <Row
+                  @title={{format-message "Event"}}
+                  @description={{event.verb}}
+                />
+              {{else if (eq event.object "wifi")}}
+                <Row
+                  @title={{format-message "SSID"}}
+                  @description={{event.ssid}}
+                />
+                <Row
+                  @title={{format-message "Band"}}
+                  @description={{event.band}}
+                />
+                {{#if (eq event.verb "start")}}
+                  <Row
+                    @title={{format-message "Channel"}}
+                    @description={{event.channel}}
+                  />
+                {{/if}}
+                <Row
+                  @title={{format-message "Event"}}
+                  @description={{event.verb}}
+                />
+              {{else if (eq event.object "client")}}
+                <Row
+                  @title={{format-message "MAC"}}
+                  @description={{event.mac}}
+                />
+                {{#if (eq event.verb "join")}}
+                  <Row
+                    @title={{format-message "SSID"}}
+                    @description={{event.ssid}}
+                  />
+                  <Row
+                    @title={{format-message "Band"}}
+                    @description={{event.band}}
+                  />
+                {{else}}
+                  <Row
+                    @title={{format-message "Uptime"}}
+                    @description={{uptime event.connected_time}}
+                  />
+                {{/if}}
+                <Row
+                  @title={{format-message "Event"}}
+                  @description={{event.verb}}
+                />
+              {{else if (eq event.object "webui")}}
+                <Row @title={{format-message "IP"}} @description={{event.ip}} />
+                <Row
+                  @title={{format-message "Event"}}
+                  @description={{event.verb}}
+                />
+              {{else if (eq event.object "ssh")}}
+                <Row
+                  @title={{format-message "Event"}}
+                  @description={{event.msg}}
+                />
+              {{else if (eq event.object "password")}}
+                <Row
+                  @title={{format-message "Event"}}
+                  @description={{format-message "Changed"}}
+                />
+              {{else if (eq event.object "config")}}
+                <Row
+                  @title={{format-message "Event"}}
+                  @description={{format-message "Applied"}}
+                />
+              {{/if}}
+            </div>
+          </item.body>
+        </acc.item>
+      {{/if}}
+    {{/each}}
+  </BsAccordion>
+{{/if}}

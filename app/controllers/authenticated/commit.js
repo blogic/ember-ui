@@ -11,6 +11,9 @@ export default class AuthenticatedCommitController extends Controller {
   @service devices;
   @service unit;
   @service users;
+  @service adguard;
+  @service ssh;
+  @service radio;
 
   @service notifications;
 
@@ -29,12 +32,15 @@ export default class AuthenticatedCommitController extends Controller {
   reset() {
     this.uconfig.request('command', ['reset']).then(
       function () {
-        this.wifimain.onReset();
-        this.wifimesh.onReset();
-        this.wifiguest.onReset();
-        this.unit.onReset();
-        this.devices.onReset();
-        this.users.onReset();
+        this.wifimain.load();
+        this.wifimesh.load();
+        this.wifiguest.load();
+        this.unit.load();
+        this.devices.load();
+        this.users.load();
+        this.ssh.load();
+        this.adguard.load();
+        this.radio.load();
         this.uconfig.status = 'clean';
         this.router.transitionTo('authenticated.dashboard');
       }.bind(this),

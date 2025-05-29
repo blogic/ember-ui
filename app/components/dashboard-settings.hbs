@@ -2,7 +2,9 @@
 <div>
   <DashboardHeader
     @title={{format-message "Settings"}}
-    @description={{format-message "Make changes to the behaviour of the device"}}
+    @description={{format-message
+      "Make changes to the behaviour of the device"
+    }}
     class="mb-4"
   />
   <BsListGroup class="mb-3" as |ListGroup|>
@@ -26,6 +28,11 @@
       @route="authenticated.settings.system.password"
       @icon="key"
     >{{format-message "Password"}}</ListGroupNav>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.events"
+      @icon="card-list"
+    >{{format-message "Events"}}</ListGroupNav>
   </BsListGroup>
   <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav

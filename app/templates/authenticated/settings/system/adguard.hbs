@@ -23,6 +23,18 @@
     <SettingsDescription>
       {{format-message "Ads and tracking will be blocked"}}
     </SettingsDescription>
+    <form.element @controlType="text" @property="server1" as |el|>
+      <el.control placeholder={{format-message "Primary DNS"}} required />
+    </form.element>
+    <SettingsDescription>
+      {{format-message "Primary upstream DNS"}}
+    </SettingsDescription>
+    <form.element @controlType="text" @property="server2" as |el|>
+      <el.control placeholder={{format-message "Secondary DNS"}} />
+    </form.element>
+    <SettingsDescription>
+      {{format-message "Primary upstream DNS"}}
+    </SettingsDescription>
     {{#if this.adguard.running}}
       <div class="mw-100 text-center">
         <a

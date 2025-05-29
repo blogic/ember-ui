@@ -2,7 +2,7 @@
 {{#if (eq this.devices.model undefined)}}
   <Header />
   <SettingsHeader
-    @icon="pc-display-horizontal"
+    @icon="fingerprint"
     @title={{format-message "Connected Devices"}}
   />
   <SettingsDescription>
@@ -11,7 +11,7 @@
 
 {{else if (eq this.model.key "list")}}
   <Header />
-  <SettingsHeader @icon="pc-display-horizontal" @title="Connected Devices" />
+  <SettingsHeader @icon="fingerprint" @title="Connected Devices" />
   <ButtonSelect
     @value={{this.network}}
     @value1="main"
@@ -192,7 +192,7 @@
       <DeviceItem
         @parent={{ListGroup}}
         @title={{format-message "MAC"}}
-        @detail="{{this.model.key}}"
+        @detail="{{this.model.device.mac}}"
       />
 
     </BsListGroup>

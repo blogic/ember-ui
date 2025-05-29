@@ -5,7 +5,10 @@ export default class MainwifiService extends Datamodel {
 
   constructor(...args) {
     super(...args);
+    this.load();
+  }
 
+  load() {
     this.uconfig
       .getModel({
         wifimain: ['edit', 'interface', 'main', 'ssid', 'main', 'show'],
