@@ -13,11 +13,21 @@ export default class DevicesService extends Service {
     this.load();
   }
 
+  order(data) {
+    data ??= {};
+    return Object.keys(data)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = data[key];
+        return obj;
+      }, {});
+  }
+
   load() {
     this.uconfig.state(['devices']).then(
       function (msg) {
-        msg.data.main ??= {};
-        msg.data.guest ??= {};
+        msg.data.main = this.order(msg.data.main);
+        msg.data.guest = this.order(msg.data.guest);
         this.model = msg.data;
       }.bind(this),
     );
