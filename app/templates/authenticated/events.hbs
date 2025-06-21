@@ -19,7 +19,9 @@
                 <div class="col-2">
                   <BsIcon @name={{eventicon event}} />
                 </div>
-                <div class="col-2 capitalize-first-letter">{{event.object}}</div>
+                <div
+                  class="col-2 capitalize-first-letter"
+                >{{event.object}}</div>
                 <div class="col text-end">
                   {{timestamp event.time}}
                 </div>
@@ -28,6 +30,18 @@
           </item.title>
           <item.body>
             <div class="container">
+              {{#if event.host}}
+                <Row
+                  @title={{format-message "Host"}}
+                  @description={{event.host}}
+                  class="capitalize-first-letter"
+                />
+              {{else}}
+                <Row
+                  @title={{format-message "Host"}}
+                  @description={{format-message "Local"}}
+                />
+              {{/if}}
               {{#if (eq event.object "carrier")}}
                 <Row
                   @title={{format-message "Port"}}
@@ -36,6 +50,7 @@
                 <Row
                   @title={{format-message "Event"}}
                   @description={{event.verb}}
+                  class="capitalize-first-letter"
                 />
               {{else if (eq event.object "wifi")}}
                 <Row
@@ -55,6 +70,7 @@
                 <Row
                   @title={{format-message "Event"}}
                   @description={{event.verb}}
+                  class="capitalize-first-letter"
                 />
               {{else if (eq event.object "client")}}
                 <Row
@@ -79,12 +95,14 @@
                 <Row
                   @title={{format-message "Event"}}
                   @description={{event.verb}}
+                  class="capitalize-first-letter"
                 />
               {{else if (eq event.object "webui")}}
                 <Row @title={{format-message "IP"}} @description={{event.ip}} />
                 <Row
                   @title={{format-message "Event"}}
                   @description={{event.verb}}
+                  class="capitalize-first-letter"
                 />
               {{else if (eq event.object "ssh")}}
                 <Row

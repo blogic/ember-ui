@@ -33,7 +33,7 @@
       <el.control placeholder={{format-message "Secondary DNS"}} />
     </form.element>
     <SettingsDescription>
-      {{format-message "Primary upstream DNS"}}
+      {{format-message "Secondary upstream DNS (Optional)"}}
     </SettingsDescription>
     {{#if this.adguard.running}}
       <div class="mw-100 text-center">
@@ -42,7 +42,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          {{format-message "AdGuardHome configuration"}}
+          {{format-message "AdGuardHome configuration UI"}}
         </a>
       </div>
     {{/if}}

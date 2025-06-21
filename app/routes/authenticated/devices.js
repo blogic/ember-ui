@@ -9,7 +9,7 @@ export default class AuthenticatedDevicesRoute extends Route {
 
   setupController(controller, ...args) {
     super.setupController(controller, ...args);
-    this.devices.load();
+    this.devices.load(true);
   }
 
   model(params) {

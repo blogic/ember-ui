@@ -6,9 +6,9 @@
     {{#each-in this.managed.model as |device info|}}
       <ListGroupNav @parent={{ListGroup}} @onClick={{fn this.onManaged device}}>
         {{#if info.connected}}
-          <BsIcon @name="check-circle" class="text-success" />
+          <BsIcon @name="check-circle" class="text-primary" />
         {{else}}
-          <BsIcon @name="x-circle text-danger" />
+          <BsIcon @name="x-circle text-secondary" />
         {{/if}}
         {{device}}
       </ListGroupNav>

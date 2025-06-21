@@ -25,16 +25,14 @@ export default class UconfigService extends Service {
   mode;
 
   id = 1;
-
+  idle_timer;
   inactivityTimeout() {
-    let timer;
-    const IDLE_TIMEOUT = 60000; // In milliseconds (1 minute)
-
+    const IDLE_TIMEOUT = 60000;
     const resetTimer = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        // User is inactive, do something like displaying a warning or logging out
-        alert('You have been inactive for too long. Please refresh the page.');
+      clearTimeout(this.idle_timer);
+      this.idle_timer = setTimeout(() => {
+        this.logout('idle');
+        this.router.transitionTo('logged-out');
       }, IDLE_TIMEOUT);
     };
 
@@ -72,7 +70,7 @@ export default class UconfigService extends Service {
       t.mode = msg[1].mode;
       t.users.load();
       t.devices.onLoad();
-      //t.inactivityTimeout();
+      t.inactivityTimeout();
     },
 
     result: function (msg, t) {
@@ -287,9 +285,10 @@ export default class UconfigService extends Service {
     this.status = 'pending';
   }
 
-  logout() {
-    this.logout_state = 'user';
+  logout(state) {
+    this.logout_state = state;
     this.request('log-out', []);
+    clearTimeout(this.idle_timer);
   }
 
   state(path) {

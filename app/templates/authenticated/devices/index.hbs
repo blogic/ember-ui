@@ -12,6 +12,7 @@
 {{else if (eq this.model.key "list")}}
   <Header />
   <SettingsHeader @icon="fingerprint" @title="Connected Devices" />
+  {{#if (eq this.wifiguest.model.iface.disable "false")}}
   <ButtonSelect
     @value={{this.network}}
     @value1="main"
@@ -20,41 +21,18 @@
     @option2={{format-message "Guest"}}
     class="mb-3"
   />
+  {{/if}}
   <BsListGroup class="mb-3" as |ListGroup|>
     {{#each-in this.devices.model as |network devices|}}
       {{#if (eq this.network network)}}
         {{#each-in devices as |mac device|}}
-          <ListGroup.item
-            actionable="true"
-            onclick={{fn this.onDevice this.network mac}}
-          >
-            <div class="container">
-              <div class="row align-items-start">
-                <div class="col-2">
-                  <BsIcon
-                    @name={{fingerprint
-                      device.fingerprint.class
-                      "pc-display-horizontal"
-                    }}
-                  />
-                </div>
-                <div class="col">
-                  {{#if device.hostname}}
-                    {{device.hostname}}
-                  {{else}}
-                    {{mac}}
-                  {{/if}}
-                </div>
-                <div class="col-2">
-                  {{#if device.wifi}}
-                    <BsIcon @name="wifi" />
-                  {{else}}
-                    <BsIcon @name="ethernet" />
-                  {{/if}}
-                </div>
-              </div>
-            </div>
-          </ListGroup.item>
+          <DeviceListGroup
+            @listgroup={{ListGroup}}
+            @onDevice={{this.onDevice}}
+            @network={{this.network}}
+            @mac={{mac}}
+            @device={{device}}
+          />
         {{else}}
           <ListGroup.item>{{format-message
               "No devices detected"
@@ -178,12 +156,12 @@
           @title={{format-message "Vendor"}}
           @detail="{{this.model.device.fingerprint.vendor}}"
         >
-          <BsIcon @name={{fingerprint this.model.device.fingerprint.vendor}} />
+          <VendorIcon @vendor={{this.model.device.fingerprint.vendor}} />
           {{this.model.device.fingerprint.vendor}}
         </DeviceItem>
       {{/if}}
       {{#if this.model.device.fingerprint.class}}
-        <DeviceItem
+        <DeviceItem class="capitalize-first-letter"
           @parent={{ListGroup}}
           @title={{format-message "Class"}}
           @detail="{{this.model.device.fingerprint.class}}"

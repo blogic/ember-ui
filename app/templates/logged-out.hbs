@@ -1,11 +1,12 @@
 <ActionSplash
   @icon="router"
-  @description={{format-message "Logged out"}}
   class="text-primary"
 />
+{{#if (eq this.uconfig.logout_state 'idle')}}
 <SettingsDescription>
-  {{format-message "Please enter your password"}}
+  {{format-message "Disconnected due to user inactivity"}}
 </SettingsDescription>
+{{/if}}
 <ButtonFooter>
   <BsButton @onClick={{this.onReconnect}} @type="primary">
     {{format-message "Reconnect"}}

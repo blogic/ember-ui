@@ -1,0 +1,39 @@
+<@listgroup.item actionable="true" onclick={{fn @onDevice @network @mac}}>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-2">
+        {{#if @device.online}}
+          <BsIcon
+            @name={{fingerprint
+              @device.fingerprint.class
+              "pc-display-horizontal"
+            }}
+            class="text-primary"
+          />
+        {{else}}
+          <BsIcon
+            @name={{fingerprint
+              @device.fingerprint.class
+              "pc-display-horizontal"
+            }}
+            class="text-secondary"
+          />
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if @device.hostname}}
+          {{@device.hostname}}
+        {{else}}
+          {{@mac}}
+        {{/if}}
+      </div>
+      <div class="col-2">
+        {{#if @device.wifi}}
+          <BsIcon @name="wifi" />
+        {{else}}
+          <BsIcon @name="ethernet" />
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</@listgroup.item>

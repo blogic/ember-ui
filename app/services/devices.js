@@ -23,8 +23,10 @@ export default class DevicesService extends Service {
       }, {});
   }
 
-  load() {
-    this.uconfig.state(['devices']).then(
+  load(arp) {
+    let msg = ['devices'];
+    if (arp) msg.push('arp');
+    this.uconfig.state(msg).then(
       function (msg) {
         msg.data.main = this.order(msg.data.main);
         msg.data.guest = this.order(msg.data.guest);

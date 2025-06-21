@@ -7,6 +7,6 @@ export default class ApplicationController extends Controller {
 
   @action
   logout() {
-    this.uconfig.logout();
+    this.uconfig.logout('user');
   }
 }
