@@ -10,22 +10,22 @@
   <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.hostname"
+      @route="authenticated.settings.hostname"
       @icon="house"
     >{{format-message "Hostname"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.timezone"
+      @route="authenticated.settings.timezone"
       @icon="clock"
     >{{format-message "Timezone"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.leds"
+      @route="authenticated.settings.leds"
       @icon="lightbulb"
     >{{format-message "LED behaviour"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.password"
+      @route="authenticated.settings.password"
       @icon="key"
     >{{format-message "Password"}}</ListGroupNav>
     <ListGroupNav
@@ -37,29 +37,29 @@
   <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.ssh"
+      @route="authenticated.settings.ssh"
       @icon="house-lock"
     >{{format-message "SSH"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.adguard"
+      @route="authenticated.settings.adguard"
       @icon="badge-ad"
     >{{format-message "AdGuardHome"}}</ListGroupNav>
   </BsListGroup>
   <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.reboot"
+      @route="authenticated.settings.reboot"
       @icon="arrow-counterclockwise"
     >{{format-message "Reboot"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.factory"
+      @route="authenticated.settings.factory"
       @icon="house-down"
     >{{format-message "Factory"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.system.upgrade"
+      @route="authenticated.settings.upgrade"
       @icon="house-add"
     >{{format-message "Firmware"}}</ListGroupNav>
   </BsListGroup>

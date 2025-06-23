@@ -23,17 +23,15 @@ Router.map(function () {
     this.route('qrcode');
     this.route('radios', { path: '/radios/:band' }, function () {});
     this.route('settings', function () {
-      this.route('system', function () {
-        this.route('hostname');
-        this.route('timezone');
-        this.route('leds');
-        this.route('reboot');
-        this.route('factory');
-        this.route('password');
-        this.route('upgrade');
-        this.route('ssh');
-        this.route('adguard');
-      });
+      this.route('hostname');
+      this.route('timezone');
+      this.route('leds');
+      this.route('reboot');
+      this.route('factory');
+      this.route('password');
+      this.route('upgrade');
+      this.route('ssh');
+      this.route('adguard');
     });
     this.route('system');
     this.route('upgrade');
