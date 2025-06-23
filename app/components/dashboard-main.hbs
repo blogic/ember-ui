@@ -1,5 +1,5 @@
 {{! template-lint-disable no-bare-strings }}
-<DashboardHeader @title={{format-message "Network Settings"}} />
+<DashboardHeader @title={{format-message "Network"}} />
 <SettingsDescription>
   Your WiFi is up and running
 </SettingsDescription>
@@ -13,7 +13,7 @@
     @parent={{ListGroup}}
     @onClick={{@onDevices}}
     @icon="fingerprint"
-  >Connected Devices</ListGroupNav>
+  >Client Devices</ListGroupNav>
   <ListGroupNav
     @parent={{ListGroup}}
     @onClick={{fn @onManaged "list"}}

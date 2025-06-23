@@ -1,7 +1,10 @@
 import Datamodel from './datamodel';
 
 export default class MainwifiService extends Datamodel {
-  keys = ['ssid', 'key', 'security', 'disable'];
+  keys = {
+    wifi: ['ssid', 'key', 'security'],
+    ipv4: ['subnet', 'addressing'],
+  };
 
   constructor(...args) {
     super(...args);
@@ -11,23 +14,31 @@ export default class MainwifiService extends Datamodel {
   load() {
     this.uconfig
       .getModel({
-        wifimain: ['edit', 'interface', 'main', 'ssid', 'main', 'show'],
+        wifi: ['edit', 'interface', 'main', 'ssid', 'main', 'show'],
+        ipv4: ['edit', 'interface', 'main', 'ipv4', 'show'],
       })
       .then(
         function (msg) {
-          this.model = msg.wifimain;
+          this.model = msg;
           this.doUpdate();
         }.bind(this),
       );
   }
 
   onSubmit(values) {
+    console.log(values);
+    console.log(this.model);
     this.uconfig.setModel(
       {
-        wifimain: [
+        wifi: [
           ['edit', 'interface', 'main', 'ssid', 'main'],
-          values,
-          this.model,
+          values.wifi,
+          this.model.wifi,
+        ],
+        ipv4: [
+          ['edit', 'interface', 'main', 'ipv4'],
+          values.ipv4,
+          this.model.ipv4,
         ],
       },
       this,

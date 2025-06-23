@@ -86,11 +86,19 @@
                     @title={{format-message "Band"}}
                     @description={{event.band}}
                   />
-                {{else}}
+                {{else if (eq event.verb "key-mismatch")}}
+                  <Row
+                    @title={{format-message "SSID"}}
+                    @description={{event.ssid}}
+                  />
+                {{else if (eq event.verb "leave")}}
                   <Row
                     @title={{format-message "Uptime"}}
                     @description={{uptime event.connected_time}}
                   />
+                  <Row @title={{format-message "Traffic"}}>
+                    <Traffic @rx={{event.tx_bytes}} @tx={{event.rx_bytes}} />
+                  </Row>
                 {{/if}}
                 <Row
                   @title={{format-message "Event"}}
@@ -98,12 +106,16 @@
                   class="capitalize-first-letter"
                 />
               {{else if (eq event.object "webui")}}
-                <Row @title={{format-message "IP"}} @description={{event.ip}} />
+                <Row
+                  @title={{format-message "User"}}
+                  @description={{event.user}}
+                />
                 <Row
                   @title={{format-message "Event"}}
                   @description={{event.verb}}
                   class="capitalize-first-letter"
                 />
+                <Row @title={{format-message "IP"}} @description={{event.ip}} />
               {{else if (eq event.object "ssh")}}
                 <Row
                   @title={{format-message "Event"}}

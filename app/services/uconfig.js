@@ -27,7 +27,7 @@ export default class UconfigService extends Service {
   id = 1;
   idle_timer;
   inactivityTimeout() {
-    const IDLE_TIMEOUT = 60000;
+    const IDLE_TIMEOUT = 4 * 60 * 1000;
     const resetTimer = () => {
       clearTimeout(this.idle_timer);
       this.idle_timer = setTimeout(() => {

@@ -26,6 +26,7 @@ export default class GuestwifiService extends Datamodel {
   load() {}
 
   onSubmit(values) {
+    console.log(values);
     this.uconfig.setModel(
       {
         ssid: [

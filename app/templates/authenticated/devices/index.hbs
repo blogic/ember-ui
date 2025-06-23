@@ -3,7 +3,7 @@
   <Header />
   <SettingsHeader
     @icon="fingerprint"
-    @title={{format-message "Connected Devices"}}
+    @title={{format-message "Client Devices"}}
   />
   <SettingsDescription>
     {{format-message "Loading ..."}}"
@@ -11,7 +11,7 @@
 
 {{else if (eq this.model.key "list")}}
   <Header />
-  <SettingsHeader @icon="fingerprint" @title="Connected Devices" />
+  <SettingsHeader @icon="fingerprint" @title="Client Devices" />
   {{#if (eq this.wifiguest.model.iface.disable "false")}}
   <ButtonSelect
     @value={{this.network}}
