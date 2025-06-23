@@ -52,7 +52,19 @@
   </BsForm>
 
 {{else if (eq this.model.device "onboarding")}}
-  <ActionSplash @icon="router" @description="Onboarding" class="text-success" />
+  {{#if (eq this.managed.uconfig.onboarding "pending")}}
+    <ActionSplash
+      @icon="router"
+      @description="Onboarding"
+      class="text-success"
+    />
+  {{else}}
+    <ActionSplash
+      @icon="router"
+      @description="Onboarding"
+      class="text-secondary"
+    />
+  {{/if}}
   {{#if (eq this.managed.uconfig.onboarding "pending")}}
     <BsListGroup @flush={{true}} class="mb-5" as |ListGroup|>
       <ListGroupFlush
