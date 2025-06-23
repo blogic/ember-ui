@@ -3,10 +3,10 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class AuthenticatedSettingsWifiGuestController extends Controller {
-  @service wifiguest;
+  @service guest;
 
   @action onSubmit() {
-    this.wifiguest.onSubmit({
+    this.guest.onSubmit({
       ssid: ['ssid', 'key', 'security'],
       iface: ['disable'],
     });

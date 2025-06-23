@@ -6,8 +6,8 @@ import { action } from '@ember/object';
 export default class AuthenticatedDashboardController extends Controller {
   @service router;
   @service uconfig;
-  @service wifiguest;
-  @service wifimesh;
+  @service guest;
+  @service mesh;
   @service radio;
 
   @tracked internet;
@@ -90,8 +90,8 @@ export default class AuthenticatedDashboardController extends Controller {
         this.loading = false;
       }.bind(this),
     );
-    this.wifiguest.load();
-    this.wifimesh.load();
+    this.guest.load();
+    this.mesh.load();
     this.loadTraffic();
   }
 

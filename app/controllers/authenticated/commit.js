@@ -5,9 +5,9 @@ import { action } from '@ember/object';
 export default class AuthenticatedCommitController extends Controller {
   @service uconfig;
   @service router;
-  @service wifimain;
-  @service wifiguest;
-  @service wifimesh;
+  @service netmain;
+  @service guest;
+  @service mesh;
   @service devices;
   @service unit;
   @service users;
@@ -32,9 +32,9 @@ export default class AuthenticatedCommitController extends Controller {
   reset() {
     this.uconfig.request('command', ['reset']).then(
       function () {
-        this.wifimain.load();
-        this.wifimesh.load();
-        this.wifiguest.load();
+        this.netmain.load();
+        this.mesh.load();
+        this.guest.load();
         this.unit.load();
         this.devices.load();
         this.users.load();

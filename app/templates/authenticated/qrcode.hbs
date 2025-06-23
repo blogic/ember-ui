@@ -16,7 +16,7 @@
     }}
   />
 {{/if}}
-{{#if (eq this.wifiguest.model.iface.disable "false")}}
+{{#if (eq this.guest.model.iface.disable "false")}}
   <ButtonSelect
     @value={{this.type}}
     @value1="main"
@@ -28,12 +28,12 @@
 {{/if}}
 {{#if (eq this.type "main")}}
   <WifiQrCode
-    @ssid={{this.wifimain.model.ssid}}
-    @psk={{this.wifimain.model.key}}
+    @ssid={{this.netmain.model.ssid}}
+    @psk={{this.netmain.model.key}}
   />
 {{else}}
   <WifiQrCode
-    @ssid={{this.wifiguest.model.ssid.ssid}}
-    @psk={{this.wifiguest.model.ssid.key}}
+    @ssid={{this.guest.model.ssid.ssid}}
+    @psk={{this.guest.model.ssid.key}}
   />
 {{/if}}

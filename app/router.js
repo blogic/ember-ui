@@ -34,15 +34,15 @@ Router.map(function () {
         this.route('ssh');
         this.route('adguard');
       });
-      this.route('wifi', function () {
-        this.route('guest');
-        this.route('main');
-        this.route('mesh');
-      });
     });
     this.route('system');
     this.route('upgrade');
     this.route('users', { path: '/users/:network/:user' }, function () {});
+    this.route('wifi', function () {
+      this.route('guest');
+      this.route('main');
+      this.route('mesh');
+    });
   });
   this.route('login');
   this.route('setup', function () {

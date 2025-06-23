@@ -1,33 +1,33 @@
 {{! template-lint-disable no-bare-strings }}
 <BsForm
   @formLayout="vertical"
-  @model={{this.wifimesh.model}}
+  @model={{this.mesh.model}}
   @onSubmit={{this.onSubmit}}
-  {{on "change" this.wifimesh.onChange}}
+  {{on "change" this.mesh.onChange}}
   as |form|
 >
-  <Header @onSubmit={{form.submit}} @model={{this.wifimesh}} />
+  <Header @onSubmit={{form.submit}} @model={{this.mesh}} />
   <SettingsHeader
     @title={{format-message "Backhaul Mesh"}}
     @description={{format-message
       "The backhaul Mesh network that devices can use for connectivity"
     }}
   >
-    {{#if (eq this.wifimesh.model.disable "false")}}
+    {{#if (eq this.mesh.model.disable "false")}}
       <BsIconRound @name="wifi" />
     {{else}}
       <BsIconRound @name="wifi-off" />
     {{/if}}
   </SettingsHeader>
   <ButtonSelect
-    @value={{this.wifimesh.model.disable}}
+    @value={{this.mesh.model.disable}}
     @value1="false"
     @option1={{format-message "Enable"}}
     @value2="true"
     @option2={{format-message "Disable"}}
     class="mb-3"
   />
-  {{#if (eq this.wifimesh.model.disable "false")}}
+  {{#if (eq this.mesh.model.disable "false")}}
     <form.element @controlType="text" @property="ssid" as |el|>
       <el.control
         placeholder={{format-message "SSID"}}

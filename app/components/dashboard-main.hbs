@@ -28,18 +28,18 @@
 <BsListGroup class="mb-3" as |ListGroup|>
   <ListGroupNav
     @parent={{ListGroup}}
-    @route="authenticated.settings.wifi.main"
+    @route="authenticated.wifi.main"
     @icon="wifi"
   >WiFi</ListGroupNav>
   <ListGroupNav
     @parent={{ListGroup}}
-    @route="authenticated.settings.wifi.guest"
-    @icon={{if (eq @wifiguest.model.iface.disable "false") "wifi" "wifi-off"}}
+    @route="authenticated.wifi.guest"
+    @icon={{if (eq @guest.model.iface.disable "false") "wifi" "wifi-off"}}
   >{{format-message "Guest WiFi"}}</ListGroupNav>
   <ListGroupNav
     @parent={{ListGroup}}
-    @route="authenticated.settings.wifi.mesh"
-    @icon={{if (eq @wifimesh.model.disable "false") "wifi" "wifi-off"}}
+    @route="authenticated.wifi.mesh"
+    @icon={{if (eq @mesh.model.disable "false") "wifi" "wifi-off"}}
   >{{format-message "Mesh Backhaul"}}</ListGroupNav>
   <ListGroupNav
     @parent={{ListGroup}}

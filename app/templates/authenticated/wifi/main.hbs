@@ -1,12 +1,12 @@
 {{! template-lint-disable no-bare-strings }}
 <BsForm
   @formLayout="vertical"
-  @model={{this.wifimain.model}}
+  @model={{this.netmain.model}}
   @onSubmit={{this.onSubmit}}
-  {{on "change" this.wifimain.onChange}}
+  {{on "change" this.netmain.onChange}}
   as |form|
 >
-  <Header @onSubmit={{form.submit}} @model={{this.wifimain}} />
+  <Header @onSubmit={{form.submit}} @model={{this.netmain}} />
   <SettingsHeader
     @icon="wifi"
     @title={{format-message "Wi-Fi"}}
@@ -32,14 +32,14 @@
     {{format-message "The password that you need to enter to authenticate"}}
   </SettingsDescription>
   <ButtonSelect
-    @value={{this.wifimain.model.wifi.security}}
+    @value={{this.netmain.model.wifi.security}}
     @value1="compatibility"
     @option1={{format-message "Compatibility"}}
     @value2="maximum"
     @option2={{format-message "Maximum"}}
     class="mb-3"
   />
-  {{#if (eq this.wifimain.model.wifi.security "maximum")}}
+  {{#if (eq this.netmain.model.wifi.security "maximum")}}
     <SettingsDescription>
       {{format-message
         "The latest encryption standard will be used. Older devices might not be
@@ -59,5 +59,5 @@
     @parent={{ListGroup}}
     @route="authenticated.network.main"
     @icon="gear"
-  >{{format-message "Network Settings"}}</ListGroupNav>
+  >{{format-message "Advanced Settings"}}</ListGroupNav>
  </BsListGroup>

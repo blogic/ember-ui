@@ -3,8 +3,8 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class AuthenticatedQrcodeController extends Controller {
-  @service wifimain;
-  @service wifiguest;
+  @service netmain;
+  @service guest;
 
   @tracked type = 'main';
 }

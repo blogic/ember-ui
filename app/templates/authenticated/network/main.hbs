@@ -1,11 +1,11 @@
 <BsForm
   @formLayout="vertical"
-  @model={{this.wifimain.model}}
+  @model={{this.netmain.model}}
   @onSubmit={{this.onSubmit}}
-  {{on "change" this.wifimain.onChange}}
+  {{on "change" this.netmain.onChange}}
   as |form|
 >
-  <Header @onSubmit={{form.submit}} @model={{this.wifimain}} />
+  <Header @onSubmit={{form.submit}} @model={{this.netmain}} />
   <SettingsHeader
     @icon="wifi"
     @title={{format-message "Wi-Fi"}}

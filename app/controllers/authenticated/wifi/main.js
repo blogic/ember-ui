@@ -3,10 +3,10 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class AuthenticatedSettingsWifiMainController extends Controller {
-  @service wifimain;
+  @service netmain;
 
   @action onSubmit() {
-    this.wifimain.onSubmit({
+    this.netmain.onSubmit({
       wifi: ['ssid', 'key', 'security'],
       ipv4: ['subnet'],
     });

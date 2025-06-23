@@ -3,9 +3,9 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default class AuthenticatedSettingsWifiMeshController extends Controller {
-  @service wifimesh;
+  @service mesh;
 
   @action onSubmit() {
-    this.wifimesh.onSubmit(['ssid', 'key', 'disable']);
+    this.mesh.onSubmit(['ssid', 'key', 'disable']);
   }
 }
