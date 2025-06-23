@@ -28,10 +28,12 @@
         {{/if}}
       </div>
       <div class="col-2">
-        {{#if @device.wifi}}
-          <BsIcon @name="wifi" />
-        {{else}}
-          <BsIcon @name="ethernet" />
+        {{#if @device.online}}
+          {{#if @device.wifi}}
+            <BsIcon @name="wifi" />
+          {{else}}
+            <BsIcon @name="ethernet" />
+          {{/if}}
         {{/if}}
       </div>
     </div>

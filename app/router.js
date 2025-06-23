@@ -11,7 +11,6 @@ Router.map(function () {
     this.route('commit');
     this.route('dashboard');
     this.route('devices', { path: '/devices/:network/:mac' }, function () {});
-    this.route('events');
     this.route('logout');
     this.route('managed', { path: '/managed/:device' }, function () {});
     this.route('network', function () {
@@ -23,15 +22,16 @@ Router.map(function () {
     this.route('qrcode');
     this.route('radios', { path: '/radios/:band' }, function () {});
     this.route('settings', function () {
-      this.route('hostname');
-      this.route('timezone');
-      this.route('leds');
-      this.route('reboot');
-      this.route('factory');
-      this.route('password');
-      this.route('upgrade');
-      this.route('ssh');
       this.route('adguard');
+      this.route('events');
+      this.route('hostname');
+      this.route('leds');
+      this.route('password');
+      this.route('reboot');
+      this.route('ssh');
+      this.route('timezone');
+      this.route('factory');
+      this.route('upgrade');
     });
     this.route('system');
     this.route('upgrade');
