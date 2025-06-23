@@ -14,6 +14,12 @@ Router.map(function () {
     this.route('events');
     this.route('logout');
     this.route('managed', { path: '/managed/:device' }, function () {});
+    this.route('network', function () {
+      this.route('list');
+      this.route('uplink');
+      this.route('guest');
+      this.route('main');
+    });
     this.route('qrcode');
     this.route('radios', { path: '/radios/:band' }, function () {});
     this.route('settings', function () {

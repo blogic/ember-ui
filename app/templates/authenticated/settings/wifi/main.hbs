@@ -53,23 +53,11 @@
       }}
     </SettingsDescription>
   {{/if}}
-  {{#if (eq this.wifimain.model.ipv4.addressing "static")}}
-    <form.element
-      @controlType="switch"
-      @label="Advanced"
-      @property="advanced"
-    />
-    {{#if this.wifimain.model.advanced}}
-      <form.element @controlType="text" @property="ipv4.subnet" as |el|>
-        <el.control
-          placeholder={{format-message "Subnet"}}
-          required
-          maxlength="32"
-        />
-      </form.element>
-      <SettingsDescription>
-        {{format-message "The subnet used by your main wifi"}}
-      </SettingsDescription>
-    {{/if}}
-  {{/if}}
 </BsForm>
+<BsListGroup class="mb-3" as |ListGroup|>
+  <ListGroupNav
+    @parent={{ListGroup}}
+    @route="authenticated.network.main"
+    @icon="gear"
+  >{{format-message "Network Settings"}}</ListGroupNav>
+ </BsListGroup>

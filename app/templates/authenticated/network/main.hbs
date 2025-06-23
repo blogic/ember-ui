@@ -1,0 +1,26 @@
+<BsForm
+  @formLayout="vertical"
+  @model={{this.wifimain.model}}
+  @onSubmit={{this.onSubmit}}
+  {{on "change" this.wifimain.onChange}}
+  as |form|
+>
+  <Header @onSubmit={{form.submit}} @model={{this.wifimain}} />
+  <SettingsHeader
+    @icon="wifi"
+    @title={{format-message "Wi-Fi"}}
+    @description={{format-message
+      "The main Wi-Fi networks provided by your device"
+    }}
+  />
+  <form.element @controlType="text" @property="ipv4.subnet" as |el|>
+    <el.control
+      placeholder={{format-message "Subnet"}}
+      required
+      maxlength="32"
+    />
+  </form.element>
+  <SettingsDescription>
+    {{format-message "The subnet used by your main wifi"}}
+  </SettingsDescription>
+</BsForm>

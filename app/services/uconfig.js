@@ -276,7 +276,7 @@ export default class UconfigService extends Service {
     let path = {};
 
     for (const [k, v] of Object.entries(request))
-      path[k] = this.generate_path(v[0], v[1], v[2]);
+      if (v[1]) path[k] = this.generate_path(v[0], v[1], v[2]);
 
     this.sendModel(path, model);
   }

@@ -26,8 +26,6 @@ export default class MainwifiService extends Datamodel {
   }
 
   onSubmit(values) {
-    console.log(values);
-    console.log(this.model);
     this.uconfig.setModel(
       {
         wifi: [
