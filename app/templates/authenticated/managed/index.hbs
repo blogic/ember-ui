@@ -55,12 +55,12 @@
   <ActionSplash @icon="router" @description="Onboarding" class="text-success" />
   {{#if (eq this.managed.uconfig.onboarding "pending")}}
     <BsListGroup @flush={{true}} class="mb-5" as |ListGroup|>
-      <ListGroupItem
+      <ListGroupFlush
         @parent={{ListGroup}}
         @key={{format-message "Name"}}
         @value={{this.managed.name}}
       />
-      <ListGroupItem
+      <ListGroupFlush
         @parent={{ListGroup}}
         @key={{format-message "PIN"}}
         @value={{this.managed.pin}}
