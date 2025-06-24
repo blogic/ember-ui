@@ -33,10 +33,10 @@
   </SettingsDescription>
   <ButtonSelect
     @value={{this.network.model.wifi.security}}
-    @value1="compatibility"
-    @option1={{format-message "Compatibility"}}
-    @value2="maximum"
-    @option2={{format-message "Maximum"}}
+    @value1="maximum"
+    @option1={{format-message "Maximum"}}
+    @value2="compatibility"
+    @option2={{format-message "Compatibility"}}
     class="mb-3"
   />
   {{#if (eq this.network.model.wifi.security "maximum")}}

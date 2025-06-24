@@ -150,7 +150,11 @@
         @title={{format-message "MAC"}}
         @detail="{{this.model.device.mac}}"
       />
-
+      <ListGroupItem
+        @parent={{ListGroup}}
+        @title={{format-message "First seen"}}
+        @detail={{timestamp this.model.device.created}}
+      />
     </BsListGroup>
     {{#if (and (eq this.network "main") this.model.form.dhcp)}}
       <BsListGroup class="mb-3" as |ListGroup|>
