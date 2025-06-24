@@ -21,12 +21,12 @@
       @description={{format-message "Manage the settings of your 5G radio"}}
     />
     <BsListGroup class="mb-3" as |ListGroup|>
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Mode"}}
         @detail={{htmode this.model.mode}}
       />
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Channel"}}
         @detail={{this.model.active_channel}}

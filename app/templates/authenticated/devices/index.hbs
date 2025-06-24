@@ -26,7 +26,7 @@
     {{#each-in this.devices.model as |network devices|}}
       {{#if (eq this.network network)}}
         {{#each-in devices as |mac device|}}
-          <DeviceListGroup
+          <ListGroupItem
             @listgroup={{ListGroup}}
             @onDevice={{this.onDevice}}
             @network={{this.network}}
@@ -105,20 +105,20 @@
             </div>
           </div>
         </ListGroup.item>
-        <DeviceItem
+        <ListGroupItem
           @parent={{ListGroup}}
           @title={{format-message "AP"}}
           @detail="{{this.model.device.wifi.host}}"
         />
         {{#if this.model.owner}}
-          <DeviceItem
+          <ListGroupItem
             @parent={{ListGroup}}
             @title={{format-message "Owner"}}
             @detail="{{this.model.owner}}"
             @onClick={{fn this.onClickUser this.network this.model.owner}}
           />
         {{else}}
-          <DeviceItem @parent={{ListGroup}} @title="Owner">
+          <ListGroupItem @parent={{ListGroup}} @title="Owner">
             {{#unless this.model.owner}}
               {{#if (eq this.network "main")}}
                 <form.element
@@ -134,40 +134,40 @@
                 />
               {{/if}}
             {{/unless}}
-          </DeviceItem>
+          </ListGroupItem>
         {{/if}}
       </BsListGroup>
     {{/if}}
 
     <BsListGroup class="mb-3" as |ListGroup|>
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Name"}}
         @detail="{{this.model.device.hostname}}"
       />
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Device"}}
         @detail="{{this.model.device.fingerprint.device}}"
       />
       {{#if this.model.device.fingerprint.vendor}}
-        <DeviceItem
+        <ListGroupItem
           @parent={{ListGroup}}
           @title={{format-message "Vendor"}}
           @detail="{{this.model.device.fingerprint.vendor}}"
         >
           <VendorIcon @vendor={{this.model.device.fingerprint.vendor}} />
           {{this.model.device.fingerprint.vendor}}
-        </DeviceItem>
+        </ListGroupItem>
       {{/if}}
       {{#if this.model.device.fingerprint.class}}
-        <DeviceItem class="capitalize-first-letter"
+        <ListGroupItem class="capitalize-first-letter"
           @parent={{ListGroup}}
           @title={{format-message "Class"}}
           @detail="{{this.model.device.fingerprint.class}}"
         />
       {{/if}}
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "MAC"}}
         @detail="{{this.model.device.mac}}"
@@ -176,19 +176,19 @@
     </BsListGroup>
     {{#if (and (eq this.network "main") this.model.form.dhcp)}}
       <BsListGroup class="mb-3" as |ListGroup|>
-        <DeviceItem
+        <ListGroupItem
           @parent={{ListGroup}}
           @title={{format-message "IPv4"}}
           @detail="{{this.model.device.ipv4}}"
         />
         {{#each this.model.device.ipv6 as |ipv6|}}
-          <DeviceItem
+          <ListGroupItem
             @parent={{ListGroup}}
             @title={{format-message "IPv6"}}
             @detail="{{ipv6}}"
           />
         {{/each}}
-        <DeviceItem @parent={{ListGroup}} @title="DHCP">
+        <ListGroupItem @parent={{ListGroup}} @title="DHCP">
           <ButtonSelect
             @value={{this.model.form.dhcp}}
             @value1="dynamic"
@@ -196,7 +196,7 @@
             @value2="static"
             @option2={{format-message "Static"}}
           />
-        </DeviceItem>
+        </ListGroupItem>
       </BsListGroup>
 
     {{/if}}

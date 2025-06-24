@@ -92,18 +92,18 @@
   <ModalConfirm />
   <SettingsHeader @icon="router" @title="Managed Devices" />
   <BsListGroup class="mb-3" as |ListGroup|>
-    <DeviceItem
+    <ListGroupItem
       @parent={{ListGroup}}
       @title={{format-message "Name"}}
       @detail="{{this.model.device}}"
     />
-    <DeviceItem
+    <ListGroupItem
       @parent={{ListGroup}}
       @title={{format-message "Status"}}
       @detail={{this.model.info.connected}}
     />
     {{#if (eq this.model.info.connected "Connected")}}
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Traffic"}}
         @detail="{{bandwidth this.model.info.tx_bytes}} / {{bandwidth
@@ -114,32 +114,32 @@
           @tx={{this.model.info.tx_bytes}}
           @rx={{this.model.info.rx_bytes}}
         />
-      </DeviceItem>
+      </ListGroupItem>
     {{/if}}
   </BsListGroup>
   <BsListGroup class="mb-3" as |ListGroup|>
     {{#if (eq this.model.info.connected "Connected")}}
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Model"}}
         @detail={{this.model.info.model}}
       />
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Firmware"}}
         @detail={{this.model.info.revision}}
       />
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Endpoint"}}
         @detail={{this.model.info.endpoint}}
       />
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Uptime"}}
         @detail={{uptime this.model.info.uptime}}
       />
-      <DeviceItem
+      <ListGroupItem
         @parent={{ListGroup}}
         @title={{format-message "Temperature"}}
         @detail={{temperature this.model.info.thermal}}
