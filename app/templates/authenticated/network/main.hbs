@@ -1,23 +1,23 @@
 <BsForm
   @formLayout="vertical"
-  @model={{this.netmain.model}}
+  @model={{this.network.model}}
   @onSubmit={{this.onSubmit}}
-  {{on "change" this.netmain.onChange}}
+  {{on "change" this.network.onChange}}
   as |form|
 >
-  <Header @onSubmit={{form.submit}} @model={{this.netmain}} />
+  <Header @onSubmit={{form.submit}} @model={{this.network}} />
   <SettingsHeader
-    @icon="wifi"
-    @title={{format-message "Wi-Fi"}}
+    @icon="gear"
+    @title={{format-message "Network"}}
     @description={{format-message
-      "The main Wi-Fi networks provided by your device"
+      "The advanced settings of your main network"
     }}
   />
   <form.element @controlType="text" @property="ipv4.subnet" as |el|>
     <el.control
-      placeholder={{format-message "Subnet"}}
+      placeholder="192.168.1.1/24"
+      pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$"
       required
-      maxlength="32"
     />
   </form.element>
   <SettingsDescription>

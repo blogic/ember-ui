@@ -28,8 +28,8 @@
 {{/if}}
 {{#if (eq this.type "main")}}
   <WifiQrCode
-    @ssid={{this.netmain.model.ssid}}
-    @psk={{this.netmain.model.key}}
+    @ssid={{this.network.model.ssid}}
+    @psk={{this.network.model.key}}
   />
 {{else}}
   <WifiQrCode

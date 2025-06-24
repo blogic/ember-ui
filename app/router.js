@@ -14,8 +14,7 @@ Router.map(function () {
     this.route('logout');
     this.route('managed', { path: '/managed/:device' }, function () {});
     this.route('network', function () {
-      this.route('list');
-      this.route('uplink');
+      this.route('internet');
       this.route('guest');
       this.route('main');
     });

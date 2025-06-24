@@ -1,2 +1,26 @@
-{{page-title "Guest"}}
-{{outlet}}
+<BsForm
+  @formLayout="vertical"
+  @model={{this.guest.model}}
+  @onSubmit={{this.onSubmit}}
+  {{on "change" this.guest.onChange}}
+  as |form|
+>
+  <Header @onSubmit={{form.submit}} @model={{this.guest}} />
+  <SettingsHeader
+    @icon="gear"
+    @title={{format-message "Guest"}}
+    @description={{format-message
+      "The advanced settings of your guest network"
+    }}
+  />
+  <form.element @controlType="text" @property="ipv4.subnet" as |el|>
+    <el.control
+      placeholder="192.168.1.1/24"
+      pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$"
+      required
+    />
+  </form.element>
+  <SettingsDescription>
+    {{format-message "The subnet used by your guest wifi"}}
+  </SettingsDescription>
+</BsForm>

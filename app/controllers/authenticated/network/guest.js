@@ -2,12 +2,11 @@ import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 
-export default class AuthenticatedSettingsWifiMainController extends Controller {
-  @service network;
+export default class AuthenticatedNetworkGuestController extends Controller {
+  @service guest;
 
   @action onSubmit() {
-    this.network.onSubmit({
-      wifi: ['ssid', 'key', 'security'],
+    this.guest.onSubmit({
       ipv4: ['subnet'],
     });
   }

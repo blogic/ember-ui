@@ -78,3 +78,12 @@
     </SettingsDescription>
   {{/if}}
 </BsForm>
+{{#if (eq this.guest.model.iface.disable "false")}}
+  <BsListGroup class="mb-3" as |ListGroup|>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.network.guest"
+      @icon="gear"
+    >{{format-message "Advanced Settings"}}</ListGroupNav>
+  </BsListGroup>
+{{/if}}
