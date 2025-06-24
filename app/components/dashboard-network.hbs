@@ -1,36 +1,36 @@
 {{! template-lint-disable no-bare-strings }}
 <DashboardHeader @title={{format-message "Network"}} />
 <SettingsDescription>
-  Your WiFi is up and running
+  {{format-message "Your WiFi is up and running"}}
 </SettingsDescription>
 <BsListGroup class="mb-3" as |ListGroup|>
   <ListGroupNav
     @parent={{ListGroup}}
     @route="authenticated.qrcode"
     @icon="qr-code"
-  >QR Code</ListGroupNav>
+  >{{format-message "QR Code"}}</ListGroupNav>
   <ListGroupNav
     @parent={{ListGroup}}
     @onClick={{@onDevices}}
     @icon="fingerprint"
-  >Client Devices</ListGroupNav>
+  >{{format-message "Client Devices"}}</ListGroupNav>
   <ListGroupNav
     @parent={{ListGroup}}
     @onClick={{fn @onManaged "list"}}
     @icon="router"
-  >Managed Devices</ListGroupNav>
+  >{{format-message "Managed Devices"}}</ListGroupNav>
   <ListGroupNav
     @parent={{ListGroup}}
     @onClick={{@onUsers}}
     @icon="people"
-  >Users</ListGroupNav>
+  >{{format-message "Users"}}</ListGroupNav>
 </BsListGroup>
 <BsListGroup class="mb-3" as |ListGroup|>
   <ListGroupNav
     @parent={{ListGroup}}
     @route="authenticated.wifi.main"
     @icon="wifi"
-  >WiFi</ListGroupNav>
+  >{{format-message "Main WiFi"}}</ListGroupNav>
   <ListGroupNav
     @parent={{ListGroup}}
     @route="authenticated.wifi.guest"

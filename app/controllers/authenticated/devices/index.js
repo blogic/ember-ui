@@ -9,6 +9,7 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   @service uconfig;
   @service router;
   @service users;
+  @service guest;
 
   @tracked network = 'main';
 

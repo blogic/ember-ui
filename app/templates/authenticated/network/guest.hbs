@@ -13,16 +13,18 @@
       "The advanced settings of your guest network"
     }}
   />
-  <form.element @controlType="text" @property="ipv4.subnet" as |el|>
-    <el.control
-      placeholder="192.168.1.1/24"
-      pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$"
-      required
-    />
-  </form.element>
-  <SettingsDescription>
-    {{format-message "The subnet used by your guest wifi"}}
-  </SettingsDescription>
+  {{#if (eq this.guest.model.ipv4.addressing "static")}}
+    <form.element @controlType="text" @property="ipv4.subnet" as |el|>
+      <el.control
+        placeholder={{this.pattern.cidr4_placeholder}}
+        pattern={{this.pattern.cidr4}}
+        required
+      />
+    </form.element>
+    <SettingsDescription>
+      {{format-message "The subnet used by your guest wifi"}}
+    </SettingsDescription>
+  {{/if}}
   <ButtonSelect
     @value={{this.guest.model.ssid.isolate-clients}}
     @value1="true"

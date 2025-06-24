@@ -4,7 +4,7 @@ export default class GuestwifiService extends Datamodel {
   keys = {
     ssid: ['ssid', 'key', 'security', 'isolate-clients', 'rate-limit'],
     iface: ['disable'],
-    ipv4: ['subnet'],
+    ipv4: ['addressing', 'subnet'],
   };
 
   constructor(...args) {
@@ -20,6 +20,7 @@ export default class GuestwifiService extends Datamodel {
         function (msg) {
           this.bool_to_string(msg.iface, 'disable');
           this.bool_to_string(msg.ssid, 'isolate-clients');
+          this.int_to_string(msg.ssid, 'rate-limit');
           this.model = msg;
           this.doUpdate();
         }.bind(this),

@@ -15,7 +15,7 @@ export default class SetupWizardController extends Controller {
     this.model = {
       name: 'MyHome',
       mode: 'configurable',
-      standalone: 'router',
+      type: 'router',
       guest_wifi: 'enable',
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
@@ -39,7 +39,7 @@ export default class SetupWizardController extends Controller {
 
   @action
   onSubmitMode() {
-    if (this.model.mode == 'configurable') this.onChangeSlide('standalone');
+    if (this.model.mode == 'configurable') this.onChangeSlide('type');
     else this.onChangeSlide('managed');
   }
 

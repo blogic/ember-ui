@@ -13,20 +13,20 @@
   <Header />
   <SettingsHeader @icon="fingerprint" @title="Client Devices" />
   {{#if (eq this.guest.model.iface.disable "false")}}
-  <ButtonSelect
-    @value={{this.network}}
-    @value1="main"
-    @option1={{format-message "Main"}}
-    @value2="guest"
-    @option2={{format-message "Guest"}}
-    class="mb-3"
-  />
+    <ButtonSelect
+      @value={{this.network}}
+      @value1="main"
+      @option1={{format-message "Main"}}
+      @value2="guest"
+      @option2={{format-message "Guest"}}
+      class="mb-3"
+    />
   {{/if}}
   <BsListGroup class="mb-3" as |ListGroup|>
     {{#each-in this.devices.model as |network devices|}}
       {{#if (eq this.network network)}}
         {{#each-in devices as |mac device|}}
-          <ListGroupItem
+          <DeviceListGroup
             @listgroup={{ListGroup}}
             @onDevice={{this.onDevice}}
             @network={{this.network}}
@@ -100,42 +100,19 @@
                       {{this.model.device.wifi.signal}}
                     </div>
                   </div>
+                  <div class="row align-items-start d-flex">
+                    <div class="col-4 text-end mw-50">
+                      {{format-message "AP"}}
+                    </div>
+                    <div class="col-4 text-start mw-50">
+                      {{this.model.device.wifi.host}}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </ListGroup.item>
-        <ListGroupItem
-          @parent={{ListGroup}}
-          @title={{format-message "AP"}}
-          @detail="{{this.model.device.wifi.host}}"
-        />
-        {{#if this.model.owner}}
-          <ListGroupItem
-            @parent={{ListGroup}}
-            @title={{format-message "Owner"}}
-            @detail="{{this.model.owner}}"
-            @onClick={{fn this.onClickUser this.network this.model.owner}}
-          />
-        {{else}}
-          <ListGroupItem @parent={{ListGroup}} @title="Owner">
-            {{#unless this.model.owner}}
-              {{#if (eq this.network "main")}}
-                <form.element
-                  @controlType="power-select"
-                  @property="user"
-                  @options={{this.users.mainUsers}}
-                />
-              {{else}}
-                <form.element
-                  @controlType="power-select"
-                  @property="user"
-                  @options={{this.users.guestUsers}}
-                />
-              {{/if}}
-            {{/unless}}
-          </ListGroupItem>
-        {{/if}}
       </BsListGroup>
     {{/if}}
 
@@ -161,7 +138,8 @@
         </ListGroupItem>
       {{/if}}
       {{#if this.model.device.fingerprint.class}}
-        <ListGroupItem class="capitalize-first-letter"
+        <ListGroupItem
+          class="capitalize-first-letter"
           @parent={{ListGroup}}
           @title={{format-message "Class"}}
           @detail="{{this.model.device.fingerprint.class}}"
@@ -197,6 +175,35 @@
             @option2={{format-message "Static"}}
           />
         </ListGroupItem>
+      </BsListGroup>
+
+      <BsListGroup class="mb-3" as |ListGroup|>
+        {{#if this.model.owner}}
+          <ListGroupItem
+            @parent={{ListGroup}}
+            @title={{format-message "Owner"}}
+            @detail="{{this.model.owner}}"
+            @onClick={{fn this.onClickUser this.network this.model.owner}}
+          />
+        {{else}}
+          <ListGroupItem @parent={{ListGroup}} @title="Owner">
+            {{#unless this.model.owner}}
+              {{#if (eq this.network "main")}}
+                <form.element
+                  @controlType="power-select"
+                  @property="user"
+                  @options={{this.users.mainUsers}}
+                />
+              {{else}}
+                <form.element
+                  @controlType="power-select"
+                  @property="user"
+                  @options={{this.users.guestUsers}}
+                />
+              {{/if}}
+            {{/unless}}
+          </ListGroupItem>
+        {{/if}}
       </BsListGroup>
 
     {{/if}}

@@ -53,8 +53,8 @@
     </ButtonFooter>
   {{/if}}
 
-  {{#if (eq this.uconfig.wizard "standalone")}}
-    <WizardStandalone
+  {{#if (eq this.uconfig.wizard "type")}}
+    <WizardType
       @model={{this.model}}
       @onSubmit={{fn this.onChangeSlide "password"}}
     />

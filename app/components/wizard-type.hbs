@@ -5,14 +5,14 @@
   @description={{format-message "Please choose the configuration type"}}
 />
 <ButtonSelect
-  @value={{@model.standalone}}
+  @value={{@model.type}}
   @value1="router"
   @option1={{format-message "Router"}}
   @value2="ap"
   @option2={{format-message "Access Point"}}
   class="mb-3"
 />
-{{#if (eq @model.standalone "router")}}
+{{#if (eq @model.type "router")}}
   <SettingsDescription>
     {{format-message
       "The device will will be able to route your local traffic to the internet"

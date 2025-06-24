@@ -17,6 +17,10 @@ export default class ModelService extends Service {
     else model[value] = 'false';
   }
 
+  int_to_string(model, value) {
+    model[value] = '' + model[value];
+  }
+
   clone_model(from, keys) {
     let ret = {};
     keys.forEach((e) => {

@@ -3,7 +3,7 @@ import Datamodel from './datamodel';
 export default class MainwifiService extends Datamodel {
   keys = {
     wifi: ['ssid', 'key', 'security'],
-    ipv4: ['subnet', 'addressing'],
+    ipv4: ['subnet', 'addressing', 'gateway', 'dns-servers'],
   };
 
   constructor(...args) {
