@@ -47,10 +47,12 @@
     @icon="broadcast-pin"
   >{{format-message "Radio settings"}}</ListGroupNav>
 </BsListGroup>
-<BsListGroup class="mb-3" as |ListGroup|>
-  <ListGroupNav
-    @parent={{ListGroup}}
-    @route="authenticated.network.internet"
-    @icon="globe"
-  >Internet Settings</ListGroupNav>
-</BsListGroup>
+{{#if (eq @mode "router")}}
+  <BsListGroup class="mb-3" as |ListGroup|>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.network.internet"
+      @icon="globe"
+    >Internet Settings</ListGroupNav>
+  </BsListGroup>
+{{/if}}

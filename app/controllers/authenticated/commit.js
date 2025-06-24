@@ -6,6 +6,7 @@ export default class AuthenticatedCommitController extends Controller {
   @service uconfig;
   @service router;
   @service network;
+  @service internet;
   @service guest;
   @service mesh;
   @service devices;
@@ -32,6 +33,7 @@ export default class AuthenticatedCommitController extends Controller {
   reset() {
     this.uconfig.request('command', ['reset']).then(
       function () {
+        this.internet.load();
         this.network.load();
         this.mesh.load();
         this.guest.load();

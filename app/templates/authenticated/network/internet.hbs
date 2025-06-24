@@ -1,2 +1,67 @@
-{{page-title "Uplink"}}
-{{outlet}}
+<BsForm
+  @formLayout="vertical"
+  @model={{this.internet.model}}
+  @onSubmit={{this.onSubmit}}
+  {{on "change" this.internet.onChange}}
+  as |form|
+>
+  <Header @onSubmit={{form.submit}} @model={{this.internet}} />
+  <SettingsHeader
+    @icon="gear"
+    @title={{format-message "Internet"}}
+    @description={{format-message "The settings of your internet connection"}}
+  />
+  <ButtonSelect
+    @value={{this.internet.model.ipv4.addressing}}
+    @value1="static"
+    @option1={{format-message "Static"}}
+    @value2="dynamic"
+    @option2={{format-message "Dynamic"}}
+    class="mb-3"
+  />
+  {{#if (eq this.internet.model.ipv4.addressing "static")}}
+    <SettingsDescription>
+      {{format-message
+        "You need to provide static IP settings"
+      }}
+    </SettingsDescription>
+  {{else}}
+    <SettingsDescription>
+      {{format-message
+        "The device will discover the internet connection using DHCP"
+      }}
+    </SettingsDescription>
+  {{/if}}
+  {{#if (eq this.internet.model.ipv4.addressing "static")}}
+    <form.element @controlType="text" @property="ipv4.subnet" as |el|>
+      <el.control
+        placeholder={{this.pattern.cidr4_placeholder}}
+        pattern={{this.pattern.cidr4}}
+        required
+      />
+    </form.element>
+    <SettingsDescription>
+      {{format-message "The subnet used by your internet connection"}}
+    </SettingsDescription>
+    <form.element @controlType="text" @property="ipv4.gateway" as |el|>
+      <el.control
+        placeholder={{this.pattern.ipv4_placeholder}}
+        pattern={{this.pattern.ipv4}}
+        required
+      />
+    </form.element>
+    <SettingsDescription>
+      {{format-message "The gateway used by connect to the internet"}}
+    </SettingsDescription>
+    <form.element @controlType="text" @property="ipv4.dns-servers" as |el|>
+      <el.control
+        placeholder={{this.pattern.ipv4_placeholder}}
+        pattern={{this.pattern.ipv4}}
+        required
+      />
+    </form.element>
+    <SettingsDescription>
+      {{format-message "The DNS server used for name resolution"}}
+    </SettingsDescription>
+  {{/if}}
+</BsForm>

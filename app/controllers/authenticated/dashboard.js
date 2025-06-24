@@ -6,11 +6,12 @@ import { action } from '@ember/object';
 export default class AuthenticatedDashboardController extends Controller {
   @service router;
   @service uconfig;
+  @service internet;
   @service guest;
   @service mesh;
   @service radio;
 
-  @tracked internet;
+  @tracked connection;
   @tracked ethernet;
   @tracked system;
   @tracked loading = true;
@@ -76,7 +77,7 @@ export default class AuthenticatedDashboardController extends Controller {
           msg.data.globe_color = 'text-secondary';
           msg.data.line_color = 'bg-warning';
         }
-        this.internet = msg.data;
+        this.connection = msg.data;
       }.bind(this),
     );
     this.uconfig.request('state', ['ports']).then(
@@ -90,6 +91,7 @@ export default class AuthenticatedDashboardController extends Controller {
         this.loading = false;
       }.bind(this),
     );
+    this.internet.load();
     this.guest.load();
     this.mesh.load();
     this.loadTraffic();
