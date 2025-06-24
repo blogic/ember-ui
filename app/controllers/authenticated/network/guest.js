@@ -8,6 +8,7 @@ export default class AuthenticatedNetworkGuestController extends Controller {
   @action onSubmit() {
     this.guest.onSubmit({
       ipv4: ['subnet'],
+      ssid: ['isolate-clients'],
     });
   }
 }

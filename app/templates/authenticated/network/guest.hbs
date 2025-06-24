@@ -23,4 +23,25 @@
   <SettingsDescription>
     {{format-message "The subnet used by your guest wifi"}}
   </SettingsDescription>
+<ButtonSelect
+      @value={{this.guest.model.ssid.isolate-clients}}
+      @value1="true"
+      @option1={{format-message "Isolation"}}
+      @value2="false"
+      @option2={{format-message "Disable"}}
+      class="mb-3"
+    />
+    {{#if (eq this.guest.model.ssid.isolate-clients "true")}}
+      <SettingsDescription>
+        {{format-message
+          "Your guests will not be able to establish connections amongst eachother"
+        }}
+      </SettingsDescription>
+    {{else}}
+      <SettingsDescription>
+        {{format-message
+          "Client isolation is disabled"
+        }}
+      </SettingsDescription>
+    {{/if}}
 </BsForm>

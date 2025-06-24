@@ -63,6 +63,7 @@
   "Ggxfqs": "Disconnected due to user inactivity",
   "GjrgLY": "Onboarding",
   "Gs8gGX": "You are currently connected to the internet",
+  "H/GXXf": "Your guests will not be able to establish connections amongst eachother",
   "HAlOn1": "Name",
   "HNB4v5": "Start onboarding",
   "HSx0Zs": "Delete Device",
@@ -101,6 +102,7 @@
   "RpRJcV": "Ask your guest to scan the QR code to gain access to the guest network",
   "RuYFoZ": "You are about to reboot the device",
   "Rw7iI7": "Disable",
+  "SGvWZ4": "Client isolation is disabled",
   "SM1qll": "Router",
   "SQEDqe": "No devices assigned",
   "SX7GNM": "SSH public key",
@@ -207,6 +209,7 @@
   "z2o+kS": "Device overview",
   "zF7Cth": "Guest",
   "zINlao": "Owner",
+  "zTQfZs": "Isolation",
   "zq3AjU": "The advanced settings of your main network",
   "zug5DJ": "Compatibility"
 }
