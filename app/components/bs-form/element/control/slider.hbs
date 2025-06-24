@@ -1,0 +1,11 @@
+{{! @glint-nocheck }}
+<input
+  type="range"
+  id={{@id}}
+  disabled={{@disabled}}
+  value={{@value}}
+  class="form-range {{this.formValidationClass}} {{this.sizeClass}}"
+  ...attributes
+  {{on "change" this.handleChange}}
+  {{on "input" this.handleInput}}
+>

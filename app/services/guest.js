@@ -2,7 +2,7 @@ import Datamodel from './datamodel';
 
 export default class GuestwifiService extends Datamodel {
   keys = {
-    ssid: ['ssid', 'key', 'security', 'isolate-clients'],
+    ssid: ['ssid', 'key', 'security', 'isolate-clients', 'rate-limit'],
     iface: ['disable'],
     ipv4: ['subnet'],
   };
