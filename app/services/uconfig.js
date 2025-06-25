@@ -23,6 +23,7 @@ export default class UconfigService extends Service {
   @tracked onboarding;
 
   mode;
+  modules;
 
   id = 1;
   idle_timer;
@@ -52,6 +53,7 @@ export default class UconfigService extends Service {
     'setup-required': function (msg, t) {
       t.authenticated = 'setup';
       t.wizard = 'welcome';
+      t.modules = msg[1].modules;
       t.router.transitionTo('setup.wizard');
     },
 
@@ -68,6 +70,7 @@ export default class UconfigService extends Service {
       t.status = msg[1].pending_changes ? 'pending' : 'clean';
       t.router.transitionTo('authenticated.dashboard');
       t.mode = msg[1].mode;
+      t.modules = msg[1].modules;
       t.users.load();
       t.devices.onLoad();
       t.inactivityTimeout();
@@ -102,7 +105,7 @@ export default class UconfigService extends Service {
   get_socket(connect) {
     let path;
     if (macroCondition(isDevelopingApp())) {
-      path = 'ws://192.168.42.1/config';
+      path = 'ws://192.168.42.78/config';
     } else {
       let ws = 'ws://';
       if (window.location.protocol == 'https:') ws = 'wss://';

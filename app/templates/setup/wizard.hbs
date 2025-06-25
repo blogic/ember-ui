@@ -8,7 +8,11 @@
 {{else}}
   <HeaderLogo />
   {{#if (eq this.uconfig.wizard "welcome")}}
-    <WizardWelcome @onSubmit={{fn this.onChangeSlide "mode"}} />
+    {{#if (hasmodule 'uconfig-client')}}
+      <WizardWelcome @onSubmit={{fn this.onChangeSlide "mode"}} />
+    {{else}}
+      <WizardWelcome @onSubmit={{fn this.onChangeSlide "type"}} />
+    {{/if}}
   {{/if}}
 
   {{#if (eq this.uconfig.wizard "mode")}}

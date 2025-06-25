@@ -14,11 +14,13 @@
     @onClick={{@onDevices}}
     @icon="fingerprint"
   >{{format-message "Client Devices"}}</ListGroupNav>
-  <ListGroupNav
-    @parent={{ListGroup}}
-    @onClick={{fn @onManaged "list"}}
-    @icon="router"
-  >{{format-message "Managed Devices"}}</ListGroupNav>
+  {{#if (hasmodule "unetd")}}
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @onClick={{fn @onManaged "list"}}
+      @icon="router"
+    >{{format-message "Managed Devices"}}</ListGroupNav>
+  {{/if}}
   <ListGroupNav
     @parent={{ListGroup}}
     @onClick={{@onUsers}}
@@ -36,11 +38,13 @@
     @route="authenticated.wifi.guest"
     @icon={{if (eq @guest.model.iface.disable "false") "wifi" "wifi-off"}}
   >{{format-message "Guest WiFi"}}</ListGroupNav>
-  <ListGroupNav
-    @parent={{ListGroup}}
-    @route="authenticated.wifi.mesh"
-    @icon={{if (eq @mesh.model.disable "false") "wifi" "wifi-off"}}
-  >{{format-message "Mesh Backhaul"}}</ListGroupNav>
+  {{#if (hasmodule "batman-adv")}}
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @route="authenticated.wifi.mesh"
+      @icon={{if (eq @mesh.model.disable "false") "wifi" "wifi-off"}}
+    >{{format-message "Mesh Backhaul"}}</ListGroupNav>
+  {{/if}}
   <ListGroupNav
     @parent={{ListGroup}}
     @onClick={{fn @onRadio "list"}}

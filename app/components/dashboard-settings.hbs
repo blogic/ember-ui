@@ -10,6 +10,13 @@
   <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav
       @parent={{ListGroup}}
+      @route="authenticated.settings.events"
+      @icon="card-list"
+    >{{format-message "Events"}}</ListGroupNav>
+  </BsListGroup>
+  <BsListGroup class="mb-3" as |ListGroup|>
+    <ListGroupNav
+      @parent={{ListGroup}}
       @route="authenticated.settings.hostname"
       @icon="house"
     >{{format-message "Hostname"}}</ListGroupNav>
@@ -23,6 +30,8 @@
       @route="authenticated.settings.leds"
       @icon="lightbulb"
     >{{format-message "LED behaviour"}}</ListGroupNav>
+  </BsListGroup>
+  <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav
       @parent={{ListGroup}}
       @route="authenticated.settings.password"
@@ -30,21 +39,18 @@
     >{{format-message "Password"}}</ListGroupNav>
     <ListGroupNav
       @parent={{ListGroup}}
-      @route="authenticated.settings.events"
-      @icon="card-list"
-    >{{format-message "Events"}}</ListGroupNav>
-  </BsListGroup>
-  <BsListGroup class="mb-3" as |ListGroup|>
-    <ListGroupNav
-      @parent={{ListGroup}}
       @route="authenticated.settings.ssh"
       @icon="house-lock"
     >{{format-message "SSH"}}</ListGroupNav>
-    <ListGroupNav
-      @parent={{ListGroup}}
-      @route="authenticated.settings.adguard"
-      @icon="badge-ad"
-    >{{format-message "AdGuardHome"}}</ListGroupNav>
+  </BsListGroup>
+  <BsListGroup class="mb-3" as |ListGroup|>
+    {{#if (hasmodule "adguardhome")}}
+      <ListGroupNav
+        @parent={{ListGroup}}
+        @route="authenticated.settings.adguard"
+        @icon="badge-ad"
+      >{{format-message "AdGuardHome"}}</ListGroupNav>
+    {{/if}}
   </BsListGroup>
   <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupNav
