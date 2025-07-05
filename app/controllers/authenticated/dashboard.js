@@ -108,8 +108,8 @@ export default class AuthenticatedDashboardController extends Controller {
   }
 
   @action
-  onManaged(index) {
-    this.router.transitionTo('authenticated.managed', index);
+  onManaged(index, action) {
+    this.router.transitionTo('authenticated.managed', index, action);
   }
 
   @action

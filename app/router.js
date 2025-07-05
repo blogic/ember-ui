@@ -12,7 +12,7 @@ Router.map(function () {
     this.route('dashboard');
     this.route('devices', { path: '/devices/:network/:mac' }, function () {});
     this.route('logout');
-    this.route('managed', { path: '/managed/:device' }, function () {});
+    this.route('managed', { path: '/managed/:action/:device' }, function () {});
     this.route('network', function () {
       this.route('internet');
       this.route('guest');

@@ -4,6 +4,6 @@ import { service } from '@ember/service';
 export default class HasModule extends Helper {
   @service uconfig;
   compute([module]) {
-    return this.uconfig.modules.includes(module);
+    return this.uconfig.modules?.includes(module);
   }
 }

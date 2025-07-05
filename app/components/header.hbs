@@ -1,16 +1,16 @@
-{{! template-lint-disable no-bare-strings no-inline-styles no-invalid-interactive }}
+{{! template-lint-disable no-inline-styles no-invalid-interactive }}
 <nav class="navbar navbar-expand-lg bg-body">
   <div class="container mw-100">
-      <span class="align-middle" onclick={{this.back}}>
-        <BsIcon @name="arrow-left" class="h1 text-primary" />
-      </span>
+    <span class="align-middle" onclick={{this.back}}>
+      <BsIcon @name="arrow-left" class="h1 text-primary" />
+    </span>
     {{#if @model.isDirty}}
       <span
         class="badge rounded-pill bg-primary"
         role="button"
         onclick={{this.done}}
       >
-        Done
+        {{format-message "Done"}}
       </span>
     {{/if}}
   </div>

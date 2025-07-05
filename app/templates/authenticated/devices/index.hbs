@@ -43,7 +43,7 @@
   </BsListGroup>
 {{else}}
   <BsForm
-    @formLayout="vertical"
+    @formLayout="inline"
     @model={{this.model.form}}
     @onSubmit={{this.onSubmit}}
     {{on "change" this.onChange}}
@@ -155,6 +155,9 @@
         @title={{format-message "First seen"}}
         @detail={{timestamp this.model.device.created}}
       />
+      <ListGroupItem @parent={{ListGroup}} @title={{format-message "Name"}}>
+        <form.element @controlType="text" @property="hostname" />
+      </ListGroupItem>
     </BsListGroup>
     {{#if (and (eq this.network "main") this.model.form.dhcp)}}
       <BsListGroup class="mb-3" as |ListGroup|>
@@ -180,13 +183,14 @@
           />
         </ListGroupItem>
       </BsListGroup>
-
+    {{/if}}
+    {{#if this.model.device.wifi}}
       <BsListGroup class="mb-3" as |ListGroup|>
         {{#if this.model.owner}}
           <ListGroupItem
             @parent={{ListGroup}}
             @title={{format-message "Owner"}}
-            @detail="{{this.model.owner}}"
+            @detail={{this.model.owner}}
             @onClick={{fn this.onClickUser this.network this.model.owner}}
           />
         {{else}}
@@ -209,7 +213,6 @@
           </ListGroupItem>
         {{/if}}
       </BsListGroup>
-
     {{/if}}
   </BsForm>
   {{#if this.model.device.bytes}}

@@ -51,6 +51,13 @@ export default class DevicesService extends Service {
   }
 
   @action
+  onSetHostname(mac, hostname) {
+    this.uconfig
+      .state(['devices', 'hostname', mac, hostname])
+      .then(function () {}.bind(this));
+  }
+
+  @action
   onSetDHCP(network, mac, dhcp, ip) {
     switch (dhcp) {
       case 'static':

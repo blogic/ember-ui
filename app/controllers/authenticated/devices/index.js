@@ -17,6 +17,8 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   onSubmit() {
     if (this.model.form.user)
       this.users.onAddMac(this.model, this.model.form.user);
+    if (this.model.form.hostname)
+      this.devices.onSetHostname(this.model.mac, this.model.form.hostname);
     if (this.model.shadow.dhcp != this.model.form.dhcp)
       this.devices.onSetDHCP(
         this.model.network,
@@ -36,6 +38,7 @@ export default class AuthenticatedDevicesIndexController extends Controller {
     this.datamodel.isModelDirty(this.model.form, this.model.shadow, [
       'user',
       'dhcp',
+      'hostname',
     ]);
   }
 

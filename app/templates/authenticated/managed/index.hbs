@@ -1,10 +1,13 @@
 {{! template-lint-disable no-bare-strings }}
-<Header />
 {{#if (eq this.model.device "list")}}
+  <Header />
   <SettingsHeader @icon="router" @title="Managed Devices" />
   <BsListGroup as |ListGroup|>
     {{#each-in this.managed.model as |device info|}}
-      <ListGroupNav @parent={{ListGroup}} @onClick={{fn this.onManaged device}}>
+      <ListGroupNav
+        @parent={{ListGroup}}
+        @onClick={{fn this.onManaged "show" device}}
+      >
         {{#if info.connected}}
           <BsIcon @name="check-circle" class="text-primary" />
         {{else}}
@@ -15,14 +18,14 @@
     {{/each-in}}
     <ListGroupNav
       @icon="person-add"
-      @onClick={{fn this.onManaged "add"}}
+      @onClick={{fn this.onManaged "device" "add"}}
       @parent={{ListGroup}}
     >
       {{format-message "Add device"}}
     </ListGroupNav>
   </BsListGroup>
-
 {{else if (eq this.model.device "add")}}
+  <Header />
   <BsForm
     @formLayout="vertical"
     @model={{this.new}}
@@ -52,6 +55,7 @@
   </BsForm>
 
 {{else if (eq this.model.device "onboarding")}}
+  <Header />
   {{#if (eq this.managed.uconfig.onboarding "pending")}}
     <ActionSplash
       @icon="router"
@@ -87,15 +91,101 @@
       {{format-message "The device onboarding process was successfull"}}
     </SettingsDescription>
   {{/if}}
-
-{{else}}
+{{else if (eq this.model.action "settings")}}
   <ModalConfirm />
+  <BsForm
+    @formLayout="vertical"
+    @model={{this.model.form}}
+    @onSubmit={{this.onSubmit}}
+    {{on "change" this.onChange}}
+    as |form|
+  >
+    <Header
+      @onSubmit={{form.submit}}
+      @onReset={{this.onReset}}
+      @model={{this.datamodel}}
+    />
+    <SettingsHeader @icon="gear" @title="Advanced Settings" />
+    <ButtonSelect
+      @value={{this.model.form.leds-active}}
+      @value1="true"
+      @option1={{format-message "LEDs"}}
+      @value2="false"
+      @option2={{format-message "Off"}}
+      class="mb-3"
+    />
+    <SettingsDescription>
+      {{#if (eq this.model.form.leds-active "true")}}
+        {{format-message "The device LEDs are active"}}
+      {{else}}
+        {{format-message "All LEDs on the device will be turned off"}}
+      {{/if}}
+    </SettingsDescription>
+    <ButtonSelect
+      @value={{this.model.form.ssh}}
+      @value1="true"
+      @option1={{format-message "SSH"}}
+      @value2="false"
+      @option2={{format-message "Off"}}
+      class="mb-3"
+    />
+    <SettingsDescription>
+      {{#if (eq this.model.form.ssh "true")}}
+        {{format-message "The SSH server is enabled"}}
+      {{else}}
+        {{format-message "The SSH server is disabled"}}
+      {{/if}}
+    </SettingsDescription>
+    <ButtonSelect
+      @value={{this.model.form.mesh-batman}}
+      @value1="true"
+      @option1={{format-message "Batman"}}
+      @value2="false"
+      @option2={{format-message "Off"}}
+      class="mb-3"
+    />
+    <SettingsDescription>
+      {{#if (eq this.model.form.mesh-batman "true")}}
+        {{format-message "The Batman-Adv backhaul is enabled"}}
+      {{else}}
+        {{format-message "The Batman-Adv backhaul is disabled"}}
+      {{/if}}
+    </SettingsDescription>
+    <ButtonSelect
+      @value={{this.model.form.guest-wifi}}
+      @value1="true"
+      @option1={{format-message "Guest WiFi"}}
+      @value2="false"
+      @option2={{format-message "Off"}}
+      class="mb-3"
+    />
+    <SettingsDescription>
+      {{#if (eq this.model.form.guest-wifi "true")}}
+        {{format-message "The guest WiFi is enabled"}}
+      {{else}}
+        {{format-message "The guest WiFi is disabled"}}
+      {{/if}}
+    </SettingsDescription>
+  </BsForm>
+  <ButtonFooter>
+    <BsButton @onClick={{this.onDeviceDel}} @type="primary">{{format-message
+        "Delete Device"
+      }}</BsButton>
+    {{#if (eq this.model.info.connected "Connected")}}
+      <BsButton
+        @onClick={{this.onDeviceReboot}}
+        @type="primary"
+      >{{format-message "Reboot Device"}}</BsButton>
+    {{/if}}
+  </ButtonFooter>
+{{else}}
+  <Header />
   <SettingsHeader @icon="router" @title="Managed Devices" />
   <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupItem
       @parent={{ListGroup}}
       @title={{format-message "Name"}}
-      @detail="{{this.model.device}}"
+      @detail={{this.model.device}}
     />
     <ListGroupItem
       @parent={{ListGroup}}
@@ -147,15 +237,11 @@
     {{/if}}
   </BsListGroup>
   <EthernetPorts @ethernet={{this.model.info.ports}} />
-  <ButtonFooter>
-    <BsButton @onClick={{this.onDeviceDel}} @type="primary">{{format-message
-        "Delete Device"
-      }}</BsButton>
-    {{#if (eq this.model.info.connected "Connected")}}
-      <BsButton
-        @onClick={{this.onDeviceReboot}}
-        @type="primary"
-      >{{format-message "Reboot Device"}}</BsButton>
-    {{/if}}
-  </ButtonFooter>
+  <BsListGroup class="mb-3" as |ListGroup|>
+    <ListGroupNav
+      @parent={{ListGroup}}
+      @onClick={{fn this.onManaged "settings" this.model.device}}
+    >
+      {{format-message "Advanced Settings"}}</ListGroupNav>
+  </BsListGroup>
 {{/if}}

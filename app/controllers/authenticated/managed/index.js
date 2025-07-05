@@ -8,6 +8,7 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   @service managed;
   @service modal;
   @service intl;
+  @service datamodel;
 
   @tracked new = {};
 
@@ -18,8 +19,8 @@ export default class AuthenticatedDevicesIndexController extends Controller {
   }
 
   @action
-  onManaged(index) {
-    this.router.transitionTo('authenticated.managed', index);
+  onManaged(index, action) {
+    this.router.transitionTo('authenticated.managed', index, action);
   }
 
   @action
@@ -53,5 +54,15 @@ export default class AuthenticatedDevicesIndexController extends Controller {
       onSubmit: this.onConfirmReboot,
       device: this.model.device,
     });
+  }
+
+  @action
+  onChange() {
+    this.datamodel.isModelDirty(this.model.form, this.model.shadow, [
+      'leds-active',
+      'mesh-batman',
+      'guest',
+      'ssh',
+    ]);
   }
 }

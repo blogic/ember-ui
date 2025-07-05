@@ -3,6 +3,7 @@ import Route from '@ember/routing/route';
 
 export default class AuthenticatedManagedRoute extends Route {
   @service managed;
+  @service datamodel;
 
   setupController(controller, ...args) {
     super.setupController(controller, ...args);
@@ -11,6 +12,7 @@ export default class AuthenticatedManagedRoute extends Route {
 
   model(params) {
     let info = {};
+    let form = {};
     if (this.managed.model?.[params.device]) {
       let device = this.managed.model?.[params.device];
       info.endpoint = device.endpoint?.split(':')[0];
@@ -27,7 +29,10 @@ export default class AuthenticatedManagedRoute extends Route {
     }
     return {
       device: params.device,
+      action: params.action,
       info,
+      form,
+      shadow: this.datamodel.clone(form),
     };
   }
 }

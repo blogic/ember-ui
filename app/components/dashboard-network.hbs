@@ -17,7 +17,7 @@
   {{#if (hasmodule "unetd")}}
     <ListGroupNav
       @parent={{ListGroup}}
-      @onClick={{fn @onManaged "list"}}
+      @onClick={{fn @onManaged "any" "list"}}
       @icon="router"
     >{{format-message "Managed Devices"}}</ListGroupNav>
   {{/if}}

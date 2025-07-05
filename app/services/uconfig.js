@@ -28,7 +28,7 @@ export default class UconfigService extends Service {
   id = 1;
   idle_timer;
   inactivityTimeout() {
-    const IDLE_TIMEOUT = 4 * 60 * 1000;
+    const IDLE_TIMEOUT = 5 * 60 * 1000;
     const resetTimer = () => {
       clearTimeout(this.idle_timer);
       this.idle_timer = setTimeout(() => {
@@ -76,6 +76,12 @@ export default class UconfigService extends Service {
       t.inactivityTimeout();
     },
 
+    'setup-complete': function (msg, t) {
+      setTimeout(() => {
+        t.handlers.authenticated(msg, t);
+      }, 1 * 1000);
+    },
+
     result: function (msg, t) {
       let callback = callbacks[msg[1]];
       if (callback) {
@@ -105,7 +111,7 @@ export default class UconfigService extends Service {
   get_socket(connect) {
     let path;
     if (macroCondition(isDevelopingApp())) {
-      path = 'ws://192.168.42.78/config';
+      path = 'ws://192.168.42.1/config';
     } else {
       let ws = 'ws://';
       if (window.location.protocol == 'https:') ws = 'wss://';

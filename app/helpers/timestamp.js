@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 export default class Timestamp extends Helper {
   @service intl;
   compute([timestamp]) {
+    if (!timestamp) return null;
     return (
       this.intl.formatTime(timestamp * 1000) +
       ' - ' +

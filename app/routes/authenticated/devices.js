@@ -36,9 +36,11 @@ export default class AuthenticatedDevicesRoute extends Route {
       }
     }
     if (device?.dhcp) form.dhcp = device.dhcp;
+    form.hostname = device?.hostname_override ? params.mac : '';
     return {
       network: params.network,
       key: params.mac,
+      mac: device?.mac || '',
       device,
       chart,
       owner: this.users.lookupUser(params.mac),
