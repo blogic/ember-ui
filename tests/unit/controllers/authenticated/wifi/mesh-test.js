@@ -1,14 +1,12 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'webui/tests/helpers';
 
-module('Unit | Controller | authenticated/settings/main', function (hooks) {
+module('Unit | Controller | authenticated/wifi/mesh', function (hooks) {
   setupTest(hooks);
 
   // TODO: Replace this with your real tests.
   test('it exists', function (assert) {
-    let controller = this.owner.lookup(
-      'controller:authenticated/settings/wifi/main',
-    );
+    let controller = this.owner.lookup('controller:authenticated/wifi/mesh');
     assert.ok(controller);
   });
 });
