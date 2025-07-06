@@ -1,9 +1,8 @@
-{{! template-lint-disable no-args-paths }}
 <BsIcon
   @name={{@name}}
   @onClick={{this.onClick}}
   class="{{if
-      (eq this.uconfig.dashboard this.args.index)
+      (eq this.uconfig.dashboard @index)
       'text-primary'
       'text-secondary'
     }}
