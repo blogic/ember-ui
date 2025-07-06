@@ -1,7 +1,6 @@
-{{! template-lint-disable no-bare-strings }}
 {{#if (eq this.model.device "list")}}
   <Header />
-  <SettingsHeader @icon="router" @title="Managed Devices" />
+  <SettingsHeader @icon="router" @title={{format-message "Managed Devices"}} />
   <BsListGroup as |ListGroup|>
     {{#each-in this.managed.model as |device info|}}
       <ListGroupNav
@@ -59,13 +58,13 @@
   {{#if (eq this.managed.uconfig.onboarding "pending")}}
     <ActionSplash
       @icon="router"
-      @description="Onboarding"
+      @description={{format-message "Onboarding"}}
       class="text-success"
     />
   {{else}}
     <ActionSplash
       @icon="router"
-      @description="Onboarding"
+      @description={{format-message "Onboarding"}}
       class="text-secondary"
     />
   {{/if}}
@@ -105,7 +104,7 @@
       @onReset={{this.onReset}}
       @model={{this.datamodel}}
     />
-    <SettingsHeader @icon="gear" @title="Advanced Settings" />
+    <SettingsHeader @icon="gear" @title={{format-message "Advanced Settings"}} />
     <ButtonSelect
       @value={{this.model.form.leds-active}}
       @value1="true"
@@ -180,7 +179,7 @@
   </ButtonFooter>
 {{else}}
   <Header />
-  <SettingsHeader @icon="router" @title="Managed Devices" />
+  <SettingsHeader @icon="router" @title={{format-message "Managed Devices"}} />
   <BsListGroup class="mb-3" as |ListGroup|>
     <ListGroupItem
       @parent={{ListGroup}}

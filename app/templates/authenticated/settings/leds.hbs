@@ -1,4 +1,3 @@
-{{! template-lint-disable no-bare-strings }}
 <BsForm
   @formLayout="vertical"
   @model={{this.unit.model}}
@@ -21,7 +20,6 @@
     @value2="false"
     @option2={{format-message "Disable"}}
   />
-
   <SettingsDescription>
     {{#if (eq this.unit.model.leds-active "true")}}
       {{format-message "The device LEDs are active"}}

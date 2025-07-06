@@ -1,4 +1,3 @@
-{{! template-lint-disable no-bare-strings }}
 {{#if (eq this.devices.model undefined)}}
   <Header />
   <SettingsHeader
@@ -11,7 +10,7 @@
 
 {{else if (eq this.model.key "list")}}
   <Header />
-  <SettingsHeader @icon="fingerprint" @title="Client Devices" />
+  <SettingsHeader @icon="fingerprint" @title={{format-message "Client Devices"}} />
   {{#if (eq this.guest.model.iface.disable "false")}}
     <ButtonSelect
       @value={{this.network}}
@@ -173,7 +172,7 @@
             @detail="{{ipv6}}"
           />
         {{/each}}
-        <ListGroupItem @parent={{ListGroup}} @title="DHCP">
+        <ListGroupItem @parent={{ListGroup}} @title={{format-message "DHCP"}}>
           <ButtonSelect
             @value={{this.model.form.dhcp}}
             @value1="dynamic"
@@ -194,7 +193,7 @@
             @onClick={{fn this.onClickUser this.network this.model.owner}}
           />
         {{else}}
-          <ListGroupItem @parent={{ListGroup}} @title="Owner">
+          <ListGroupItem @parent={{ListGroup}} @title={{format-message "Owner"}}>
             {{#unless this.model.owner}}
               {{#if (eq this.network "main")}}
                 <form.element

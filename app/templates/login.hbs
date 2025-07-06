@@ -1,7 +1,7 @@
-{{! template-lint-disable no-bare-strings no-curly-component-invocation }}
+{{! template-lint-disable  no-curly-component-invocation }}
 {{#if (eq this.uconfig.authenticated "login-required")}}
   <NotificationContainer @position="top-right" @zindex="9999" />
-  <SettingsHeader @icon="person-circle" @title="Login" />
+  <SettingsHeader @icon="person-circle" @title={{format-message "Login"}} />
   <BsForm
     @formLayout="vertical"
     @model={{this}}

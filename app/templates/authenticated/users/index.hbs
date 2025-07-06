@@ -1,10 +1,9 @@
-{{! template-lint-disable no-bare-strings no-unused-block-params }}
+{{! template-lint-disable no-unused-block-params }}
 {{#if (eq this.users.model undefined)}}
-  <SettingsHeader @icon="people" @title="Users" />
+  <SettingsHeader @icon="people" @title={{format-message "Users"}} />
   <SettingsDescription>
-    {{format-message "Loading ..."}}"
+    {{format-message "Loading ..."}}
   </SettingsDescription>
-
 {{else if (eq this.model.key "list")}}
   <Header />
   <SettingsHeader
