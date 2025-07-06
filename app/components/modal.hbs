@@ -1,4 +1,3 @@
-{{! template-lint-disable no-bare-strings }}
 <BsModal
   @open={{this.modal.visible}}
   @onSubmit={{this.onSubmit}}
@@ -13,7 +12,7 @@
     {{this.modal.model.body}}
   </modal.body>
   <modal.footer>
-    <BsButton @onClick={{modal.close}} @type="primary">Cancel</BsButton>
-    <BsButton @onClick={{modal.submit}} @type="danger">Confirm</BsButton>
+    <BsButton @onClick={{modal.close}} @type="primary">{{format-message "Cancel"}}</BsButton>
+    <BsButton @onClick={{modal.submit}} @type="danger">{{format-message "Confirm"}}</BsButton>
   </modal.footer>
 </BsModal>

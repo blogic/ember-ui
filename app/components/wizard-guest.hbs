@@ -1,4 +1,3 @@
-{{! template-lint-disable no-bare-strings }}
 <BsForm
   @formLayout="vertical"
   @model={{@model}}
@@ -21,9 +20,9 @@
   <ButtonSelect
     @value={{@model.guest_wifi}}
     @value1="enable"
-    @option1="Enable"
+    @option1={{format-message "Enable"}}
     @value2="disable"
-    @option2="Disable"
+    @option2={{format-message "Disable"}}
     class="mb-3"
   />
   {{#if (eq @model.guest_wifi "enable")}}

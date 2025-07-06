@@ -91,6 +91,7 @@
   "Ml9k1R": "The default value was automatically detected from your browser settings",
   "Mrd3JV": "The channel that the radio will broadcast on",
   "MtL9d7": "Manage the settings of your WiFi radios",
+  "N2IrpM": "Confirm",
   "NJEs2+": "{mathFloorUptime} {mathFloorUptime, plural, =1 {Hour} other {Hours}}",
   "OiVWYt": "The SSH server is disabled",
   "OnQfY/": "Manage the settings of your 5G radio",
@@ -193,6 +194,7 @@
   "mA+33H": "New firmware available",
   "mJbA00": "Delete User",
   "mrOnjM": "Mode",
+  "nL1Egk": "Internet Settings",
   "nraEHM": "Class",
   "oMaeEx": "Connecting ...",
   "olQyA1": "Secondary DNS",
@@ -234,6 +236,7 @@
   "zF7Cth": "Guest",
   "zINlao": "Owner",
   "zTQfZs": "Isolation",
+  "zWysIK": "Please choose the mode of the device.",
   "zq3AjU": "The advanced settings of your main network",
   "zug5DJ": "Compatibility"
 }

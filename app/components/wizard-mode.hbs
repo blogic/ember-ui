@@ -1,8 +1,7 @@
-{{! template-lint-disable no-bare-strings }}
 <SettingsHeader
   @icon="router"
-  @title="Mode"
-  @description="Please choose the mode of the device."
+  @title={{format-message "Mode"}}
+  @description={{format-message "Please choose the mode of the device."}}
 />
 <ButtonSelect
   @value={{@model.mode}}

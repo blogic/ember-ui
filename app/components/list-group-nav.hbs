@@ -1,11 +1,12 @@
 <@parent.item actionable="true" onclick={{this.click}} class="mr-2">
   <div class="row">
-  <div class="col">{{#if @icon}}
-    <BsIcon @name={{@icon}} />
-  {{/if}}  {{yield}}
-  </div> <div class="col-2">
-
-  <BsIcon @name="arrow-right" class="h2 text-primary" />
-  </div>
+    <div class="col">{{#if @icon}}
+        <BsIcon @name={{@icon}} />
+      {{/if}}
+      {{yield}}
+    </div>
+    <div class="col-2">
+      <BsIcon @name="arrow-right" class="h2 text-primary" />
+    </div>
   </div>
 </@parent.item>
