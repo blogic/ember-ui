@@ -1,3 +1,4 @@
+{{! template-lint-disable no-inline-styles }}
 {{#if (eq this.devices.model undefined)}}
   <Header />
   <SettingsHeader
@@ -5,7 +6,7 @@
     @title={{format-message "Client Devices"}}
   />
   <SettingsDescription>
-    {{format-message "Loading ..."}}"
+    {{format-message "Loading ..."}}
   </SettingsDescription>
 
 {{else if (eq this.model.key "list")}}

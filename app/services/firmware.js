@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import Datamodel from './datamodel';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';

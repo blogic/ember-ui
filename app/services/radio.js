@@ -1,4 +1,3 @@
-/* eslint-disable no-dupe-keys, prettier/prettier */
 import Datamodel from './datamodel';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
